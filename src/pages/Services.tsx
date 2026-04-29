@@ -1,94 +1,152 @@
-import React from 'react';
+import { useServices } from '@/hooks/useFirestore';
 import { motion } from 'motion/react';
-import { 
-  Code2, 
-  Layers, 
-  MessageSquare, 
-  ShieldCheck, 
-  ChevronRight 
-} from 'lucide-react';
+import { ChevronRight, Loader } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Services = () => {
-  const servicesList = [
-    {
-      title: 'تطوير أنظمة الويب',
-      desc: 'نطور أنظمة ويب متكاملة ومعقدة تخدم أهدافك التجارية بأحدث التقنيات العالمية. نضمن لك السرعة والأداء العالي والاستقرار التام.',
-      icon: <Code2 size={40} />,
-      color: 'bg-purple-50 text-purple-600',
-      features: ['أنظمة ERP', 'لوحات تحكم متطورة', 'ربط API']
-    },
-    {
-      title: 'الصيانة والتطوير',
-      desc: 'خدمات صيانة دورية وتطوير مستمر لكافة الأنظمة البرمجية لضمان كفاءتها وبقائها حديثة ومواكبة للتطورات التقنية المتسارعة.',
-      icon: <Layers size={40} />,
-      color: 'bg-teal-50 text-teal-600',
-      features: ['تحديثات دورية', 'إصلاح الأخطاء', 'إضافة ميزات جديدة']
-    },
-    {
-      title: 'الدعم الفني 24/7',
-      desc: 'فريق دعم فني متخصص متواجد على مدار الساعة لحل المشكلات التقنية وضمان استمرارية عملك دون توقف أو انقطاع.',
-      icon: <MessageSquare size={40} />,
-      color: 'bg-blue-50 text-blue-600',
-      features: ['استجابة سريعة', 'دعم عبر الهاتف', 'مراقبة حية']
-    },
-    {
-      title: 'الأمان الرقمي & SQL',
-      desc: 'حماية فائقة لبياناتك باستخدام أقوى قواعد بيانات SQL مع تطبيق معايير الأمان العالمية ضد الاختراق وتسريب البيانات.',
-      icon: <ShieldCheck size={40} />,
-      color: 'bg-red-50 text-red-600',
-      features: ['تشفير البيانات', 'نسخ احتياطي', 'فحص أمني']
-    }
-  ];
+  const { services, loading, error } = useServices();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pt-32">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+          className="flex flex-col items-center gap-4"
+        >
+          <Loader size={48} className="text-primary-green" />
+          <p className="text-lg text-slate-600">جاري تحميل الخدمات...</p>
+        </motion.div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pt-32">
+        <div className="bg-red-50 border border-red-200 text-red-700 px-8 py-6 rounded-2xl max-w-md text-center">
+          <h2 className="text-xl font-bold mb-2">حدث خطأ</h2>
+          <p>{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="pt-32 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-20">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white py-24 pt-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl lg:text-6xl font-display font-bold text-slate-900 mb-6"
+          className="text-center mb-20"
         >
-          خدماتنا <span className="text-brand-gradient">التقنية</span>
-        </motion.h1>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="text-xl text-slate-600 max-w-3xl mx-auto"
-        >
-          نقدم حلولاً متكاملة تغطي كافة جوانب احتياجاتك الرقمية، من التخطيط والتطوير إلى الصيانة والأمن.
-        </motion.p>
-      </div>
+          <h1 className="text-5xl lg:text-6xl font-display font-bold text-primary-navy mb-6">
+            خدماتنا المتميزة
+          </h1>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            نقدم مجموعة شاملة من الخدمات المساعدة التي تدعم نجاح مشروعك على المدى الطويل
+          </p>
+          <p className="text-sm text-slate-400 mt-4">
+            {services.length} خدمة متاحة
+          </p>
+        </motion.div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12">
-        {servicesList.map((service, index) => (
+        {services.length === 0 ? (
           <motion.div
-            key={index}
-            initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="group bg-white p-10 rounded-[3rem] shadow-sm border border-slate-100 hover:shadow-2xl hover:border-transparent transition-all"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-20"
           >
-            <div className={`w-20 h-20 rounded-3xl ${service.color} flex items-center justify-center mb-8 group-hover:scale-110 transition-transform`}>
-              {service.icon}
-            </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-4">{service.title}</h3>
-            <p className="text-lg text-slate-600 leading-relaxed mb-8">{service.desc}</p>
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              {service.features.map((f, i) => (
-                <div key={i} className="flex items-center gap-2 text-slate-700">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary-teal" />
-                  <span className="font-medium text-sm">{f}</span>
-                </div>
-              ))}
-            </div>
-            <div className="pt-8 border-t border-slate-100">
-              <button className="flex items-center gap-2 text-primary-purple font-bold hover:gap-4 transition-all">
-                اطلب هذه الخدمة <ChevronRight size={20} />
-              </button>
-            </div>
+            <p className="text-lg text-slate-500">لا توجد خدمات حالياً</p>
           </motion.div>
-        ))}
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100 hover:border-primary-green/50"
+              >
+                <div className="flex items-start justify-between mb-6">
+                  <div>
+                    <h3 className="text-2xl font-bold text-primary-navy mb-2 font-display">
+                      {service.name}
+                    </h3>
+                    {service.period && (
+                      <span className="inline-block bg-primary-green/10 text-primary-green px-3 py-1 rounded-full text-sm font-semibold">
+                        {service.period}
+                      </span>
+                    )}
+                  </div>
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    className="w-14 h-14 bg-primary-green/10 rounded-full flex items-center justify-center"
+                  >
+                    <span className="text-2xl">🎯</span>
+                  </motion.div>
+                </div>
+
+                <p className="text-slate-600 text-base leading-relaxed mb-6">
+                  {service.description}
+                </p>
+
+                {service.features && service.features.length > 0 && (
+                  <div className="mb-6 pb-6 border-b border-slate-100">
+                    <p className="text-xs font-semibold text-slate-700 mb-3 uppercase">المميزات:</p>
+                    <ul className="space-y-2">
+                      {service.features.map((feature, i) => (
+                        <li key={i} className="text-sm text-slate-600 flex items-center gap-2">
+                          <span className="text-primary-green">✓</span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-3xl font-bold text-primary-navy">
+                      {service.price.toLocaleString('ar-SA')}
+                      <span className="text-lg text-slate-500 font-normal"> ر.س</span>
+                    </p>
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-primary-green hover:bg-primary-green/90 text-white p-3 rounded-full transition-all shadow-lg"
+                  >
+                    <ChevronRight size={20} />
+                  </motion.button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-r from-primary-green to-primary-navy rounded-3xl p-12 lg:p-16 text-center text-white"
+        >
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+            تحتاج إلى خدمة مخصصة؟
+          </h2>
+          <p className="text-lg text-white/80 mb-8">
+            فريقنا جاهز لتطوير باقة خدمات تناسب احتياجات مشروعك بالضبط
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 bg-white text-primary-green px-8 py-3 rounded-xl font-bold hover:scale-105 transition-transform"
+          >
+            استفسر الآن <ChevronRight size={20} />
+          </Link>
+        </motion.div>
       </div>
     </div>
   );
