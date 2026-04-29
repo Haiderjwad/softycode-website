@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, User } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { Loader as GlobalLoader } from '@/components/Loader';
 
 export const Login = () => {
   const [isLogin, setIsLogin] = useState(true);

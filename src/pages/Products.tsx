@@ -2,24 +2,18 @@ import { useProducts } from '@/hooks/useProducts';
 import { motion } from 'motion/react';
 import { ChevronRight, Loader } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Loader as GlobalLoader } from '@/components/Loader';
 
 export const Products = () => {
   const { products, loading, error } = useProducts();
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center pt-32">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-          className="flex flex-col items-center gap-4"
-        >
-          <Loader size={48} className="text-primary-green" />
-          <p className="text-lg text-slate-600">جاري تحميل المنتجات...</p>
-        </motion.div>
-      </div>
-    );
-  }
+   if (loading) {
+     return (
+       <div className="min-h-screen flex items-center justify-center pt-32">
+         <GlobalLoader text="جاري تحميل المنتجات..." />
+       </div>
+     );
+   }
 
   if (error) {
     return (
