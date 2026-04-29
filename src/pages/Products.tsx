@@ -165,10 +165,10 @@ export const Products = () => {
             تحدث معنا عن احتياجاتك الخاصة وسنقوم بتطوير حل مخصص لك
           </p>
           <Link
-            to="/contact"
+            to="/cart"
             className="inline-flex items-center gap-2 bg-white text-primary-green px-8 py-3 rounded-xl font-bold hover:scale-105 transition-transform"
           >
-            تواصل معنا الآن <ChevronRight size={20} />
+            عرض السلة <ChevronRight size={20} />
           </Link>
         </motion.div>
       </div>

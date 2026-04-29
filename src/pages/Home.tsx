@@ -41,8 +41,8 @@ export const Home = () => {
                 <Link to="/products" className="flex items-center justify-center gap-2 px-8 py-4 bg-brand-gradient text-white rounded-2xl font-bold text-lg shadow-xl shadow-primary-green/20 hover:scale-105 transition-transform">
                   اكتشف حلولنا <ChevronRight size={20} />
                 </Link>
-                <Link to="/contact" className="flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-navy border-2 border-slate-100 rounded-2xl font-bold text-lg hover:border-primary-green transition-all shadow-sm">
-                  تواصل معنا
+                <Link to="/cart" className="flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-navy border-2 border-slate-100 rounded-2xl font-bold text-lg hover:border-primary-green transition-all shadow-sm">
+                  عرض السلة
                 </Link>
               </div>
 
@@ -167,6 +167,12 @@ export const Home = () => {
         <div className="text-center mt-12">
           <Link to="/services" className="inline-flex items-center gap-2 text-primary-green font-bold text-lg hover:gap-4 transition-all">
             عرض كافة الخدمات <ChevronRight size={20} />
+          </Link>
+          <Link to="/blog" className="inline-flex items-center gap-2 text-primary-green font-bold text-lg hover:gap-4 transition-all">
+            اقرأ المزيد <ChevronRight size={20} />
+          </Link>
+          <Link to="/careers" className="inline-flex items-center gap-2 text-primary-green font-bold text-lg hover:gap-4 transition-all">
+            انضم إلينا <ChevronRight size={20} />
           </Link>
         </div>
       </section>

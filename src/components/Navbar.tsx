@@ -25,7 +25,10 @@ export const Navbar = () => {
     { name: 'الرئيسية', path: '/' },
     { name: 'خدماتنا', path: '/services' },
     { name: 'منتجاتنا', path: '/products' },
+    { name: 'المدونة', path: '/blog' },
+    { name: 'الوظائف', path: '/careers' },
     { name: 'عن الشركة', path: '/about' },
+    { name: 'الأسئلة الشائعة', path: '/faq' },
     { name: 'اتصل بنا', path: '/contact' },
   ];
 
@@ -97,12 +100,18 @@ export const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-6">
+              <div className="pt-6 space-y-3">
                 <Link
-                  to="/contact"
+                  to="/cart"
                   className="w-full bg-brand-gradient text-white px-6 py-6 rounded-2xl font-bold text-xl shadow-xl flex items-center justify-center text-center"
                 >
-                  ابدأ مشروعك الآن
+                  عرض السلة
+                </Link>
+                <Link
+                  to="/login"
+                  className="w-full bg-white text-primary-green border-2 border-primary-green px-6 py-6 rounded-2xl font-bold text-xl shadow-xl flex items-center justify-center text-center"
+                >
+                  تسجيل الدخول
                 </Link>
               </div>
             </div>

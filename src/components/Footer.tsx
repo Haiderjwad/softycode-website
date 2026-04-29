@@ -31,27 +31,20 @@ export const Footer = () => {
               <li><Link to="/" className="hover:text-primary-green transition-colors">الرئيسية</Link></li>
               <li><Link to="/services" className="hover:text-primary-green transition-colors">خدماتنا</Link></li>
               <li><Link to="/products" className="hover:text-primary-green transition-colors">منتجاتنا</Link></li>
+              <li><Link to="/blog" className="hover:text-primary-green transition-colors">المدونة</Link></li>
+              <li><Link to="/careers" className="hover:text-primary-green transition-colors">الوظائف</Link></li>
               <li><Link to="/about" className="hover:text-primary-green transition-colors">عن الشركة</Link></li>
+              <li><Link to="/faq" className="hover:text-primary-green transition-colors">الأسئلة الشائعة</Link></li>
               <li><Link to="/contact" className="hover:text-primary-green transition-colors">اتصل بنا</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-white text-xl mb-8 font-display">خدماتنا</h4>
-            <ul className="space-y-5 text-slate-400 font-medium">
-              <li>تطوير أنظمة الويب</li>
-              <li>الصيانة السحابية</li>
-              <li>الدعم الفني المتكامل</li>
-              <li>الأمان الرقمي & SQL</li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold text-white text-xl mb-8 font-display">قانوني</h4>
             <ul className="space-y-5 text-slate-400 font-medium">
-              <li>سياسة الخصوصية</li>
-              <li>الشروط والأحكام</li>
-              <li>اتفاقية الاستخدام</li>
+              <li><Link to="/privacy" className="hover:text-primary-green transition-colors">سياسة الخصوصية</Link></li>
+              <li><Link to="/terms" className="hover:text-primary-green transition-colors">الشروط والأحكام</Link></li>
+              <li><Link to="/careers" className="hover:text-primary-green transition-colors">الوظائف</Link></li>
             </ul>
           </div>
         </div>

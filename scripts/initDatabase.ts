@@ -76,7 +76,7 @@ const contactsData = {
 };
 
 // دالة لإضافة البيانات
-async function initializeDatabase() {
+export async function initializeDatabase() {
   try {
     console.log('🔄 جاري إضافة البيانات إلى Firestore...\n');
 
@@ -124,11 +124,20 @@ async function initializeDatabase() {
     console.log('  ✓ users - المستخدمون (1 مستخدم)');
     console.log('  ✓ orders - الطلبات (جاهز للاستخدام)\n');
 
-    process.exit(0);
+    // Exit only if running in Node.js environment
+    if (typeof process !== 'undefined' && process.exit) {
+      process.exit(0);
+    }
   } catch (error) {
     console.error('❌ خطأ:', error);
-    process.exit(1);
+    // Exit only if running in Node.js environment
+    if (typeof process !== 'undefined' && process.exit) {
+      process.exit(1);
+    }
   }
 }
 
-initializeDatabase();
+// إذا تم تشغيل الملف مباشرة (في بيئة Node.js فقط)
+if (typeof process !== 'undefined' && process.argv && import.meta.url === `file://${process.argv[1]}`) {
+  initializeDatabase();
+}

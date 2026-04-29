@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { initializeFirestoreCollections } from '@/utils/firebaseInit';
+import { initializeDatabase } from '../../scripts/initDatabase';
 
 export const AdminPanel = () => {
   const [loading, setLoading] = useState(false);
@@ -8,7 +8,7 @@ export const AdminPanel = () => {
   const handleInitializeDatabase = async () => {
     setLoading(true);
     try {
-      await initializeFirestoreCollections();
+      await initializeDatabase();
       setMessage('✅ تم تهيئة قاعدة البيانات بنجاح!');
     } catch (error) {
       setMessage('❌ حدث خطأ أثناء تهيئة قاعدة البيانات');

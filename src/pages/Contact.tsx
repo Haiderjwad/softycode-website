@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Mail, MessageSquare, MapPin, Phone, ArrowRight, Instagram, Twitter, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Contact = () => {
   return (
@@ -102,6 +103,12 @@ export const Contact = () => {
               <button className="w-full py-5 bg-brand-gradient text-white rounded-2xl font-bold text-xl shadow-xl shadow-primary-purple/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
                 إرسال الرسالة <ArrowRight size={24} className="rotate-180" />
               </button>
+              <Link
+                to="/cart"
+                className="w-full py-5 bg-white text-primary-green border-2 border-primary-green rounded-2xl font-bold text-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3"
+              >
+                عرض السلة <ArrowRight size={24} />
+              </Link>
             </form>
           </div>
         </div>

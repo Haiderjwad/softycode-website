@@ -141,10 +141,10 @@ export const Services = () => {
             فريقنا جاهز لتطوير باقة خدمات تناسب احتياجات مشروعك بالضبط
           </p>
           <Link
-            to="/contact"
+            to="/cart"
             className="inline-flex items-center gap-2 bg-white text-primary-green px-8 py-3 rounded-xl font-bold hover:scale-105 transition-transform"
           >
-            استفسر الآن <ChevronRight size={20} />
+            عرض السلة <ChevronRight size={20} />
           </Link>
         </motion.div>
       </div>
