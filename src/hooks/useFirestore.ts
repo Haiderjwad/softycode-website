@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { db } from '@/config/firebase';
-import { collection, onSnapshot, query, where, doc, getDoc } from 'firebase/firestore';
+import { collection, onSnapshot, query, orderBy, limit, doc, getDoc } from 'firebase/firestore';
 
 // Hook لجلب الخدمات الإضافية
 export const useServices = () => {
@@ -36,26 +36,29 @@ export const useServices = () => {
   return { services, loading, error };
 };
 
-// Hook لجلب بيانات الاتصال
-export const useContacts = () => {
+// Hook لجلب معلومات الاتصال (موجود في مجموعة contacts)
+export const useContactInfo = () => {
   const [contact, setContact] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // جلب أول مستند من مجموعة contacts
     const unsubscribe = onSnapshot(
-      collection(db, 'contacts'),
+      query(collection(db, 'contacts'), limit(1)),
       (snapshot) => {
         if (!snapshot.empty) {
-          const contactData = snapshot.docs[0].data();
+          const doc = snapshot.docs[0];
+          const data = doc.data();
           setContact({
-            id: snapshot.docs[0].id,
-            phone: contactData.phone,
-            email: contactData.email,
-            address: contactData.address,
-            workingHours: contactData.workingHours,
-            socialMedia: contactData.socialMedia || {},
-            createdAt: contactData.createdAt?.toDate() || new Date(),
+            id: doc.id,
+            phone: data.phone || '',
+            email: data.email || '',
+            address: data.address || '',
+            workingHours: data.workingHours || '',
+            socialMedia: data.socialMedia || {},
+            mapEmbed: data.mapEmbed || '',
+            additionalInfo: data.additionalInfo || {},
           });
         }
         setLoading(false);

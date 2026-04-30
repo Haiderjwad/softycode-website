@@ -92,6 +92,208 @@ const contactsData = [
   },
 ];
 
+// بيانات الإحصائيات
+const siteStatsData = [
+  {
+    label: 'عميل سعيد',
+    value: '500+',
+    icon: 'Users',
+    color: 'purple',
+    order: 1,
+  },
+  {
+    label: 'مشروع ناجح',
+    value: '1,200+',
+    icon: 'Rocket',
+    color: 'teal',
+    order: 2,
+  },
+  {
+    label: 'سنة خبرة',
+    value: '10+',
+    icon: 'Award',
+    color: 'blue',
+    order: 3,
+  },
+];
+
+// بيانات الميزات
+const siteFeaturesData = [
+  {
+    title: 'تطوير ناعم ذكي',
+    description: 'حلول متكاملة تضمن لك الأداء والأمان في مشروعك التقني.',
+    icon: 'Code2',
+    color: 'green',
+    bgColor: 'bg-green-100',
+    order: 1,
+  },
+  {
+    title: 'صيانة دائمة',
+    description: 'حلول متكاملة تضمن لك الأداء والأمان في مشروعك التقني.',
+    icon: 'Layers',
+    color: 'blue',
+    bgColor: 'bg-blue-100',
+    order: 2,
+  },
+  {
+    title: 'دعم 24/7',
+    description: 'حلول متكاملة تضمن لك الأداء والأمان في مشروعك التقني.',
+    icon: 'MessageSquare',
+    color: 'indigo',
+    bgColor: 'bg-indigo-100',
+    order: 3,
+  },
+  {
+    title: 'أمان سحابي SQL',
+    description: 'حلول متكاملة تضمن لك الأداء والأمان في مشروعك التقني.',
+    icon: 'ShieldCheck',
+    color: 'green',
+    bgColor: 'bg-emerald-100',
+    order: 4,
+  },
+];
+
+// بيانات الأنظمة
+const siteSystemsData = [
+  {
+    name: 'نظام سوفتي كود لإدارة المطاعم',
+    description: 'نظام متكامل لإدارة المطاعم والمقاهي',
+    icon: 'Store',
+    color: 'orange',
+    bgColor: 'from-orange-500 to-red-500',
+    category: 'restaurant',
+    order: 1,
+  },
+  {
+    name: 'نظام سوفتي كود لإدارة العيادات',
+    description: 'نظام متكامل لإدارة العيادات والمستشفيات',
+    icon: 'Stethoscope',
+    color: 'teal',
+    bgColor: 'from-teal-500 to-cyan-500',
+    category: 'clinics',
+    order: 2,
+  },
+  {
+    name: 'نظام سوفتي كود لإدارة التوصيل',
+    description: 'نظام متكامل لإدارة شركات التوصيل',
+    icon: 'Truck',
+    color: 'blue',
+    bgColor: 'from-blue-500 to-indigo-600',
+    category: 'delivery',
+    order: 3,
+  },
+];
+
+// بيانات الإعدادات العامة
+const generalSettingsData = [
+  {
+    siteName: 'SoftyCode',
+    tagline: 'مستقبل البرمجيات يبدأ بسحابة ذكية',
+    description: 'نطور أنظمة ويب ذكية تدير أعمالك بلمسة ناعمة',
+  },
+];
+
+// بيانات الإحصائيات
+const siteStatsData = [
+  {
+    label: 'عميل سعيد',
+    value: '500+',
+    icon: 'Users',
+    color: 'purple',
+    order: 1,
+  },
+  {
+    label: 'مشروع ناجح',
+    value: '1,200+',
+    icon: 'Rocket',
+    color: 'teal',
+    order: 2,
+  },
+  {
+    label: 'سنة خبرة',
+    value: '10+',
+    icon: 'Award',
+    color: 'blue',
+    order: 3,
+  },
+];
+
+// بيانات الميزات
+const siteFeaturesData = [
+  {
+    title: 'تطوير ناعم ذكي',
+    description: 'حلول متكاملة تضمن لك الأداء والأمان في مشروعك التقني.',
+    icon: 'Code2',
+    color: 'green',
+    bgColor: 'bg-green-100',
+    order: 1,
+  },
+  {
+    title: 'صيانة دائمة',
+    description: 'حلول متكاملة تضمن لك الأداء والأمان في مشروعك التقني.',
+    icon: 'Layers',
+    color: 'blue',
+    bgColor: 'bg-blue-100',
+    order: 2,
+  },
+  {
+    title: 'دعم 24/7',
+    description: 'حلول متكاملة تضمن لك الأداء والأمان في مشروعك التقني.',
+    icon: 'MessageSquare',
+    color: 'indigo',
+    bgColor: 'bg-indigo-100',
+    order: 3,
+  },
+  {
+    title: 'أمان سحابي SQL',
+    description: 'حلول متكاملة تضمن لك الأداء والأمان في مشروعك التقني.',
+    icon: 'ShieldCheck',
+    color: 'green',
+    bgColor: 'bg-emerald-100',
+    order: 4,
+  },
+];
+
+// بيانات الأنظمة
+const siteSystemsData = [
+  {
+    name: 'نظام سوفتي كود لإدارة المطاعم',
+    description: 'نظام متكامل لإدارة المطاعم والمقاهي',
+    icon: 'Store',
+    color: 'orange',
+    bgColor: 'from-orange-500 to-red-500',
+    category: 'restaurant',
+    order: 1,
+  },
+  {
+    name: 'نظام سوفتي كود لإدارة العيادات',
+    description: 'نظام متكامل لإدارة العيادات والمستشفيات',
+    icon: 'Stethoscope',
+    color: 'teal',
+    bgColor: 'from-teal-500 to-cyan-500',
+    category: 'clinics',
+    order: 2,
+  },
+  {
+    name: 'نظام سوفتي كود لإدارة التوصيل',
+    description: 'نظام متكامل لإدارة شركات التوصيل',
+    icon: 'Truck',
+    color: 'blue',
+    bgColor: 'from-blue-500 to-indigo-600',
+    category: 'delivery',
+    order: 3,
+  },
+];
+
+// بيانات الإعدادات العامة
+const generalSettingsData = [
+  {
+    siteName: 'SoftyCode',
+    tagline: 'مستقبل البرمجيات يبدأ بسحابة ذكية',
+    description: 'نطور أنظمة ويب ذكية تدير أعمالك بلمسة ناعمة',
+  },
+];
+
 // وظيفة لإضافة البيانات الأولية
 export const initializeFirestoreCollections = async () => {
   try {
@@ -124,6 +326,34 @@ export const initializeFirestoreCollections = async () => {
       await addDoc(docRef, contact);
     }
     console.log('✅ تم إضافة بيانات الاتصال بنجاح');
+
+    // إضافة إحصائيات الموقع
+    for (const stat of siteStatsData) {
+      const docRef = collection(db, 'siteStats');
+      await addDoc(docRef, stat);
+    }
+    console.log('✅ تم إضافة إحصائيات الموقع بنجاح');
+
+    // إضافة ميزات الموقع
+    for (const feature of siteFeaturesData) {
+      const docRef = collection(db, 'siteFeatures');
+      await addDoc(docRef, feature);
+    }
+    console.log('✅ تم إضافة ميزات الموقع بنجاح');
+
+    // إضافة أنظمة الموقع
+    for (const system of siteSystemsData) {
+      const docRef = collection(db, 'siteSystems');
+      await addDoc(docRef, system);
+    }
+    console.log('✅ تم إضافة أنظمة الموقع بنجاح');
+
+    // إضافة الإعدادات العامة
+    for (const setting of generalSettingsData) {
+      const docRef = collection(db, 'generalSettings');
+      await addDoc(docRef, setting);
+    }
+    console.log('✅ تم إضافة الإعدادات العامة بنجاح');
 
     console.log('✅ تم تهيئة قاعدة البيانات بنجاح!');
     return true;
