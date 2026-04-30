@@ -193,104 +193,31 @@ const generalSettingsData = [
   },
 ];
 
-// بيانات الإحصائيات
-const siteStatsData = [
+// بيانات السوشل ميديا
+const socialMediaData = [
   {
-    label: 'عميل سعيد',
-    value: '500+',
-    icon: 'Users',
-    color: 'purple',
+    label: 'Twitter',
+    url: 'https://twitter.com/softycode',
+    icon: 'Twitter',
     order: 1,
   },
   {
-    label: 'مشروع ناجح',
-    value: '1,200+',
-    icon: 'Rocket',
-    color: 'teal',
+    label: 'LinkedIn',
+    url: 'https://linkedin.com/company/softycode',
+    icon: 'Linkedin',
     order: 2,
   },
   {
-    label: 'سنة خبرة',
-    value: '10+',
-    icon: 'Award',
-    color: 'blue',
-    order: 3,
-  },
-];
-
-// بيانات الميزات
-const siteFeaturesData = [
-  {
-    title: 'تطوير ناعم ذكي',
-    description: 'حلول متكاملة تضمن لك الأداء والأمان في مشروعك التقني.',
-    icon: 'Code2',
-    color: 'green',
-    bgColor: 'bg-green-100',
-    order: 1,
-  },
-  {
-    title: 'صيانة دائمة',
-    description: 'حلول متكاملة تضمن لك الأداء والأمان في مشروعك التقني.',
-    icon: 'Layers',
-    color: 'blue',
-    bgColor: 'bg-blue-100',
-    order: 2,
-  },
-  {
-    title: 'دعم 24/7',
-    description: 'حلول متكاملة تضمن لك الأداء والأمان في مشروعك التقني.',
-    icon: 'MessageSquare',
-    color: 'indigo',
-    bgColor: 'bg-indigo-100',
+    label: 'Instagram',
+    url: 'https://instagram.com/softycode',
+    icon: 'Instagram',
     order: 3,
   },
   {
-    title: 'أمان سحابي SQL',
-    description: 'حلول متكاملة تضمن لك الأداء والأمان في مشروعك التقني.',
-    icon: 'ShieldCheck',
-    color: 'green',
-    bgColor: 'bg-emerald-100',
+    label: 'GitHub',
+    url: 'https://github.com/softycode',
+    icon: 'Github',
     order: 4,
-  },
-];
-
-// بيانات الأنظمة
-const siteSystemsData = [
-  {
-    name: 'نظام سوفتي كود لإدارة المطاعم',
-    description: 'نظام متكامل لإدارة المطاعم والمقاهي',
-    icon: 'Store',
-    color: 'orange',
-    bgColor: 'from-orange-500 to-red-500',
-    category: 'restaurant',
-    order: 1,
-  },
-  {
-    name: 'نظام سوفتي كود لإدارة العيادات',
-    description: 'نظام متكامل لإدارة العيادات والمستشفيات',
-    icon: 'Stethoscope',
-    color: 'teal',
-    bgColor: 'from-teal-500 to-cyan-500',
-    category: 'clinics',
-    order: 2,
-  },
-  {
-    name: 'نظام سوفتي كود لإدارة التوصيل',
-    description: 'نظام متكامل لإدارة شركات التوصيل',
-    icon: 'Truck',
-    color: 'blue',
-    bgColor: 'from-blue-500 to-indigo-600',
-    category: 'delivery',
-    order: 3,
-  },
-];
-
-// بيانات الإعدادات العامة
-const generalSettingsData = [
-  {
-    siteName: 'SoftyCode',
-    tagline: 'مستقبل البرمجيات يبدأ بسحابة ذكية',
-    description: 'نطور أنظمة ويب ذكية تدير أعمالك بلمسة ناعمة',
   },
 ];
 
@@ -354,6 +281,13 @@ export const initializeFirestoreCollections = async () => {
       await addDoc(docRef, setting);
     }
     console.log('✅ تم إضافة الإعدادات العامة بنجاح');
+
+    // إضافة بيانات السوشل ميديا
+    for (const social of socialMediaData) {
+      const docRef = collection(db, 'social_media');
+      await addDoc(docRef, social);
+    }
+    console.log('✅ تم إضافة بيانات السوشل ميديا بنجاح');
 
     console.log('✅ تم تهيئة قاعدة البيانات بنجاح!');
     return true;

@@ -70,7 +70,7 @@ export const Privacy = () => {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary-green mt-1">•</span>
-                <span>بيانات الطلب: تفاصيل الطلبات والشحن</span>
+                <span>بيانات طلب الخدمة: تفاصيل المشاريع والمتطلبات التقنية</span>
               </li>
             </ul>
           </div>
@@ -104,34 +104,34 @@ export const Privacy = () => {
             </ul>
           </div>
 
-           {/* Section 3 */}
-           <div className="space-y-4">
-             <h3 className="text-xl font-bold text-slate-900 flex items-center gap-3">
-               <ShieldCheck size={24} className="text-primary-green" />
-               3. حماية البيانات
-             </h3>
-             <p className="text-slate-600 leading-relaxed">
-               نستخدم أحدث تقنيات الحماية لحماية بياناتك:
-             </p>
-             <ul className="space-y-2 text-slate-600">
-               <li className="flex items-start gap-2">
-                 <span className="text-primary-green mt-1">•</span>
-                 <span>التشفير المتقدم للبيانات الحساسة</span>
-               </li>
-               <li className="flex items-start gap-2">
-                 <span className="text-primary-green mt-1">•</span>
-                 <span>نظام المصادقة الثنائية</span>
-               </li>
-               <li className="flex items-start gap-2">
-                 <span className="text-primary-green mt-1">•</span>
-                 <span>الوصول المشفر للبيانات</span>
-               </li>
-               <li className="flex items-start gap-2">
-                 <span className="text-primary-green mt-1">•</span>
-                 <span>النسخ الاحتياطي التلقائي</span>
-               </li>
-             </ul>
-           </div>
+          {/* Section 3 */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold text-slate-900 flex items-center gap-3">
+              <ShieldCheck size={24} className="text-primary-green" />
+              3. حماية البيانات
+            </h3>
+            <p className="text-slate-600 leading-relaxed">
+              نستخدم أحدث تقنيات الحماية لحماية بياناتك:
+            </p>
+            <ul className="space-y-2 text-slate-600">
+              <li className="flex items-start gap-2">
+                <span className="text-primary-green mt-1">•</span>
+                <span>التشفير المتقدم للبيانات الحساسة</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary-green mt-1">•</span>
+                <span>نظام المصادقة الثنائية</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary-green mt-1">•</span>
+                <span>الوصول المشفر للبيانات</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary-green mt-1">•</span>
+                <span>النسخ الاحتياطي التلقائي</span>
+              </li>
+            </ul>
+          </div>
 
           {/* Section 4 */}
           <div className="space-y-4">
@@ -145,7 +145,7 @@ export const Privacy = () => {
             <ul className="space-y-2 text-slate-600">
               <li className="flex items-start gap-2">
                 <span className="text-primary-green mt-1">•</span>
-                <span>لأغراض الدفع والشحن</span>
+                <span>لأغراض الدفع والفواتير</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary-green mt-1">•</span>

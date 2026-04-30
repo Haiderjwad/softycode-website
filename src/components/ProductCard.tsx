@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ChevronRight, Star, ShoppingCart, Eye, Heart } from 'lucide-react';
+import { ChevronRight, Star, Eye, Heart, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Product } from '@/hooks/useProducts';
@@ -37,7 +37,7 @@ export const ProductCard = ({ product, index, viewMode }: ProductCardProps) => {
                 <span className="text-6xl">📦</span>
               </div>
             )}
-            
+
             {/* Category Badge */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -135,11 +135,11 @@ export const ProductCard = ({ product, index, viewMode }: ProductCardProps) => {
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
-                    to="/cart"
+                    to="/contact"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-brand-gradient text-white font-semibold hover-glow transition-all shadow-lg"
                   >
-                    <ShoppingCart size={18} />
-                    أضف
+                    <MessageCircle size={18} />
+                    اطلب الآن
                   </Link>
                 </motion.div>
               </div>
@@ -271,10 +271,10 @@ export const ProductCard = ({ product, index, viewMode }: ProductCardProps) => {
             </motion.div>
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
               <Link
-                to="/cart"
+                to="/contact"
                 className="inline-flex items-center justify-center p-2 rounded-lg bg-primary-green hover:bg-primary-green/90 text-white transition-all shadow-lg"
               >
-                <ShoppingCart size={18} />
+                <MessageCircle size={18} />
               </Link>
             </motion.div>
           </div>

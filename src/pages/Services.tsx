@@ -7,13 +7,13 @@ import { Loader as GlobalLoader } from '@/components/Loader';
 export const Services = () => {
   const { services, loading, error } = useServices();
 
-   if (loading) {
-     return (
-       <div className="min-h-screen flex items-center justify-center pt-32">
-         <GlobalLoader text="جاري تحميل الخدمات..." />
-       </div>
-     );
-   }
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pt-32">
+        <GlobalLoader text="جاري تحميل الخدمات..." />
+      </div>
+    );
+  }
 
   if (error) {
     return (
@@ -135,10 +135,10 @@ export const Services = () => {
             فريقنا جاهز لتطوير باقة خدمات تناسب احتياجات مشروعك بالضبط
           </p>
           <Link
-            to="/cart"
+            to="/contact"
             className="inline-flex items-center gap-2 bg-white text-primary-green px-8 py-3 rounded-xl font-bold hover:scale-105 transition-transform"
           >
-            عرض السلة <ChevronRight size={20} />
+            تواصل معنا <ChevronRight size={20} />
           </Link>
         </motion.div>
       </div>

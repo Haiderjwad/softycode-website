@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { CheckCircle, ArrowLeft, Truck, Shield, CreditCard, Calendar } from 'lucide-react';
+import { CheckCircle, ArrowLeft, CalendarDays, Shield, CreditCard, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const OrderSuccess = () => {
@@ -46,7 +46,7 @@ export const OrderSuccess = () => {
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 flex-shrink-0">
-                    <Truck size={24} />
+                    <CalendarDays size={24} />
                   </div>
                   <div>
                     <p className="text-sm text-slate-500">تاريخ الطلب</p>
@@ -59,7 +59,7 @@ export const OrderSuccess = () => {
                   </div>
                   <div>
                     <p className="text-sm text-slate-500">طريقة الدفع</p>
-                    <p className="font-bold text-slate-900">الدفع عند الاستلام</p>
+                    <p className="font-bold text-slate-900">التحويل البنكي / الدفع الإلكتروني</p>
                   </div>
                 </div>
               </div>
@@ -89,7 +89,7 @@ export const OrderSuccess = () => {
                   <div className="w-5 h-5 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-xs flex-shrink-0">
                     <CheckCircle size={12} />
                   </div>
-                  <span className="text-slate-400">التوصيل</span>
+                  <span className="text-slate-400">تسليم المشروع</span>
                 </div>
               </div>
             </div>
@@ -101,8 +101,8 @@ export const OrderSuccess = () => {
                 <p className="text-sm font-medium text-slate-700">ضمان الجودة</p>
               </div>
               <div className="text-center p-4 bg-slate-50 rounded-2xl">
-                <Truck size={28} className="text-green-600 mx-auto mb-2" />
-                <p className="text-sm font-medium text-slate-700">شحن سريع</p>
+                <CalendarDays size={28} className="text-green-600 mx-auto mb-2" />
+                <p className="text-sm font-medium text-slate-700">التسليم بالموعد</p>
               </div>
               <div className="text-center p-4 bg-slate-50 rounded-2xl">
                 <CreditCard size={28} className="text-green-600 mx-auto mb-2" />

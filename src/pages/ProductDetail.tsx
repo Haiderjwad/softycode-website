@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, ShoppingCart, Check, Star, Share2, Heart, ChevronRight, Calendar, Tag, Clock, Shield } from 'lucide-react';
+import { ArrowLeft, Check, Star, Share2, Heart, ChevronRight, Calendar, Tag, Clock, Shield } from 'lucide-react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useProducts } from '@/hooks/useProducts';
-import { addToFirestore } from '@/utils/firestore';
 
 export const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { products, loading, error } = useProducts();
   const [selectedImage, setSelectedImage] = useState(0);
-  const [quantity, setQuantity] = useState(1);
-  const [isAdded, setIsAdded] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
   const product = products.find((p) => p.id === id);
@@ -21,25 +18,6 @@ export const ProductDetail = () => {
       setSelectedImage(0);
     }
   }, [product]);
-
-  const handleAddToCart = async () => {
-    if (!product) return;
-
-    try {
-      await addToFirestore('orders', {
-        productId: product.id,
-        productName: product.name,
-        quantity,
-        price: product.price,
-        status: 'pending',
-        createdAt: new Date(),
-      });
-      setIsAdded(true);
-      setTimeout(() => setIsAdded(false), 3000);
-    } catch (err) {
-      console.error('Error adding to cart:', err);
-    }
-  };
 
   if (loading) {
     return (
@@ -122,11 +100,10 @@ export const ProductDetail = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedImage(i)}
-                    className={`aspect-square rounded-2xl overflow-hidden border-2 transition-all ${
-                      selectedImage === i
+                    className={`aspect-square rounded-2xl overflow-hidden border-2 transition-all ${selectedImage === i
                         ? 'border-primary-green'
                         : 'border-slate-200 hover:border-primary-green'
-                    }`}
+                      }`}
                   >
                     <img
                       src={product.image}
@@ -151,11 +128,10 @@ export const ProductDetail = () => {
                 </span>
                 <button
                   onClick={() => setIsWishlisted(!isWishlisted)}
-                  className={`p-3 rounded-2xl transition-all ${
-                    isWishlisted
+                  className={`p-3 rounded-2xl transition-all ${isWishlisted
                       ? 'bg-red-100 text-red-600'
                       : 'bg-slate-100 text-slate-400 hover:bg-red-50 hover:text-red-600'
-                  }`}
+                    }`}
                 >
                   <Heart size={24} fill={isWishlisted ? 'currentColor' : 'none'} />
                 </button>
@@ -171,9 +147,8 @@ export const ProductDetail = () => {
                     <Star
                       key={i}
                       size={20}
-                      className={`${
-                        i < 4 ? 'text-yellow-400 fill-yellow-400' : 'text-slate-200'
-                      }`}
+                      className={`${i < 4 ? 'text-yellow-400 fill-yellow-400' : 'text-slate-200'
+                        }`}
                     />
                   ))}
                 </div>
@@ -230,33 +205,6 @@ export const ProductDetail = () => {
               </motion.div>
             )}
 
-            {/* Quantity */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <label className="block text-sm font-bold text-slate-700 mb-3">
-                الكمية
-              </label>
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-slate-200 transition-all font-bold text-xl"
-                >
-                  -
-                </button>
-                <span className="text-2xl font-bold text-slate-900 w-12 text-center">
-                  {quantity}
-                </span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-slate-200 transition-all font-bold text-xl"
-                >
-                  +
-                </button>
-              </div>
-            </motion.div>
 
             {/* Actions */}
             <motion.div
@@ -265,29 +213,12 @@ export const ProductDetail = () => {
               transition={{ delay: 0.4 }}
               className="flex gap-4"
             >
-              <button
-                onClick={handleAddToCart}
-                disabled={isAdded}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className={`flex-1 py-5 rounded-2xl font-bold text-xl shadow-xl transition-all flex items-center justify-center gap-3 ${
-                  isAdded
-                    ? 'bg-green-500 text-white'
-                    : 'bg-brand-gradient text-white hover:shadow-2xl'
-                }`}
+              <Link
+                to="/contact"
+                className="flex-1 py-5 rounded-2xl font-bold text-xl shadow-xl transition-all flex items-center justify-center gap-3 bg-brand-gradient text-white hover:shadow-2xl"
               >
-                {isAdded ? (
-                  <>
-                    <Check size={24} />
-                    تمت الإضافة
-                  </>
-                ) : (
-                  <>
-                    <ShoppingCart size={24} />
-                    إضافة للسلة
-                  </>
-                )}
-              </button>
+                طلب الخدمة
+              </Link>
               <button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}

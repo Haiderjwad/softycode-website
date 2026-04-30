@@ -24,26 +24,24 @@ export const AdminPanel = () => {
         <h1 className="text-2xl font-bold mb-6 text-center text-gray-900">
           لوحة الإدارة
         </h1>
-        
+
         <div className="space-y-4">
           <button
             onClick={handleInitializeDatabase}
             disabled={loading}
-            className={`w-full py-3 px-4 rounded-lg font-semibold transition-colors ${
-              loading
+            className={`w-full py-3 px-4 rounded-lg font-semibold transition-colors ${loading
                 ? 'bg-gray-400 cursor-not-allowed'
                 : 'bg-blue-600 hover:bg-blue-700 text-white'
-            }`}
+              }`}
           >
             {loading ? 'جاري التهيئة...' : 'تهيئة قاعدة البيانات'}
           </button>
 
           {message && (
-            <div className={`p-4 rounded-lg text-center ${
-              message.includes('✅')
+            <div className={`p-4 rounded-lg text-center ${message.includes('✅')
                 ? 'bg-green-100 text-green-800'
                 : 'bg-red-100 text-red-800'
-            }`}>
+              }`}>
               {message}
             </div>
           )}
@@ -59,6 +57,7 @@ export const AdminPanel = () => {
             <li>✓ <strong>users</strong> - المستخدمون</li>
             <li>✓ <strong>orders</strong> - الطلبات</li>
             <li>✓ <strong>contacts</strong> - بيانات الاتصال</li>
+            <li>✓ <strong>social_media</strong> - شبكات التواصل الاجتماعي</li>
           </ul>
         </div>
       </div>

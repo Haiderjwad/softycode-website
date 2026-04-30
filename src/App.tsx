@@ -19,7 +19,7 @@ import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { AdminPanel } from './components/AdminPanel';
 import { ProductDetail } from './pages/ProductDetail';
-import { Cart } from './pages/Cart';
+
 import { OrderSuccess } from './pages/OrderSuccess';
 import { Blog } from './pages/Blog';
 import { FAQ } from './pages/FAQ';
@@ -44,40 +44,48 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+const MainLayout = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+
+  return (
+    <div className="min-h-screen bg-white" dir="rtl">
+      {!isAuthPage && <Navbar />}
+      <main>
+        {children}
+      </main>
+      {!isAuthPage && <Footer />}
+    </div>
+  );
+};
+
 export default function App() {
   return (
     <ErrorBoundary>
       <Router>
-        <div className="min-h-screen bg-white" dir="rtl">
-          <Navbar />
-          <main>
-            <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><SkeletonGrid /></div>}>
-              <Routes>
-                <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-                <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
-                <Route path="/products" element={<PageTransition><Products /></PageTransition>} />
-                <Route path="/product/:id" element={<PageTransition><ProductDetail /></PageTransition>} />
-                <Route path="/cart" element={<PageTransition><Cart /></PageTransition>} />
-                <Route path="/order-success" element={<PageTransition><OrderSuccess /></PageTransition>} />
-                <Route path="/about" element={<PageTransition><About /></PageTransition>} />
-                <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
-                <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
-                <Route path="/faq" element={<PageTransition><FAQ /></PageTransition>} />
-                <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
-                <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
-                <Route path="/careers" element={<PageTransition><Careers /></PageTransition>} />
-                <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
-                <Route path="/register" element={<PageTransition><Register /></PageTransition>} />
-                <Route path="/admin" element={<PageTransition><AdminPanel /></PageTransition>} />
-              </Routes>
-            </Suspense>
-          </main>
-          <Footer />
-        </div>
+        <MainLayout>
+          <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><SkeletonGrid /></div>}>
+            <Routes>
+              <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+              <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
+              <Route path="/products" element={<PageTransition><Products /></PageTransition>} />
+              <Route path="/product/:id" element={<PageTransition><ProductDetail /></PageTransition>} />
+
+              <Route path="/order-success" element={<PageTransition><OrderSuccess /></PageTransition>} />
+              <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+              <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+              <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
+              <Route path="/faq" element={<PageTransition><FAQ /></PageTransition>} />
+              <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
+              <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
+              <Route path="/careers" element={<PageTransition><Careers /></PageTransition>} />
+              <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
+              <Route path="/register" element={<PageTransition><Register /></PageTransition>} />
+              <Route path="/admin" element={<PageTransition><AdminPanel /></PageTransition>} />
+            </Routes>
+          </Suspense>
+        </MainLayout>
       </Router>
     </ErrorBoundary>
   );
 }
-
-
-

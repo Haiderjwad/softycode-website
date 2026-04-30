@@ -159,3 +159,79 @@ export const useGeneralSettings = () => {
 
   return { settings, loading, error };
 };
+
+export interface ConnectInfo {
+  id?: string;
+  label: string;
+  value: string;
+  icon: string;
+  order?: number;
+}
+
+export interface SocialMedia {
+  id?: string;
+  label: string;
+  url: string;
+  icon: string;
+  order?: number;
+}
+
+export const useConnectData = () => {
+  const [connectInfo, setConnectInfo] = useState<ConnectInfo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      query(collection(db, 'connect')),
+      (snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        } as ConnectInfo));
+        // Sort in client side if order is available
+        data.sort((a, b) => (a.order || 0) - (b.order || 0));
+        setConnectInfo(data);
+        setLoading(false);
+      },
+      (err) => {
+        setError(err.message);
+        setLoading(false);
+      }
+    );
+
+    return unsubscribe;
+  }, []);
+
+  return { connectInfo, loading, error };
+};
+
+export const useSocialMedia = () => {
+  const [socialMedia, setSocialMedia] = useState<SocialMedia[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      query(collection(db, 'social_media')),
+      (snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        } as SocialMedia));
+        // Sort in client side if order is available
+        data.sort((a, b) => (a.order || 0) - (b.order || 0));
+        setSocialMedia(data);
+        setLoading(false);
+      },
+      (err) => {
+        setError(err.message);
+        setLoading(false);
+      }
+    );
+
+    return unsubscribe;
+  }, []);
+
+  return { socialMedia, loading, error };
+};

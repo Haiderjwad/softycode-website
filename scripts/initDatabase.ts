@@ -75,6 +75,34 @@ const contactsData = {
   createdAt: new Date(),
 };
 
+// بيانات التواصل الاجتماعي
+const socialMediaData = [
+  {
+    label: 'Twitter',
+    url: 'https://twitter.com/softycode',
+    icon: 'Twitter',
+    order: 1,
+  },
+  {
+    label: 'LinkedIn',
+    url: 'https://linkedin.com/company/softycode',
+    icon: 'Linkedin',
+    order: 2,
+  },
+  {
+    label: 'Instagram',
+    url: 'https://instagram.com/softycode',
+    icon: 'Instagram',
+    order: 3,
+  },
+  {
+    label: 'GitHub',
+    url: 'https://github.com/softycode',
+    icon: 'Github',
+    order: 4,
+  },
+];
+
 // دالة لإضافة البيانات
 export async function initializeDatabase() {
   try {
@@ -102,6 +130,14 @@ export async function initializeDatabase() {
     console.log(`✓ تم إضافة بيانات الاتصال (ID: ${contactRef.id})`);
     console.log('✅ تم إضافة بيانات الاتصال\n');
 
+    // إضافة بيانات التواصل الاجتماعي
+    console.log('🌐 إضافة بيانات السوشل ميديا...');
+    for (const social of socialMediaData) {
+      const docRef = await addDoc(collection(db, 'social_media'), social);
+      console.log(`✓ تم إضافة: ${social.label} (ID: ${docRef.id})`);
+    }
+    console.log('✅ تم إضافة جميع بيانات السوشل ميديا\n');
+
     // إنشاء مثال مستخدم
     console.log('👤 إضافة مستخدم تجريبي...');
     const userRef = await addDoc(collection(db, 'users'), {
@@ -122,6 +158,7 @@ export async function initializeDatabase() {
     console.log('  ✓ services - الخدمات الإضافية (2 عنصر)');
     console.log('  ✓ contacts - بيانات الاتصال (1 عنصر)');
     console.log('  ✓ users - المستخدمون (1 مستخدم)');
+    console.log('  ✓ social_media - شبكات التواصل الاجتماعي (4 عناصر)');
     console.log('  ✓ orders - الطلبات (جاهز للاستخدام)\n');
 
     // Exit only if running in Node.js environment
