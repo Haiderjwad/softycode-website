@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Check, Star, Share2, Heart, ChevronRight, Calendar, Tag, Clock, Shield } from 'lucide-react';
+import { ArrowLeft, Check, Star, Share2, Heart, ChevronRight, Calendar, Tag, Clock, Shield, ExternalLink } from 'lucide-react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useProducts } from '@/hooks/useProducts';
 
@@ -211,21 +211,35 @@ export const ProductDetail = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="flex gap-4"
+              className="flex gap-4 flex-col md:flex-row"
             >
+              {product.systemUrl && (
+                <motion.a
+                  href={product.systemUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex-1 py-5 px-6 rounded-2xl font-bold text-xl shadow-lg transition-all flex items-center justify-center gap-3 bg-gradient-to-r from-primary-teal to-emerald-500 text-white hover:shadow-2xl cursor-pointer"
+                  title="فتح النظام في نافذة جديدة"
+                >
+                  <ExternalLink size={20} />
+                  فتح النظام
+                </motion.a>
+              )}
               <Link
                 to="/contact"
-                className="flex-1 py-5 rounded-2xl font-bold text-xl shadow-xl transition-all flex items-center justify-center gap-3 bg-brand-gradient text-white hover:shadow-2xl"
+                className={`flex-1 py-5 rounded-2xl font-bold text-xl shadow-xl transition-all flex items-center justify-center gap-3 bg-brand-gradient text-white hover:shadow-2xl ${product.systemUrl ? 'md:flex-1' : 'flex-1'}`}
               >
                 طلب الخدمة
               </Link>
-              <button
+              <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-6 py-5 rounded-2xl bg-slate-100 hover:bg-slate-200 transition-all"
+                className="px-6 py-5 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
               >
-                <Share2 size={24} />
-              </button>
+                <Share2 size={24} className="text-slate-700 dark:text-slate-300" />
+              </motion.button>
             </motion.div>
 
             {/* Trust Badges */}

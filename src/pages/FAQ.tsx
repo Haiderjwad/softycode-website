@@ -38,14 +38,14 @@ export const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-32 pb-20">
+    <div className="min-h-screen bg-white dark:bg-slate-950 pt-32 pb-20 transition-colors duration-300">
       {/* Header */}
-      <div className="bg-white border-b border-slate-100">
+      <div className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl font-display font-bold text-slate-900 mb-4"
+            className="text-5xl font-display font-bold text-slate-900 dark:text-white mb-4 transition-colors duration-300"
           >
             الأسئلة الشائعة
           </motion.h1>
@@ -53,7 +53,7 @@ export const FAQ = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-slate-600 max-w-2xl"
+            className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl transition-colors duration-300"
           >
             اكتشف إجابات على أسئلتك الشائعة حول منتجاتنا وخدماتنا
           </motion.p>
@@ -71,9 +71,9 @@ export const FAQ = () => {
             <input
               type="text"
               placeholder="ابحث عن سؤال..."
-              className="w-full px-6 py-5 pr-14 rounded-2xl bg-white border-2 border-slate-200 focus:border-primary-green focus:ring-4 focus:ring-primary-green/10 transition-all outline-none text-lg"
+              className="w-full px-6 py-5 pr-14 rounded-2xl bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-primary-green focus:ring-4 focus:ring-primary-green/10 transition-all outline-none text-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400"
             />
-            <Search size={24} className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search size={24} className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 transition-colors duration-300" />
           </div>
         </motion.div>
 

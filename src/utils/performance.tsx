@@ -86,7 +86,7 @@ export const preconnect = (domain: string, crossOrigin = true) => {
  */
 export const measureLoadTime = (label: string) => {
   if ('performance' in window) {
-    const navigationTiming = performance.getEntriesByType('navigation')[0];
+    const navigationTiming = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
     if (navigationTiming) {
       console.log(`${label}: ${navigationTiming.loadEventEnd - navigationTiming.loadEventStart}ms`);
     }

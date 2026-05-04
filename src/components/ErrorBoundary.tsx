@@ -1,10 +1,10 @@
-import React, { ReactNode, ReactElement, Component, ErrorInfo } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 interface State {
@@ -12,21 +12,24 @@ interface State {
   error?: Error;
 }
 
-export class ErrorBoundary extends Component<Props, State> {
+export class ErrorBoundary extends React.Component<Props, State> {
+  public state: State = {
+    hasError: false
+  };
+
   constructor(props: Props) {
     super(props);
-    this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error): State {
+  public static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('Error caught by boundary:', error, errorInfo);
   }
 
-  render(): ReactNode {
+  public render(): React.ReactNode {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen flex items-center justify-center pt-32 pb-20 bg-gradient-to-b from-slate-50 via-white to-slate-50">
@@ -52,7 +55,7 @@ export class ErrorBoundary extends Component<Props, State> {
               آسفين، حدث خطأ غير متوقع في التطبيق. يرجى محاولة تحديث الصفحة.
             </p>
 
-            {process.env.NODE_ENV === 'development' && this.state.error && (
+            {import.meta.env.DEV && this.state.error && (
               <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg text-left mb-6">
                 <p className="text-red-700 font-mono text-sm break-words">
                   {this.state.error.message}

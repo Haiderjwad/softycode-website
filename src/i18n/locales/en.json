@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "products": "Products",
+    "blog": "Blog",
+    "careers": "Careers",
+    "about": "About Us",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register",
+    "admin": "Admin Panel",
+    "logout": "Logout"
+  },
+  "hero": {
+    "badge": "Future of software starts with a smart cloud",
+    "title": "We develop <0>smart web systems</0> that manage your business with a soft touch",
+    "description": "At SoftyCode, we merge the power of cloud solutions with superior user interfaces, turning system complexities into seamless and enjoyable digital experiences that drive your business to the top.",
+    "cta_products": "Find your system",
+    "cta_consult": "Free Consultation",
+    "trust": "More than <1>+500</1> clients trust us",
+    "stats": {
+      "clients": "Happy Clients",
+      "projects": "Successful Projects",
+      "experience": "Years Experience"
+    },
+    "security_card": {
+      "title": "Server Security",
+      "status": "100% Trusted"
+    }
+  },
+  "features": {
+    "badge": "SoftyCode Features",
+    "title": "Why choose us as your tech partner?",
+    "subtitle": "We provide software solutions that go beyond mere code; we build integrated platforms that support your continuous success and ensure you stand out in the market.",
+    "smart_dev": {
+      "title": "Smart Soft Development",
+      "desc": "Flexible infrastructure that keeps pace with your business growth with premium user interfaces to achieve the highest quality standards."
+    },
+    "support": {
+      "title": "Exceptional Technical Support",
+      "desc": "A dedicated team available around the clock to ensure your system continues to operate efficiently without interruption."
+    },
+    "updates": {
+      "title": "Continuous Updates",
+      "desc": "Always stay ahead with periodic updates that ensure you have the latest software features and security developments."
+    },
+    "security": {
+      "title": "Advanced Cloud Security",
+      "desc": "Protecting your data is our priority through the latest encryption protocols and automatic backup systems."
+    },
+    "cta_all": "View All Services",
+    "cta_blog": "Discover Latest Articles"
+  },
+  "systems": {
+    "restaurant": "Smart Restaurant System",
+    "clinics": "Clinic Management System",
+    "delivery": "Integrated Delivery System"
+  },
+  "products": {
+    "badge": "Ready Products",
+    "title": "Professional Systems Ready for Success",
+    "subtitle": "Discover our selection of integrated software systems that have proven highly efficient and contributed to the success of hundreds of businesses.",
+    "cta_store": "View Software Store",
+    "items": {
+      "accounting": { "title": "Express Accounting System", "cat": "Cloud ERP System" },
+      "ecommerce": { "title": "Ecommerce Pro Platform", "cat": "Online Stores" },
+      "spa": { "title": "Integrated Spa System V2", "cat": "Facility Management" }
+    }
+  },
+  "cta": {
+    "title": "Ready to transform your digital project?",
+    "desc": "The SoftyCode digital team is ready to turn your vision into a software reality that excels in the market. Start today and elevate your business to unprecedented levels.",
+    "start": "Start Now for Free",
+    "services": "Explore Our Services",
+    "no_card": "No credit card required to start"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "back_to_home": "Back to Home",
+    "ready": "Ready to work",
+    "details": "View Details"
+  },
+  "seo": {
+    "home_title": "SoftyCode | Professional Software & Web Solutions"
+  }
+}

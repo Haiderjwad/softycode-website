@@ -134,7 +134,7 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-slate-900 to-primary-navy pt-24 pb-12 overflow-hidden relative">
+    <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pt-24 pb-12 overflow-hidden relative transition-colors duration-300">
       {/* Decorative blobs */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary-green/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 blur-3xl rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none" />
@@ -155,12 +155,12 @@ export const Footer = () => {
             <Link to="/" className="inline-block mb-8 group">
               <div className="relative inline-flex p-[2px] rounded-xl"
                 style={{ background: 'linear-gradient(135deg, #22c55e, #14b8a6, #22c55e)' }}>
-                <div className="bg-white rounded-[10px] px-4 py-2 flex items-center justify-center shadow-lg shadow-primary-green/20 transition-all duration-300 group-hover:shadow-primary-green/35">
+                <div className="bg-white dark:bg-slate-800 rounded-[10px] px-4 py-2 flex items-center justify-center shadow-lg shadow-primary-green/20 transition-all duration-300 group-hover:shadow-primary-green/35">
                   <Logo size="md" />
                 </div>
               </div>
             </Link>
-            <p className="text-slate-300 text-base mb-10 max-w-sm leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-base mb-10 max-w-sm leading-relaxed transition-colors duration-300">
               شريكك التقني الأمثل لبناء حلول سحابية ذكية بلمسة ناعمة. نحوّل تعقيدات البرمجة إلى أنظمة سهلة وفعّالة تدعم رؤيتك للمستقبل.
             </p>
 
@@ -168,7 +168,7 @@ export const Footer = () => {
             <div className="flex flex-wrap gap-3 mb-10">
               {contactLoading ? (
                 Array.from({ length: 4 }).map((_, i) => (
-                  <div key={i} className="w-12 h-12 rounded-2xl bg-slate-800 animate-pulse" />
+                  <div key={i} className="w-12 h-12 rounded-2xl bg-slate-200 dark:bg-slate-700 animate-pulse transition-colors duration-300" />
                 ))
               ) : (
                 socialLinks.map(({ key, label, url, icon, hoverColor }, i) => (
@@ -184,7 +184,7 @@ export const Footer = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.07 }}
-                    className={`w-12 h-12 rounded-2xl border border-slate-700 bg-slate-800/60 backdrop-blur-sm flex items-center justify-center text-slate-400 transition-all duration-300 ${hoverColor}`}
+                    className={`w-12 h-12 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/60 backdrop-blur-sm flex items-center justify-center text-slate-600 dark:text-slate-400 transition-all duration-300 ${hoverColor}`}
                   >
                     {icon}
                   </motion.a>
@@ -196,7 +196,7 @@ export const Footer = () => {
             <div className="space-y-3">
               {contactLoading ? (
                 Array.from({ length: 3 }).map((_, i) => (
-                  <div key={i} className="h-5 bg-slate-800 rounded-lg animate-pulse w-3/4" />
+                  <div key={i} className="h-5 bg-slate-200 dark:bg-slate-700 rounded-lg animate-pulse w-3/4 transition-colors duration-300" />
                 ))
               ) : (
                 contactItems.map((item, idx) => (
@@ -205,14 +205,14 @@ export const Footer = () => {
                     initial={{ opacity: 0, x: -16 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.08 }}
-                    className="flex items-start gap-3 text-sm text-slate-400 group"
+                    className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400 group transition-colors duration-300"
                   >
-                    <span className="mt-0.5 text-primary-green/70 group-hover:text-primary-green transition-colors">
+                    <span className="mt-0.5 text-primary-green/70 dark:text-primary-green/60 group-hover:text-primary-green transition-colors duration-300">
                       {item.icon}
                     </span>
                     <span
                       dir={item.dir}
-                      className="group-hover:text-slate-200 transition-colors"
+                      className="group-hover:text-slate-800 dark:group-hover:text-slate-200 transition-colors duration-300"
                       style={item.dir === 'ltr' ? { textAlign: 'left' } : {}}
                     >
                       {item.label}
@@ -230,13 +230,13 @@ export const Footer = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-bold text-white text-lg mb-8 font-display">الروابط السريعة</h4>
+            <h4 className="font-bold text-slate-900 dark:text-white text-lg mb-8 font-display transition-colors duration-300">الروابط السريعة</h4>
             <ul className="space-y-4">
               {quickLinks.map((link, i) => (
                 <motion.li key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
                   <Link
                     to={link.path}
-                    className="text-slate-400 font-medium hover:text-primary-green transition-colors flex items-center gap-2 group"
+                    className="text-slate-600 dark:text-slate-400 font-medium hover:text-primary-green dark:hover:text-primary-green transition-colors flex items-center gap-2 group duration-300"
                   >
                     <span className="w-1.5 h-1.5 bg-primary-green rounded-full scale-0 group-hover:scale-100 transition-transform" />
                     {link.name}
@@ -253,13 +253,13 @@ export const Footer = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-bold text-white text-lg mb-8 font-display">قانوني</h4>
+            <h4 className="font-bold text-slate-900 dark:text-white text-lg mb-8 font-display transition-colors duration-300">قانوني</h4>
             <ul className="space-y-4">
               {legalLinks.map((link, i) => (
                 <motion.li key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
                   <Link
                     to={link.path}
-                    className="text-slate-400 font-medium hover:text-primary-green transition-colors flex items-center gap-2 group"
+                    className="text-slate-600 dark:text-slate-400 font-medium hover:text-primary-green dark:hover:text-primary-green transition-colors flex items-center gap-2 group duration-300"
                   >
                     <span className="w-1.5 h-1.5 bg-primary-green rounded-full scale-0 group-hover:scale-100 transition-transform" />
                     {link.name}
@@ -276,8 +276,8 @@ export const Footer = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-bold text-white text-lg mb-8 font-display">النشرة البريدية</h4>
-            <p className="text-slate-400 text-sm mb-6">اشترك لتتلقى آخر أخبارنا والعروض الحصرية</p>
+            <h4 className="font-bold text-slate-900 dark:text-white text-lg mb-8 font-display transition-colors duration-300">النشرة البريدية</h4>
+            <p className="text-slate-600 dark:text-slate-400 text-sm mb-6 transition-colors duration-300">اشترك لتتلقى آخر أخبارنا والعروض الحصرية</p>
             <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
@@ -297,7 +297,7 @@ export const Footer = () => {
         </div>
 
         {/* ── Divider ── */}
-        <div className="h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent mb-10" />
+        <div className="h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-700 to-transparent mb-10 transition-colors duration-300" />
 
         {/* ── Bottom Bar ── */}
         <motion.div
@@ -306,14 +306,14 @@ export const Footer = () => {
           transition={{ duration: 0.5 }}
           className="flex flex-col md:flex-row justify-between items-center gap-6"
         >
-          <div className="text-sm text-slate-400 font-medium">
+          <div className="text-sm text-slate-600 dark:text-slate-400 font-medium transition-colors duration-300">
             © {new Date().getFullYear()} SoftyCode. جميع الحقوق محفوظة.
           </div>
 
           <div className="flex items-center gap-4">
             {contact?.address && (
-              <span className="text-xs text-slate-500 flex items-center gap-1">
-                <MapPin size={11} className="text-slate-600" />
+              <span className="text-xs text-slate-500 dark:text-slate-500 flex items-center gap-1 transition-colors duration-300">
+                <MapPin size={11} className="text-slate-600 dark:text-slate-600" />
                 {contact.address}
               </span>
             )}
@@ -321,7 +321,7 @@ export const Footer = () => {
               onClick={scrollToTop}
               whileHover={{ scale: 1.1, y: -5 }}
               whileTap={{ scale: 0.95 }}
-              className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-green/20 to-primary-teal/20 flex items-center justify-center text-primary-green hover:bg-primary-green hover:text-white transition-all"
+              className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-green/20 to-primary-teal/20 dark:from-primary-green/30 dark:to-primary-teal/30 flex items-center justify-center text-primary-green hover:bg-primary-green hover:text-white dark:hover:bg-primary-green dark:hover:text-white transition-all duration-300"
               title="العودة للأعلى"
             >
               <ArrowUp size={20} />

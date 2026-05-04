@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage } from '@/utils/helpers';
 
 /**

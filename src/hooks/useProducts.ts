@@ -11,6 +11,7 @@ export interface Product {
   image?: string;
   duration?: string;
   features?: string[];
+  systemUrl?: string; // رابط النظام
   createdAt: Date;
 }
 
@@ -34,6 +35,7 @@ export const useProducts = () => {
             image: data.image,
             duration: data.duration,
             features: data.features,
+            systemUrl: data.systemUrl,
             createdAt: data.createdAt?.toDate() || new Date(),
           } as Product;
         });
@@ -72,6 +74,7 @@ export const useServiceProducts = () => {
             image: data.image,
             duration: data.duration,
             features: data.features,
+            systemUrl: data.systemUrl,
             createdAt: data.createdAt?.toDate() || new Date(),
           } as Product;
         });
@@ -109,6 +112,7 @@ export const getProductById = async (productId: string) => {
       image: data.image,
       duration: data.duration,
       features: data.features,
+      systemUrl: data.systemUrl,
       createdAt: data.createdAt?.toDate() || new Date(),
     } as Product;
   } catch (error) {
