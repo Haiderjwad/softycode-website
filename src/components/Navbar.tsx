@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Logo } from './Logo';
+import { Logo, LogoIcon, LogoText } from './Logo';
 import { useAuth } from '@/hooks/useAuth';
 import { useTheme } from '@/hooks/useTheme';
 
@@ -93,10 +93,17 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-24 lg:h-28">
 
-          {/* Logo */}
-          <motion.div className="flex-shrink-0" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link to="/"><Logo size="xl" /></Link>
-          </motion.div>
+      {/* Logo */}
+      <motion.div className="flex-shrink-0 flex items-center gap-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+        <Link to="/" className="inline-flex items-center gap-2">
+          {/* Cloud Icon */}
+          <LogoIcon size="xl" />
+          {/* Brand Name with white card in dark mode */}
+          <div className="bg-white/95 dark:bg-white rounded-lg px-2.5 py-1 shadow-sm border border-primary-green/20 dark:border-primary-green/40 transition-all duration-300 hover:border-primary-green/40 dark:hover:border-primary-green/60">
+            <LogoText size="xl" />
+          </div>
+        </Link>
+      </motion.div>
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center flex-nowrap gap-0.5">

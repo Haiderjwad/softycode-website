@@ -5,7 +5,7 @@ import {
   ArrowUp, Mail, Phone, MapPin, Clock,
   X as XIcon, Linkedin, Instagram, Facebook, Github, Globe,
 } from 'lucide-react';
-import { Logo } from './Logo';
+import { Logo, LogoIcon, LogoText } from './Logo';
 import { useContactInfo } from '../hooks/useFirestore';
 
 // ========================
@@ -153,10 +153,12 @@ export const Footer = () => {
           >
             {/* ── Logo Card ── */}
             <Link to="/" className="inline-block mb-8 group">
-              <div className="relative inline-flex p-[2px] rounded-xl"
-                style={{ background: 'linear-gradient(135deg, #22c55e, #14b8a6, #22c55e)' }}>
-                <div className="bg-white dark:bg-slate-800 rounded-[10px] px-4 py-2 flex items-center justify-center shadow-lg shadow-primary-green/20 transition-all duration-300 group-hover:shadow-primary-green/35">
-                  <Logo size="md" />
+              <div className="flex items-center gap-2">
+                {/* Cloud Icon */}
+                <LogoIcon size="md" />
+                {/* Brand Name with white card in dark mode */}
+                <div className="bg-white/95 dark:bg-white rounded-lg px-2.5 py-1 shadow-sm border border-primary-green/20 dark:border-primary-green/40 transition-all duration-300 hover:border-primary-green/40 dark:hover:border-primary-green/60">
+                  <LogoText size="md" />
                 </div>
               </div>
             </Link>

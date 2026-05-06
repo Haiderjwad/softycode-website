@@ -54,7 +54,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   }, [i18n, i18n.language]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300 ease-in-out">
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300 ease-in-out">
       <Helmet>
         <title>SoftyCode | حلول برمجية وأنظمة ويب احترافية</title>
         <meta name="description" content="شريكك التقني الأمثل لبناء حلول سحابية ذكية بلمسة ناعمة. نحوّل تعقيدات البرمجة إلى أنظمة سهلة وفعّالة." />

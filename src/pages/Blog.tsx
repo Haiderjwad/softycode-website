@@ -68,14 +68,14 @@ const blogPosts = [
 
 export const Blog = () => {
   return (
-    <div className="min-h-screen bg-slate-50 pt-32 pb-20">
+    <div className="min-h-screen bg-slate-50 dark:bg-gray-900 pt-32 pb-20">
       {/* Header */}
-      <div className="bg-white border-b border-slate-100">
+      <div className="bg-white dark:bg-gray-800 border-b border-slate-100 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl font-display font-bold text-slate-900 mb-4"
+            className="text-5xl font-display font-bold text-slate-900 dark:text-white mb-4"
           >
             المدونة
           </motion.h1>
@@ -83,7 +83,7 @@ export const Blog = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-slate-600 max-w-2xl"
+            className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl"
           >
             مقالات وأخبار حول عالم البرمجة والتقنيات الحديثة
           </motion.p>

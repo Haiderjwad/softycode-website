@@ -80,7 +80,7 @@ export const Register = () => {
   return (
     <div className="min-h-screen flex" dir="rtl">
       {/* ── Left Panel – Form ── */}
-      <div className="flex-1 flex items-center justify-center bg-slate-50 p-6 lg:p-16 order-2 lg:order-1">
+      <div className="flex-1 flex items-center justify-center bg-white dark:bg-[#0a0a0f] p-6 lg:p-16 order-2 lg:order-1">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -94,10 +94,10 @@ export const Register = () => {
 
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-4xl font-display font-bold text-slate-900 mb-2">
+            <h1 className="text-4xl font-display font-bold text-slate-900 dark:text-white mb-2">
               إنشاء حساب جديد
             </h1>
-            <p className="text-slate-500">
+            <p className="text-slate-500 dark:text-slate-400">
               لديك حساب بالفعل؟{' '}
               <Link to="/login" className="text-primary-green font-bold hover:underline">
                 تسجيل الدخول
@@ -115,12 +115,12 @@ export const Register = () => {
                     ? 'bg-primary-green text-white'
                     : step === s
                       ? 'bg-brand-gradient text-white shadow-lg shadow-primary-green/30'
-                      : 'bg-slate-200 text-slate-500'
+                      : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
                     }`}
                 >
                   {step > s ? <CheckCircle size={16} /> : s}
                 </motion.div>
-                {s < 2 && <div className={`flex-1 h-1 rounded-full transition-all duration-500 ${step > s ? 'bg-primary-green' : 'bg-slate-200'}`} />}
+                {s < 2 && <div className={`flex-1 h-1 rounded-full transition-all duration-500 ${step > s ? 'bg-primary-green' : 'bg-slate-200 dark:bg-slate-800'}`} />}
               </React.Fragment>
             ))}
           </div>
@@ -136,7 +136,7 @@ export const Register = () => {
                 key="success"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-white rounded-3xl shadow-xl border border-slate-100 p-10 text-center"
+                className="bg-slate-50 dark:bg-[#111118] rounded-3xl shadow-xl shadow-slate-200/80 dark:shadow-none border border-slate-100 dark:border-slate-800 p-10 text-center"
               >
                 <motion.div
                   initial={{ scale: 0 }}
@@ -146,12 +146,12 @@ export const Register = () => {
                 >
                   <CheckCircle size={40} className="text-primary-green" />
                 </motion.div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">تم إنشاء الحساب بنجاح!</h2>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">تم إنشاء الحساب بنجاح!</h2>
                 <p className="text-slate-500">مرحباً {formData.name}! يتم توجيهك الآن...</p>
               </motion.div>
             ) : (
               <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/80 border border-slate-100 p-8 space-y-5">
+                <div className="bg-slate-50 dark:bg-[#111118] rounded-3xl shadow-xl shadow-slate-200/80 dark:shadow-none border border-slate-100 dark:border-slate-800 p-8 space-y-5">
 
                   {/* Error */}
                   <AnimatePresence>
@@ -160,7 +160,7 @@ export const Register = () => {
                         initial={{ opacity: 0, y: -8 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
-                        className="bg-red-50 border border-red-200/80 text-red-700 px-4 py-3 rounded-2xl text-sm text-center font-medium"
+                        className="bg-red-50 dark:bg-red-900/20 border border-red-200/80 dark:border-red-800/50 text-red-700 dark:text-red-400 px-4 py-3 rounded-2xl text-sm text-center font-medium"
                       >
                         ⚠️ {error}
                       </motion.div>
@@ -180,14 +180,14 @@ export const Register = () => {
                       >
                         {/* Name */}
                         <div>
-                          <label className="block text-sm font-bold text-slate-700 mb-2">الاسم الكامل</label>
+                          <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">الاسم الكامل</label>
                           <div className="relative">
-                            <User size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                            <User size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
                             <input
                               type="text"
                               value={formData.name}
                               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                              className="w-full pr-11 pl-4 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-primary-green focus:bg-white focus:ring-4 focus:ring-primary-green/10 transition-all outline-none text-slate-900 placeholder:text-slate-400"
+                              className="w-full pr-11 pl-4 py-4 rounded-2xl bg-white dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 focus:border-primary-green dark:focus:border-primary-green focus:bg-white dark:focus:bg-slate-800 focus:ring-4 focus:ring-primary-green/10 dark:focus:ring-primary-green/20 transition-all outline-none text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
                               placeholder="أدخل اسمك الكامل"
                               required
                             />
@@ -196,14 +196,14 @@ export const Register = () => {
 
                         {/* Email */}
                         <div>
-                          <label className="block text-sm font-bold text-slate-700 mb-2">البريد الإلكتروني</label>
+                          <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">البريد الإلكتروني</label>
                           <div className="relative">
-                            <Mail size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                            <Mail size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
                             <input
                               type="email"
                               value={formData.email}
                               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                              className="w-full pr-11 pl-4 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-primary-green focus:bg-white focus:ring-4 focus:ring-primary-green/10 transition-all outline-none text-slate-900 placeholder:text-slate-400"
+                              className="w-full pr-11 pl-4 py-4 rounded-2xl bg-white dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 focus:border-primary-green dark:focus:border-primary-green focus:bg-white dark:focus:bg-slate-800 focus:ring-4 focus:ring-primary-green/10 dark:focus:ring-primary-green/20 transition-all outline-none text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
                               placeholder="name@example.com"
                               required
                               dir="ltr"
@@ -232,19 +232,19 @@ export const Register = () => {
                       >
                         {/* Password */}
                         <div>
-                          <label className="block text-sm font-bold text-slate-700 mb-2">كلمة المرور</label>
+                          <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">كلمة المرور</label>
                           <div className="relative">
-                            <Lock size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                            <Lock size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
                             <input
                               type={showPassword ? 'text' : 'password'}
                               value={formData.password}
                               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                              className="w-full pr-11 pl-12 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-primary-green focus:bg-white focus:ring-4 focus:ring-primary-green/10 transition-all outline-none text-slate-900 placeholder:text-slate-400"
+                              className="w-full pr-11 pl-12 py-4 rounded-2xl bg-white dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 focus:border-primary-green dark:focus:border-primary-green focus:bg-white dark:focus:bg-slate-800 focus:ring-4 focus:ring-primary-green/10 dark:focus:ring-primary-green/20 transition-all outline-none text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
                               placeholder="••••••••"
                               required
                               dir="ltr"
                             />
-                            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors">
+                            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
                               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                             </button>
                           </div>
@@ -253,34 +253,34 @@ export const Register = () => {
                             <div className="mt-2 space-y-1">
                               <div className="flex gap-1">
                                 {[1, 2, 3, 4].map((i) => (
-                                  <div key={i} className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${i <= strength.score ? strength.color : 'bg-slate-200'}`} />
+                                  <div key={i} className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${i <= strength.score ? strength.color : 'bg-slate-200 dark:bg-slate-700'}`} />
                                 ))}
                               </div>
-                              <p className="text-xs text-slate-500">قوة كلمة المرور: <span className="font-bold">{strength.label}</span></p>
+                              <p className="text-xs text-slate-500 dark:text-slate-400">قوة كلمة المرور: <span className="font-bold">{strength.label}</span></p>
                             </div>
                           )}
                         </div>
 
                         {/* Confirm password */}
                         <div>
-                          <label className="block text-sm font-bold text-slate-700 mb-2">تأكيد كلمة المرور</label>
+                          <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">تأكيد كلمة المرور</label>
                           <div className="relative">
-                            <Lock size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                            <Lock size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
                             <input
                               type={showConfirmPassword ? 'text' : 'password'}
                               value={formData.confirmPassword}
                               onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                              className={`w-full pr-11 pl-12 py-4 rounded-2xl bg-slate-50 border-2 transition-all outline-none text-slate-900 placeholder:text-slate-400 ${formData.confirmPassword && formData.password !== formData.confirmPassword
-                                ? 'border-red-400 bg-red-50'
+                              className={`w-full pr-11 pl-12 py-4 rounded-2xl border-2 transition-all outline-none text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 ${formData.confirmPassword && formData.password !== formData.confirmPassword
+                                ? 'border-red-400 bg-red-50 dark:bg-red-900/20'
                                 : formData.confirmPassword && formData.password === formData.confirmPassword
-                                  ? 'border-primary-green bg-green-50'
-                                  : 'border-transparent focus:border-primary-green focus:bg-white focus:ring-4 focus:ring-primary-green/10'
+                                  ? 'border-primary-green bg-green-50 dark:bg-green-900/20'
+                                  : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary-green focus:bg-white dark:focus:bg-slate-800 focus:ring-4 focus:ring-primary-green/10 dark:focus:ring-primary-green/20'
                                 }`}
                               placeholder="••••••••"
                               required
                               dir="ltr"
                             />
-                            <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors">
+                            <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
                               {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                             </button>
                           </div>
@@ -292,9 +292,9 @@ export const Register = () => {
                             type="checkbox"
                             checked={formData.agree}
                             onChange={(e) => setFormData({ ...formData, agree: e.target.checked })}
-                            className="mt-1 w-4 h-4 rounded border-slate-300 text-primary-green focus:ring-primary-green"
+                            className="mt-1 w-4 h-4 rounded border-slate-300 dark:border-slate-700 text-primary-green focus:ring-primary-green"
                           />
-                          <span className="text-sm text-slate-600 group-hover:text-slate-800 transition-colors">
+                          <span className="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 transition-colors">
                             أوافق على{' '}
                             <Link to="/terms" className="text-primary-green font-bold hover:underline">الشروط والأحكام</Link>
                             {' '}و{' '}
@@ -308,7 +308,7 @@ export const Register = () => {
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => { setStep(1); setError(''); }}
-                            className="flex-1 py-4 rounded-2xl border-2 border-slate-200 hover:border-primary-green/40 hover:bg-slate-50 text-slate-700 font-bold transition-all"
+                            className="flex-1 py-4 rounded-2xl border-2 border-slate-200 dark:border-slate-700 hover:border-primary-green/40 dark:hover:border-primary-green/40 hover:bg-white dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold transition-all"
                           >
                             السابق
                           </motion.button>
@@ -340,7 +340,7 @@ export const Register = () => {
 
           {/* Back */}
           <div className="mt-8 text-center">
-            <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-primary-green transition-colors text-sm font-medium">
+            <Link to="/" className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-primary-green transition-colors text-sm font-medium">
               <ArrowLeft size={16} />
               العودة إلى الرئيسية
             </Link>
@@ -353,13 +353,12 @@ export const Register = () => {
         initial={{ opacity: 0, x: 60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="hidden lg:flex lg:w-1/2 relative overflow-hidden flex-col items-center justify-center p-16 order-1 lg:order-2"
-        style={{ background: 'linear-gradient(135deg, #0a0a1a 0%, #0d1f2d 40%, #0f3b2f 100%)' }}
+        className="hidden lg:flex lg:w-1/2 relative overflow-hidden flex-col items-center justify-center p-16 order-1 lg:order-2 bg-[#050510] dark:bg-[#020204]"
       >
         {/* Blobs */}
-        <div className="absolute top-20 right-20 w-72 h-72 bg-primary-green/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 left-20 w-56 h-56 bg-blue-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }} />
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(circle, #4ade80 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        <div className="absolute top-20 right-20 w-72 h-72 bg-purple-900/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 left-20 w-56 h-56 bg-teal-900/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle, #4ade80 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
         <div className="relative z-10 text-center max-w-md">
           {/* Logo Card */}
@@ -403,7 +402,7 @@ export const Register = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.7 + i * 0.12 }}
-                className="flex items-start gap-4 text-right bg-white/5 rounded-2xl p-4 border border-white/8"
+                className="flex items-start gap-4 text-right bg-white/5 rounded-2xl p-4 border border-slate-800"
               >
                 <div className="w-10 h-10 rounded-xl bg-primary-green/20 flex items-center justify-center flex-shrink-0">
                   <b.icon size={20} className="text-primary-green" />

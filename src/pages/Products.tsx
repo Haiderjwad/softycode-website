@@ -44,7 +44,7 @@ export const Products = () => {
   const softwareProducts = filteredProducts.filter(p => p.category === 'products');
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white py-24 pt-32">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-gray-800 py-24 pt-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -52,13 +52,13 @@ export const Products = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl lg:text-6xl font-display font-bold text-primary-navy mb-6">
+          <h1 className="text-5xl lg:text-6xl font-display font-bold text-primary-navy dark:text-white mb-6">
             منتجاتنا وخدماتنا
           </h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
             اكتشف مجموعة شاملة من الحلول البرمجية المتطورة التي صممت خصيصاً لتلبية احتياجات عملك
           </p>
-          <p className="text-sm text-slate-400 mt-4">
+          <p className="text-sm text-slate-400 dark:text-slate-500 mt-4">
             {products.length} منتج وخدمة متاحة حالياً
           </p>
         </motion.div>
@@ -70,29 +70,29 @@ export const Products = () => {
           transition={{ delay: 0.1 }}
           className="mb-12"
         >
-          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-gray-700">
             {/* Search */}
             <div className="relative flex-1 w-full lg:max-w-md">
-              <Search size={20} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Search size={20} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
               <input
                 type="text"
                 placeholder="ابحث عن منتج أو خدمة..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pr-12 pl-4 py-3 rounded-2xl bg-slate-50 border-2 border-slate-200 focus:border-primary-green focus:ring-4 focus:ring-primary-green/10 transition-all outline-none"
+                className="w-full pr-12 pl-4 py-3 rounded-2xl bg-slate-50 dark:bg-gray-700 border-2 border-slate-200 dark:border-gray-600 focus:border-primary-green focus:ring-4 focus:ring-primary-green/10 transition-all outline-none text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400"
               />
             </div>
 
             {/* Filters */}
             <div className="flex flex-wrap gap-4 items-center">
               {/* Category Filter */}
-              <div className="flex gap-2 p-1 bg-slate-100 rounded-2xl">
+              <div className="flex gap-2 p-1 bg-slate-100 dark:bg-gray-700 rounded-2xl">
                 <button
                   onClick={() => setSelectedCategory('all')}
                   className={`px-4 py-2 rounded-xl font-semibold transition-all ${
                     selectedCategory === 'all'
-                      ? 'bg-white text-slate-900 shadow-sm'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'bg-white dark:bg-gray-600 text-slate-900 dark:text-white shadow-sm'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   الكل
@@ -102,7 +102,7 @@ export const Products = () => {
                   className={`px-4 py-2 rounded-xl font-semibold transition-all ${
                     selectedCategory === 'products'
                       ? 'bg-primary-green text-white shadow-sm'
-                      : 'text-slate-600 hover:text-slate-900'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   برمجيات
@@ -112,7 +112,7 @@ export const Products = () => {
                   className={`px-4 py-2 rounded-xl font-semibold transition-all ${
                     selectedCategory === 'services'
                       ? 'bg-primary-navy text-white shadow-sm'
-                      : 'text-slate-600 hover:text-slate-900'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   خدمات
@@ -120,11 +120,11 @@ export const Products = () => {
               </div>
 
               {/* View Mode */}
-              <div className="flex gap-2 p-1 bg-slate-100 rounded-2xl">
+              <div className="flex gap-2 p-1 bg-slate-100 dark:bg-gray-700 rounded-2xl">
                 <button
                   onClick={() => setViewMode('grid')}
                   className={`p-2 rounded-xl transition-all ${
-                    viewMode === 'grid' ? 'bg-white text-primary-green shadow-sm' : 'text-slate-600'
+                    viewMode === 'grid' ? 'bg-white dark:bg-gray-600 text-primary-green shadow-sm' : 'text-slate-600 dark:text-slate-300'
                   }`}
                 >
                   <Grid size={20} />
@@ -132,7 +132,7 @@ export const Products = () => {
                 <button
                   onClick={() => setViewMode('list')}
                   className={`p-2 rounded-xl transition-all ${
-                    viewMode === 'list' ? 'bg-white text-primary-green shadow-sm' : 'text-slate-600'
+                    viewMode === 'list' ? 'bg-white dark:bg-gray-600 text-primary-green shadow-sm' : 'text-slate-600 dark:text-slate-300'
                   }`}
                 >
                   <List size={20} />
@@ -147,12 +147,12 @@ export const Products = () => {
           <div className="mb-20">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <span className="text-primary-navy text-sm font-bold uppercase tracking-widest">الخدمات</span>
-                <h2 className="text-3xl lg:text-4xl font-display font-bold text-primary-navy mt-2">
+                <span className="text-primary-navy dark:text-white text-sm font-bold uppercase tracking-widest">الخدمات</span>
+                <h2 className="text-3xl lg:text-4xl font-display font-bold text-primary-navy dark:text-white mt-2">
                   خدماتنا المتميزة
                 </h2>
               </div>
-              <span className="text-slate-500 text-sm bg-slate-100 px-4 py-2 rounded-full">
+              <span className="text-slate-500 dark:text-slate-400 text-sm bg-slate-100 dark:bg-gray-700 px-4 py-2 rounded-full">
                 {services.length} خدمة
               </span>
             </div>
@@ -177,12 +177,12 @@ export const Products = () => {
           <div>
             <div className="flex items-center justify-between mb-8">
               <div>
-                <span className="text-primary-navy text-sm font-bold uppercase tracking-widest">البرامج</span>
-                <h2 className="text-3xl lg:text-4xl font-display font-bold text-primary-navy mt-2">
+                <span className="text-primary-navy dark:text-white text-sm font-bold uppercase tracking-widest">البرامج</span>
+                <h2 className="text-3xl lg:text-4xl font-display font-bold text-primary-navy dark:text-white mt-2">
                   الأنظمة البرمجية
                 </h2>
               </div>
-              <span className="text-slate-500 text-sm bg-slate-100 px-4 py-2 rounded-full">
+              <span className="text-slate-500 dark:text-slate-400 text-sm bg-slate-100 dark:bg-gray-700 px-4 py-2 rounded-full">
                 {softwareProducts.length} نظام
               </span>
             </div>
@@ -210,8 +210,8 @@ export const Products = () => {
             className="text-center py-20"
           >
             <div className="text-6xl mb-6">🔍</div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-2">لم يتم العثور على نتائج</h3>
-            <p className="text-slate-600">جرب تغيير مصطلحات البحث أو الفلاتر</p>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">لم يتم العثور على نتائج</h3>
+            <p className="text-slate-600 dark:text-slate-300">جرب تغيير مصطلحات البحث أو الفلاتر</p>
           </motion.div>
         )}
 
@@ -230,7 +230,7 @@ export const Products = () => {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-white text-primary-green px-8 py-3 rounded-xl font-bold hover:scale-105 transition-transform"
+            className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 text-primary-green dark:text-primary-green px-8 py-3 rounded-xl font-bold hover:scale-105 transition-transform"
           >
             تواصل معنا <ChevronRight size={20} />
           </Link>

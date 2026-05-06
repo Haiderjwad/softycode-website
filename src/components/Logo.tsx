@@ -77,3 +77,56 @@ export const Logo: React.FC<LogoProps> = ({
     </div>
   );
 };
+
+// Component for icon only (cloud symbol)
+export const LogoIcon: React.FC<{ size?: 'sm' | 'md' | 'lg' | 'xl'; className?: string }> = ({
+  size = 'md',
+  className = '',
+}) => {
+  const dim = sizeMap[size];
+
+  return (
+    <img
+      src="/branding/softylogo.png"
+      alt="Softy Code Icon"
+      draggable={false}
+      style={{
+        width: dim.icon,
+        height: dim.icon,
+        objectFit: 'contain',
+        display: 'block',
+        transition: 'transform 0.35s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s ease',
+        filter:
+          'drop-shadow(0 4px 14px rgba(34,197,94,0.28)) ' +
+          'drop-shadow(0 2px 6px rgba(15,23,42,0.14))',
+      }}
+      className={`${className} hover:scale-110`}
+    />
+  );
+};
+
+// Component for text/brand name only
+export const LogoText: React.FC<{ size?: 'sm' | 'md' | 'lg' | 'xl'; className?: string }> = ({
+  size = 'md',
+  className = '',
+}) => {
+  const dim = sizeMap[size];
+
+  return (
+    <img
+      src="/branding/softy name brand.png"
+      alt="Softy Code"
+      draggable={false}
+      style={{
+        height: dim.nameH,
+        width: 'auto',
+        objectFit: 'contain',
+        display: 'block',
+        filter:
+          'drop-shadow(0 1px 3px rgba(15,23,42,0.12))',
+        transition: 'opacity 0.3s ease',
+      }}
+      className={className}
+    />
+  );
+};

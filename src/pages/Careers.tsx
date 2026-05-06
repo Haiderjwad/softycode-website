@@ -92,25 +92,25 @@ const positions = [
 
 export const Careers = () => {
   return (
-    <div className="min-h-screen bg-slate-50 pt-32 pb-20">
+    <div className="min-h-screen bg-slate-50 dark:bg-gray-900 pt-32 pb-20 transition-colors duration-300">
       {/* Header */}
-      <div className="bg-white border-b border-slate-100">
+      <div className="bg-white dark:bg-gray-800 border-b border-slate-100 dark:border-gray-700 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl font-display font-bold text-slate-900 mb-4"
-          >
-            الوظائف المتاحة
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-xl text-slate-600 max-w-2xl"
-          >
-            انضم إلينا وكن جزءاً من فريقنا المبدع
-          </motion.p>
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-5xl font-display font-bold text-slate-900 dark:text-white mb-4"
+      >
+        الوظائف المتاحة
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl"
+      >
+        انضم إلينا وكن جزءاً من فريقنا المبدع
+      </motion.p>
         </div>
       </div>
 
@@ -121,109 +121,109 @@ export const Careers = () => {
           animate={{ opacity: 1, y: 0 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
         >
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 text-center">
-            <Users size={32} className="text-primary-green mx-auto mb-3" />
-            <p className="text-3xl font-bold text-slate-900">50+</p>
-            <p className="text-slate-600">موظف</p>
-          </div>
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 text-center">
-            <Award size={32} className="text-primary-green mx-auto mb-3" />
-            <p className="text-3xl font-bold text-slate-900">10+</p>
-            <p className="text-slate-600">سنوات خبرة</p>
-          </div>
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 text-center">
-            <Briefcase size={32} className="text-primary-green mx-auto mb-3" />
-            <p className="text-3xl font-bold text-slate-900">100+</p>
-            <p className="text-slate-600">مشروع ناجح</p>
-          </div>
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 text-center">
-            <CheckCircle size={32} className="text-primary-green mx-auto mb-3" />
-            <p className="text-3xl font-bold text-slate-900">100%</p>
-            <p className="text-slate-600">رضا العملاء</p>
-          </div>
+    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-gray-700 text-center transition-colors duration-300">
+      <Users size={32} className="text-primary-green mx-auto mb-3" />
+      <p className="text-3xl font-bold text-slate-900 dark:text-white">50+</p>
+      <p className="text-slate-600 dark:text-slate-300">موظف</p>
+    </div>
+    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-gray-700 text-center transition-colors duration-300">
+      <Award size={32} className="text-primary-green mx-auto mb-3" />
+      <p className="text-3xl font-bold text-slate-900 dark:text-white">10+</p>
+      <p className="text-slate-600 dark:text-slate-300">سنوات خبرة</p>
+    </div>
+    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-gray-700 text-center transition-colors duration-300">
+      <Briefcase size={32} className="text-primary-green mx-auto mb-3" />
+      <p className="text-3xl font-bold text-slate-900 dark:text-white">100+</p>
+      <p className="text-slate-600 dark:text-slate-300">مشروع ناجح</p>
+    </div>
+    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-gray-700 text-center transition-colors duration-300">
+      <CheckCircle size={32} className="text-primary-green mx-auto mb-3" />
+      <p className="text-3xl font-bold text-slate-900 dark:text-white">100%</p>
+      <p className="text-slate-600 dark:text-slate-300">رضا العملاء</p>
+    </div>
         </motion.div>
 
         {/* Positions */}
         <div className="space-y-8">
           {positions.map((position, index) => (
-            <motion.div
-              key={position.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300"
-            >
-              <div className="p-8">
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="px-4 py-2 bg-primary-green/10 text-primary-green rounded-full text-sm font-bold">
-                        {position.department}
-                      </span>
-                      <span className="px-4 py-2 bg-slate-100 text-slate-600 rounded-full text-sm font-bold">
-                        {position.type}
-                      </span>
-                    </div>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                      {position.title}
-                    </h3>
-                    <p className="text-slate-600 mb-6">
-                      {position.description}
-                    </p>
+    <motion.div
+      key={position.id}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1 }}
+      className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-100 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300"
+    >
+      <div className="p-8">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+          <div className="flex-1">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="px-4 py-2 bg-primary-green/10 text-primary-green rounded-full text-sm font-bold">
+                {position.department}
+              </span>
+              <span className="px-4 py-2 bg-slate-100 dark:bg-gray-700 text-slate-600 dark:text-slate-300 rounded-full text-sm font-bold">
+                {position.type}
+              </span>
+            </div>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+              {position.title}
+            </h3>
+            <p className="text-slate-600 dark:text-slate-300 mb-6">
+              {position.description}
+            </p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                      <div className="flex items-center gap-3 text-slate-600">
-                        <MapPin size={20} className="text-primary-green flex-shrink-0" />
-                        <span>{position.location}</span>
-                      </div>
-                      <div className="flex items-center gap-3 text-slate-600">
-                        <DollarSign size={20} className="text-primary-green flex-shrink-0" />
-                        <span>{position.salary}</span>
-                      </div>
-                      <div className="flex items-center gap-3 text-slate-600">
-                        <Calendar size={20} className="text-primary-green flex-shrink-0" />
-                        <span>متاح فوراً</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <button className="px-8 py-4 bg-brand-gradient text-white rounded-2xl font-bold hover:shadow-xl transition-all whitespace-nowrap">
-                    التقديم الآن
-                  </button>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8 mt-8 pt-8 border-t border-slate-100">
-                  <div>
-                    <h4 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                      <CheckCircle size={20} className="text-primary-green" />
-                      المتطلبات
-                    </h4>
-                    <ul className="space-y-2">
-                      {position.requirements.map((req, i) => (
-                        <li key={i} className="flex items-start gap-2 text-slate-600">
-                          <span className="text-primary-green mt-1">•</span>
-                          <span>{req}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                      <CheckCircle size={20} className="text-primary-green" />
-                      المميزات
-                    </h4>
-                    <ul className="space-y-2">
-                      {position.benefits.map((benefit, i) => (
-                        <li key={i} className="flex items-start gap-2 text-slate-600">
-                          <span className="text-primary-green mt-1">•</span>
-                          <span>{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                <MapPin size={20} className="text-primary-green flex-shrink-0" />
+                <span>{position.location}</span>
               </div>
-            </motion.div>
+              <div className="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                <DollarSign size={20} className="text-primary-green flex-shrink-0" />
+                <span>{position.salary}</span>
+              </div>
+              <div className="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                <Calendar size={20} className="text-primary-green flex-shrink-0" />
+                <span>متاح فوراً</span>
+              </div>
+            </div>
+          </div>
+
+          <button className="px-8 py-4 bg-brand-gradient text-white rounded-2xl font-bold hover:shadow-xl transition-all whitespace-nowrap">
+            التقديم الآن
+          </button>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8 mt-8 pt-8 border-t border-slate-100 dark:border-gray-700">
+          <div>
+            <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+              <CheckCircle size={20} className="text-primary-green" />
+              المتطلبات
+            </h4>
+            <ul className="space-y-2">
+              {position.requirements.map((req, i) => (
+                <li key={i} className="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                  <span className="text-primary-green mt-1">•</span>
+                  <span>{req}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+              <CheckCircle size={20} className="text-primary-green" />
+              المميزات
+            </h4>
+            <ul className="space-y-2">
+              {position.benefits.map((benefit, i) => (
+                <li key={i} className="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                  <span className="text-primary-green mt-1">•</span>
+                  <span>{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </motion.div>
           ))}
         </div>
 
@@ -241,13 +241,13 @@ export const Careers = () => {
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
             أرسل سيرتك الذاتية وسنقوم بالتواصل معك عند وجود فرصة مناسبة
           </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-primary-green rounded-2xl font-bold text-lg hover:scale-105 transition-transform"
-          >
-            أرسل سيرتك الذاتية
-            <ArrowLeft size={20} />
-          </Link>
+    <Link
+      to="/contact"
+      className="inline-flex items-center gap-3 px-8 py-4 bg-white dark:bg-gray-900 text-primary-green rounded-2xl font-bold text-lg hover:scale-105 transition-transform"
+    >
+      أرسل سيرتك الذاتية
+      <ArrowLeft size={20} />
+    </Link>
         </motion.div>
       </div>
     </div>

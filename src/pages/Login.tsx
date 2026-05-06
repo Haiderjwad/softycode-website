@@ -51,17 +51,16 @@ export const Login = () => {
         initial={{ opacity: 0, x: -60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="hidden lg:flex lg:w-1/2 relative overflow-hidden flex-col items-center justify-center p-16"
-        style={{ background: 'linear-gradient(135deg, #0a0a1a 0%, #0d1f2d 40%, #0f3b2f 100%)' }}
+        className="hidden lg:flex lg:w-1/2 relative overflow-hidden flex-col items-center justify-center p-16 bg-[#050510] dark:bg-[#020204]"
       >
         {/* Animated blobs */}
-        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-primary-green/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 right-0 w-48 h-48 bg-primary-teal/10 rounded-full blur-2xl" />
+        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-indigo-500/15 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 right-0 w-48 h-48 bg-slate-800/30 rounded-full blur-2xl" />
 
         {/* Grid pattern */}
         <div
-          className="absolute inset-0 opacity-5"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: 'radial-gradient(circle, #4ade80 1px, transparent 1px)',
             backgroundSize: '40px 40px',
@@ -90,7 +89,7 @@ export const Login = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="text-4xl font-display font-bold text-white mb-4"
+            className="text-4xl font-display font-bold text-slate-100 mb-4"
           >
             مرحباً بعودتك
           </motion.h2>
@@ -134,7 +133,7 @@ export const Login = () => {
       </motion.div>
 
       {/* ── Right Panel – Form ── */}
-      <div className="flex-1 flex items-center justify-center bg-slate-50 p-6 lg:p-16">
+      <div className="flex-1 flex items-center justify-center bg-white dark:bg-[#0a0a0f] p-6 lg:p-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -148,10 +147,10 @@ export const Login = () => {
 
           {/* Header */}
           <div className="mb-10">
-            <h1 className="text-4xl font-display font-bold text-slate-900 mb-2">
+            <h1 className="text-4xl font-display font-bold text-slate-900 dark:text-white mb-2">
               تسجيل الدخول
             </h1>
-            <p className="text-slate-500">
+            <p className="text-slate-500 dark:text-slate-400">
               ليس لديك حساب؟{' '}
               <Link to="/register" className="text-primary-green font-bold hover:underline">
                 إنشاء حساب جديد
@@ -160,7 +159,7 @@ export const Login = () => {
           </div>
 
           {/* Card */}
-          <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/80 border border-slate-100 p-8 space-y-6">
+          <div className="bg-slate-50 dark:bg-[#111118] rounded-3xl shadow-xl shadow-slate-200/80 dark:shadow-none border border-slate-100 dark:border-slate-800 p-8 space-y-6">
 
             {/* Error */}
             <AnimatePresence>
@@ -169,7 +168,7 @@ export const Login = () => {
                   initial={{ opacity: 0, y: -8, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -8, scale: 0.97 }}
-                  className="bg-red-50 border border-red-200/80 text-red-700 px-4 py-3 rounded-2xl text-sm text-center font-medium"
+                  className="bg-red-50 dark:bg-red-900/20 border border-red-200/80 dark:border-red-800/50 text-red-700 dark:text-red-400 px-4 py-3 rounded-2xl text-sm text-center font-medium"
                 >
                   ⚠️ {error}
                 </motion.div>
@@ -179,14 +178,14 @@ export const Login = () => {
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Email */}
               <div>
-                <label className="block text-sm font-bold text-slate-700 mb-2">البريد الإلكتروني</label>
+                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">البريد الإلكتروني</label>
                 <div className="relative">
-                  <Mail size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Mail size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full pr-11 pl-4 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-primary-green focus:bg-white focus:ring-4 focus:ring-primary-green/10 transition-all outline-none text-slate-900 placeholder:text-slate-400"
+                    className="w-full pr-11 pl-4 py-4 rounded-2xl bg-white dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 focus:border-primary-green dark:focus:border-primary-green focus:bg-white dark:focus:bg-slate-800 focus:ring-4 focus:ring-primary-green/10 dark:focus:ring-primary-green/20 transition-all outline-none text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
                     placeholder="name@example.com"
                     required
                     dir="ltr"
@@ -197,18 +196,18 @@ export const Login = () => {
               {/* Password */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="block text-sm font-bold text-slate-700">كلمة المرور</label>
+                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300">كلمة المرور</label>
                   <button type="button" className="text-xs text-primary-green hover:underline font-medium">
                     نسيت كلمة المرور؟
                   </button>
                 </div>
                 <div className="relative">
-                  <Lock size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Lock size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="w-full pr-11 pl-12 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-primary-green focus:bg-white focus:ring-4 focus:ring-primary-green/10 transition-all outline-none text-slate-900 placeholder:text-slate-400"
+                    className="w-full pr-11 pl-12 py-4 rounded-2xl bg-white dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 focus:border-primary-green dark:focus:border-primary-green focus:bg-white dark:focus:bg-slate-800 focus:ring-4 focus:ring-primary-green/10 dark:focus:ring-primary-green/20 transition-all outline-none text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
                     placeholder="••••••••"
                     required
                     dir="ltr"
@@ -216,7 +215,7 @@ export const Login = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
@@ -251,10 +250,10 @@ export const Login = () => {
             {/* Divider */}
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-100" />
+                <div className="w-full border-t border-slate-100 dark:border-slate-800" />
               </div>
               <div className="relative flex justify-center text-xs">
-                <span className="px-4 bg-white text-slate-400 font-medium">أو تسجيل الدخول بـ</span>
+                <span className="px-4 bg-slate-50 dark:bg-[#111118] text-slate-400 font-medium">أو تسجيل الدخول بـ</span>
               </div>
             </div>
 
@@ -263,7 +262,7 @@ export const Login = () => {
               type="button"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full flex items-center justify-center gap-3 py-4 px-6 rounded-2xl border-2 border-slate-200 hover:border-primary-green/40 hover:bg-slate-50 transition-all font-bold text-slate-700 text-sm"
+              className="w-full flex items-center justify-center gap-3 py-4 px-6 rounded-2xl border-2 border-slate-200 dark:border-slate-700 hover:border-primary-green/40 dark:hover:border-primary-green/40 hover:bg-white dark:hover:bg-slate-800 transition-all font-bold text-slate-700 dark:text-slate-200 text-sm"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />

@@ -27,20 +27,20 @@ export const Services = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white py-24 pt-32">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-gray-800 py-24 pt-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-20"
         >
-          <h1 className="text-5xl lg:text-6xl font-display font-bold text-primary-navy mb-6">
+          <h1 className="text-5xl lg:text-6xl font-display font-bold text-primary-navy dark:text-white mb-6">
             خدماتنا المتميزة
           </h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
             نقدم مجموعة شاملة من الخدمات المساعدة التي تدعم نجاح مشروعك على المدى الطويل
           </p>
-          <p className="text-sm text-slate-400 mt-4">
+          <p className="text-sm text-slate-400 dark:text-slate-500 mt-4">
             {services.length} خدمة متاحة
           </p>
         </motion.div>
@@ -51,7 +51,7 @@ export const Services = () => {
             animate={{ opacity: 1 }}
             className="text-center py-20"
           >
-            <p className="text-lg text-slate-500">لا توجد خدمات حالياً</p>
+            <p className="text-lg text-slate-500 dark:text-slate-400">لا توجد خدمات حالياً</p>
           </motion.div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
@@ -63,11 +63,11 @@ export const Services = () => {
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -10 }}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100 hover:border-primary-green/50"
+                className="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100 dark:border-gray-700 hover:border-primary-green/50"
               >
                 <div className="flex items-start justify-between mb-6">
                   <div>
-                    <h3 className="text-2xl font-bold text-primary-navy mb-2 font-display">
+                    <h3 className="text-2xl font-bold text-primary-navy dark:text-white mb-2 font-display">
                       {service.name}
                     </h3>
                     {service.period && (
@@ -84,16 +84,16 @@ export const Services = () => {
                   </motion.div>
                 </div>
 
-                <p className="text-slate-600 text-base leading-relaxed mb-6">
+                <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed mb-6">
                   {service.description}
                 </p>
 
                 {service.features && service.features.length > 0 && (
-                  <div className="mb-6 pb-6 border-b border-slate-100">
-                    <p className="text-xs font-semibold text-slate-700 mb-3 uppercase">المميزات:</p>
+                  <div className="mb-6 pb-6 border-b border-slate-100 dark:border-gray-700">
+                    <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-3 uppercase">المميزات:</p>
                     <ul className="space-y-2">
                       {service.features.map((feature, i) => (
-                        <li key={i} className="text-sm text-slate-600 flex items-center gap-2">
+                        <li key={i} className="text-sm text-slate-600 dark:text-slate-300 flex items-center gap-2">
                           <span className="text-primary-green">✓</span>
                           {feature}
                         </li>
@@ -104,9 +104,9 @@ export const Services = () => {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-3xl font-bold text-primary-navy">
+                    <p className="text-3xl font-bold text-primary-navy dark:text-white">
                       {service.price.toLocaleString('ar-SA')}
-                      <span className="text-lg text-slate-500 font-normal"> ر.س</span>
+                      <span className="text-lg text-slate-500 dark:text-slate-400 font-normal"> ر.س</span>
                     </p>
                   </div>
                   <motion.button
@@ -136,7 +136,7 @@ export const Services = () => {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-white text-primary-green px-8 py-3 rounded-xl font-bold hover:scale-105 transition-transform"
+            className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 text-primary-green dark:text-primary-green px-8 py-3 rounded-xl font-bold hover:scale-105 transition-transform"
           >
             تواصل معنا <ChevronRight size={20} />
           </Link>

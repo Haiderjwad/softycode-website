@@ -81,28 +81,28 @@ export const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 pt-32 pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-32 pb-20 transition-colors duration-300">
       {/* Hero */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-4">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-green/10 text-primary-green font-semibold text-sm">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-green/10 dark:bg-primary-green/20 text-primary-green font-semibold text-sm">
             <Zap size={16} />
             نحن هنا لمساعدتك
           </span>
         </motion.div>
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-display-lg text-slate-900 mb-6"
+          className="text-display-lg text-slate-900 dark:text-white mb-6"
         >
-          تواصل <span className="text-brand-gradient">معنا الآن</span>
+          تواصل <span className="text-brand-gradient">منا الآن</span>
         </motion.h1>
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-xl text-slate-600 max-w-2xl mx-auto"
+          className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto"
         >
           نحن هنا للإجابة على استفساراتك ومساعدتك في اختيار الحل الأنسب لمشروعك القادم.
         </motion.p>
@@ -112,92 +112,92 @@ export const Contact = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {contactItems.map((item, idx) => (
-            <motion.a
-              key={idx}
-              href={item.link}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="card-elevated group hover:border-primary-green/50 p-6"
-            >
-              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                <item.icon size={24} />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">{item.title}</h3>
-              <p className="text-slate-600 font-medium group-hover:text-primary-green transition-colors">{item.value}</p>
-            </motion.a>
+        <motion.a
+          key={idx}
+          href={item.link}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: idx * 0.1 }}
+          whileHover={{ y: -5 }}
+          className="card-elevated group hover:border-primary-green/50 p-6 bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 transition-colors duration-300"
+        >
+          <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+            <item.icon size={24} />
+          </div>
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{item.title}</h3>
+          <p className="text-slate-600 dark:text-slate-300 font-medium group-hover:text-primary-green transition-colors">{item.value}</p>
+        </motion.a>
           ))}
         </div>
       </div>
 
       {/* Main Contact Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="card-elevated overflow-hidden"
-        >
-          <div className="grid lg:grid-cols-5 gap-0">
-            {/* Left Side - Info */}
-            <div className="lg:col-span-2 bg-gradient-to-br from-slate-900 to-slate-800 p-12 text-white relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary-green/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
-              
-              <div className="relative z-10">
-                <h2 className="text-3xl font-display font-bold mb-12">معلومات إضافية</h2>
-                
-                <div className="space-y-8 mb-16">
-                  {contactItems.map((item, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.4 + idx * 0.1 }}
-                      className="flex gap-4 items-start"
-                    >
-                      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center flex-shrink-0`}>
-                        <item.icon size={20} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-base mb-1">{item.title}</h4>
-                        <p className="text-slate-300 text-sm">{item.value}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="card-elevated overflow-hidden bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 transition-colors duration-300"
+      >
+        <div className="grid lg:grid-cols-5 gap-0">
+          {/* Left Side - Info */}
+          <div className="lg:col-span-2 bg-gradient-to-br from-slate-900 to-slate-800 p-12 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary-green/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
 
-                {/* Social Links */}
-                <div>
-                  <h4 className="font-bold mb-6 text-xs uppercase tracking-widest text-slate-400">تابعنا على وسائل التواصل</h4>
-                  <div className="flex gap-4">
-                    {socialLinks.map((social, i) => (
-                      <motion.a
-                        key={i}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1, y: -3 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center ${social.color} transition-all hover:bg-white/20`}
-                      >
-                        <social.icon size={20} />
-                      </motion.a>
-                    ))}
-                  </div>
+            <div className="relative z-10">
+              <h2 className="text-3xl font-display font-bold mb-12">معلومات إضافية</h2>
+
+              <div className="space-y-8 mb-16">
+                {contactItems.map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 + idx * 0.1 }}
+                    className="flex gap-4 items-start"
+                  >
+                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center flex-shrink-0`}>
+                      <item.icon size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-base mb-1">{item.title}</h4>
+                      <p className="text-slate-300 text-sm">{item.value}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Social Links */}
+              <div>
+                <h4 className="font-bold mb-6 text-xs uppercase tracking-widest text-slate-400">تابعنا على وسائل التواصل</h4>
+                <div className="flex gap-4">
+                  {socialLinks.map((social, i) => (
+                    <motion.a
+                      key={i}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1, y: -3 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center ${social.color} transition-all hover:bg-white/20`}
+                    >
+                      <social.icon size={20} />
+                    </motion.a>
+                  ))}
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Right Side - Form */}
-            <div className="lg:col-span-3 p-12">
-              <motion.form
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                onSubmit={handleSubmit}
-                className="space-y-8"
-              >
+          {/* Right Side - Form */}
+          <div className="lg:col-span-3 p-12 bg-white dark:bg-gray-800 transition-colors duration-300">
+            <motion.form
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              onSubmit={handleSubmit}
+              className="space-y-8"
+            >
                 {submitStatus === 'success' && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
