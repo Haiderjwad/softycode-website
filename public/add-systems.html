@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة الأنظمة البرمجية</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #1a202c;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .status {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+        }
+        .success {
+            background: #c6f6d5;
+            border-color: #48bb78;
+            color: #22543d;
+        }
+        .error {
+            background: #fed7d7;
+            border-color: #f56565;
+            color: #742a2a;
+        }
+        .loading {
+            background: #bee3f8;
+            border-color: #4299e1;
+            color: #2c5282;
+        }
+        pre {
+            background: #1a202c;
+            color: #48bb78;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .system-item {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .system-item.success {
+            border-color: #48bb78;
+            background: #f0fff4;
+        }
+        .icon {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 إضافة الأنظمة البرمجية التجريبية</h1>
+        <p class="subtitle">إضافة أنظمة برمجية جاهزة مع روابط تجريبية إلى قاعدة البيانات</p>
+        
+        <button class="btn" onclick="addSystems()" id="addBtn">
+            <span>➕</span>
+            إضافة الأنظمة
+        </button>
+        
+        <div id="status"></div>
+        
+        <div id="systemsList" style="margin-top: 30px;"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, addDoc, getDocs, query, where, updateDoc, doc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBwQcJ8NvXcJ8NvXcJ8NvXcJ8NvXcJ8NvX",
+            authDomain: "softycode.firebaseapp.com",
+            projectId: "softycode",
+            storageBucket: "softycode.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef123456"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        const softwareSystems = [
+            {
+                name: 'نظام المحاسبة السحابي',
+                nameEn: 'Cloud Accounting System',
+                description: 'نظام محاسبة سحابي متكامل لإدارة المالية والمخزون والمبيعات',
+                price: 2500,
+                category: 'products',
+                image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800',
+                features: ['إدارة الفواتير', 'تقارير مالية', 'إدارة المخزون', 'دعم فني 24/7'],
+                systemUrl: 'https://demo.example.com/accounting'
+            },
+            {
+                name: 'نظام إدارة المطاعم',
+                nameEn: 'Restaurant Management System',
+                description: 'حل متكامل لإدارة الطلبات والمخزون والموظفين في المطاعم',
+                price: 1800,
+                category: 'products',
+                image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800',
+                features: ['إدارة الطاولات', 'نقطة بيع POS', 'تقارير المبيعات', 'تطبيق للطلبات'],
+                systemUrl: 'https://demo.example.com/restaurant'
+            },
+            {
+                name: 'منصة التجارة الإلكترونية',
+                nameEn: 'E-commerce Platform',
+                description: 'منصة متكاملة لإنشاء متاجر إلكترونية احترافية',
+                price: 3500,
+                category: 'products',
+                image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800',
+                features: ['متجر إلكتروني', 'بوابات دفع', 'إدارة المنتجات', 'تتبع الطلبات'],
+                systemUrl: 'https://demo.example.com/ecommerce'
+            },
+            {
+                name: 'نظام إدارة العيادات',
+                nameEn: 'Clinic Management System',
+                description: 'نظام متكامل لإدارة العيادات الطبية وحجز المواعيد',
+                price: 2200,
+                category: 'products',
+                image: 'https://images.unsplash.com/photo-1519494026892-80bbd9d24eaa?auto=format&fit=crop&q=80&w=800',
+                features: ['حجز المواعيد', 'ملفات المرضى', 'الوصفات الطبية', 'الفواتير والتأمين'],
+                systemUrl: 'https://demo.example.com/clinic'
+            }
+        ];
+
+        window.addSystems = async function() {
+            const btn = document.getElementById('addBtn');
+            const statusDiv = document.getElementById('status');
+            const systemsListDiv = document.getElementById('systemsList');
+            
+            btn.disabled = true;
+            statusDiv.className = 'status loading';
+            statusDiv.innerHTML = '⏳ جاري إضافة الأنظمة...';
+            
+            let systemsHtml = '<h3 style="margin-bottom: 15px;">الأنظمة المضافة:</h3>';
+            
+            try {
+                for (const system of softwareSystems) {
+                    try {
+                        // Check if exists
+                        const q = query(collection(db, 'products'), where('name', '==', system.name));
+                        const querySnapshot = await getDocs(q);
+                        
+                        if (querySnapshot.empty) {
+                            await addDoc(collection(db, 'products'), {
+                                ...system,
+                                createdAt: new Date()
+                            });
+                            systemsHtml += `<div class="system-item success">
+                                <span class="icon">✅</span>
+                                <div>
+                                    <strong>${system.name}</strong><br>
+                                    <small>الرابط: ${system.systemUrl}</small>
+                                </div>
+                            </div>`;
+                        } else {
+                            // Update existing
+                            const docId = querySnapshot.docs[0].id;
+                            await updateDoc(doc(db, 'products', docId), {
+                                systemUrl: system.systemUrl
+                            });
+                            systemsHtml += `<div class="system-item success">
+                                <span class="icon">🔄</span>
+                                <div>
+                                    <strong>${system.name}</strong> (محدث)<br>
+                                    <small>الرابط: ${system.systemUrl}</small>
+                                </div>
+                            </div>`;
+                        }
+                    } catch (err) {
+                        systemsHtml += `<div class="system-item error">
+                            <span class="icon">❌</span>
+                            <div>
+                                <strong>${system.name}</strong><br>
+                                <small>${err.message}</small>
+                            </div>
+                        </div>`;
+                    }
+                }
+                
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = '✅ تم إضافة جميع الأنظمة بنجاح!';
+                systemsListDiv.innerHTML = systemsHtml;
+                
+            } catch (error) {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = `❌ حدث خطأ: ${error.message}`;
+            } finally {
+                btn.disabled = false;
+            }
+        };
+    </script>
+</body>
+</html>

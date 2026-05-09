@@ -2,13 +2,30 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Menu, X, LogIn, UserPlus, LogOut, User, ChevronDown,
-  LayoutDashboard, Settings, Globe, Moon, Sun
+  LayoutDashboard, Settings, Globe, Moon, Sun, Check
 } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Logo, LogoIcon, LogoText } from './Logo';
 import { useAuth } from '@/hooks/useAuth';
 import { useTheme } from '@/hooks/useTheme';
+
+// Flag SVG components
+const FlagSA = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="36" height="36" rx="4" fill="#165D31"/>
+    <text x="18" y="24" textAnchor="middle" fill="white" fontSize="16" fontFamily="Arial">🇸🇦</text>
+  </svg>
+);
+
+const FlagIQ = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="36" height="36" rx="4" fill="#CE1126"/>
+    <rect y="12" width="36" height="12" fill="white"/>
+    <rect y="24" width="36" height="12" fill="black"/>
+    <text x="18" y="24" textAnchor="middle" fill="white" fontSize="16" fontFamily="Arial">🇮🇶</text>
+  </svg>
+);
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,7 +53,6 @@ export const Navbar = () => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  // Close dropdowns on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
@@ -82,6 +98,9 @@ export const Navbar = () => {
       .map((n) => n[0]?.toUpperCase())
       .join('');
   };
+
+  const currentLanguage = i18n.language;
+  const isRTL = currentLanguage === 'ar';
 
   return (
     <nav
@@ -157,7 +176,7 @@ export const Navbar = () => {
                 className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors flex items-center gap-2"
               >
                 <Globe size={20} />
-                <span className="text-xs font-bold uppercase">{i18n.language}</span>
+                <span className="text-xs font-bold uppercase">{currentLanguage}</span>
               </motion.button>
               <AnimatePresence>
                 {isLangMenuOpen && (
@@ -165,10 +184,43 @@ export const Navbar = () => {
                     initial={{ opacity: 0, y: 8, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.97 }}
-                    className="absolute left-0 top-full mt-2 w-32 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-100 dark:border-slate-700 overflow-hidden z-50"
+                    className="absolute left-0 top-full mt-2 w-64 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-100 dark:border-slate-700 overflow-hidden z-50"
                   >
-                    <button onClick={() => toggleLanguage('ar')} className={`w-full px-4 py-2.5 text-sm font-bold text-right hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors ${i18n.language === 'ar' ? 'text-primary-green' : 'text-slate-700 dark:text-slate-300'}`}>العربية</button>
-                    <button onClick={() => toggleLanguage('en')} className={`w-full px-4 py-2.5 text-sm font-bold text-left hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors ${i18n.language === 'en' ? 'text-primary-green' : 'text-slate-700 dark:text-slate-300'}`}>English</button>
+                    <div className="p-2 space-y-1">
+                      {/* Arabic Option */}
+                      <button
+                        onClick={() => toggleLanguage('ar')}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
+                          currentLanguage === 'ar'
+                            ? 'bg-primary-green/10 text-primary-green'
+                            : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
+                        }`}
+                      >
+                        <span className="text-2xl">🇮🇶</span>
+                        <div className="flex-1 text-right">
+                          <div className="font-bold">العربية</div>
+                          <div className="text-xs text-slate-400 font-normal">Arabic</div>
+                        </div>
+                        {currentLanguage === 'ar' && <Check size={18} className="text-primary-green flex-shrink-0" />}
+                      </button>
+
+                      {/* English Option */}
+                      <button
+                        onClick={() => toggleLanguage('en')}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
+                          currentLanguage === 'en'
+                            ? 'bg-primary-green/10 text-primary-green'
+                            : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
+                        }`}
+                      >
+                        <span className="text-2xl">🇬🇧</span>
+                        <div className="flex-1 text-left">
+                          <div className="font-bold">English</div>
+                          <div className="text-xs text-slate-400 font-normal">English (UK)</div>
+                        </div>
+                        {currentLanguage === 'en' && <Check size={18} className="text-primary-green flex-shrink-0" />}
+                      </button>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -277,9 +329,33 @@ export const Navbar = () => {
                   </Link>
                 ))}
               </div>
-              <div className="flex gap-2 px-4 py-3 bg-slate-50 dark:bg-slate-800 rounded-2xl">
-                <button onClick={() => toggleLanguage('ar')} className={`flex-1 py-2 rounded-xl font-bold ${i18n.language === 'ar' ? 'bg-primary-green text-white shadow-md' : 'text-slate-600 dark:text-slate-400'}`}>العربية</button>
-                <button onClick={() => toggleLanguage('en')} className={`flex-1 py-2 rounded-xl font-bold ${i18n.language === 'en' ? 'bg-primary-green text-white shadow-md' : 'text-slate-600 dark:text-slate-400'}`}>English</button>
+              {/* Mobile Language Switcher */}
+              <div className="px-4 py-2">
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">{isRTL ? 'اللغة' : 'Language'}</p>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => toggleLanguage('ar')}
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm transition-all ${
+                      currentLanguage === 'ar'
+                        ? 'bg-primary-green text-white shadow-md'
+                        : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
+                    }`}
+                  >
+                    <span className="text-xl">🇮🇶</span>
+                    العربية
+                  </button>
+                  <button
+                    onClick={() => toggleLanguage('en')}
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm transition-all ${
+                      currentLanguage === 'en'
+                        ? 'bg-primary-green text-white shadow-md'
+                        : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
+                    }`}
+                  >
+                    <span className="text-xl">🇬🇧</span>
+                    English
+                  </button>
+                </div>
               </div>
               <div className="h-px bg-slate-200 dark:bg-slate-700" />
               <div className="space-y-3">

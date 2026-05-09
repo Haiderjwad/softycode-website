@@ -1,21 +1,22 @@
 import { useProducts } from '@/hooks/useProducts';
 import { motion } from 'motion/react';
-import { ChevronRight, Search, Grid, List } from 'lucide-react';
+import { ChevronRight, Search, Grid, List, SlidersHorizontal, LayoutGrid } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Loader as GlobalLoader } from '@/components/Loader';
 import { ProductCard } from '@/components/ProductCard';
 
 export const Products = () => {
+  const { t } = useTranslation();
   const { products, loading, error } = useProducts();
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'products' | 'services'>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center pt-32">
-        <GlobalLoader text="جاري تحميل المنتجات..." />
+        <GlobalLoader text={t('common.loading')} />
       </div>
     );
   }
@@ -24,116 +25,83 @@ export const Products = () => {
     return (
       <div className="min-h-screen flex items-center justify-center pt-32">
         <div className="bg-red-50 border border-red-200 text-red-700 px-8 py-6 rounded-2xl max-w-md text-center">
-          <h2 className="text-xl font-bold mb-2">حدث خطأ</h2>
+          <h2 className="text-xl font-bold mb-2">{t('common.error')}</h2>
           <p>{error}</p>
         </div>
       </div>
     );
   }
 
-  // Filter products
-  const filteredProducts = products.filter((product) => {
+  // Filter only products (software systems), completely remove services from this page
+  const softwareProducts = products.filter((product) => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         product.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+      product.description.toLowerCase().includes(searchTerm.toLowerCase());
+    return product.category === 'products' && matchesSearch;
   });
 
-  // Separate products and services
-  const services = filteredProducts.filter(p => p.category === 'services');
-  const softwareProducts = filteredProducts.filter(p => p.category === 'products');
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-gray-800 py-24 pt-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+      {/* مسافة فاصله احترافيه بين الشريط العلوي للنظام ومحتوى القسم */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 lg:pt-36 pb-24">
+        {/* Professional Toolbar */}
+        {/* مسافة احترافية بين شريط البحث وكارتات المنتجات */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="mb-16 sm:mb-20 lg:mb-24 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-3xl p-4 md:p-5 shadow-sm border border-slate-200/60 dark:border-slate-700/60 sticky top-24 z-30"
         >
-          <h1 className="text-5xl lg:text-6xl font-display font-bold text-primary-navy dark:text-white mb-6">
-            منتجاتنا وخدماتنا
-          </h1>
-          <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            اكتشف مجموعة شاملة من الحلول البرمجية المتطورة التي صممت خصيصاً لتلبية احتياجات عملك
-          </p>
-          <p className="text-sm text-slate-400 dark:text-slate-500 mt-4">
-            {products.length} منتج وخدمة متاحة حالياً
-          </p>
-        </motion.div>
+          <div className="flex flex-col md:flex-row gap-5 items-center justify-between">
 
-        {/* Filters & Search */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mb-12"
-        >
-          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-gray-700">
-            {/* Search */}
-            <div className="relative flex-1 w-full lg:max-w-md">
-              <Search size={20} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
+            {/* Left side: Professional Search */}
+            <div className="relative w-full md:max-w-xl group flex-1">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                <Search size={22} className="text-slate-400 dark:text-slate-500 group-hover:text-primary-green transition-colors duration-300" />
+              </div>
               <input
                 type="text"
-                placeholder="ابحث عن منتج أو خدمة..."
+                placeholder={t('pages.products.search_placeholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pr-12 pl-4 py-3 rounded-2xl bg-slate-50 dark:bg-gray-700 border-2 border-slate-200 dark:border-gray-600 focus:border-primary-green focus:ring-4 focus:ring-primary-green/10 transition-all outline-none text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400"
+                className="w-full pl-5 pr-12 py-3.5 bg-slate-100/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent text-slate-900 dark:text-white placeholder-slate-500 transition-all duration-300 hover:bg-slate-100 dark:hover:bg-slate-900 shadow-inner font-medium"
               />
             </div>
 
-            {/* Filters */}
-            <div className="flex flex-wrap gap-4 items-center">
-              {/* Category Filter */}
-              <div className="flex gap-2 p-1 bg-slate-100 dark:bg-gray-700 rounded-2xl">
-                <button
-                  onClick={() => setSelectedCategory('all')}
-                  className={`px-4 py-2 rounded-xl font-semibold transition-all ${
-                    selectedCategory === 'all'
-                      ? 'bg-white dark:bg-gray-600 text-slate-900 dark:text-white shadow-sm'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                >
-                  الكل
-                </button>
-                <button
-                  onClick={() => setSelectedCategory('products')}
-                  className={`px-4 py-2 rounded-xl font-semibold transition-all ${
-                    selectedCategory === 'products'
-                      ? 'bg-primary-green text-white shadow-sm'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                >
-                  برمجيات
-                </button>
-                <button
-                  onClick={() => setSelectedCategory('services')}
-                  className={`px-4 py-2 rounded-xl font-semibold transition-all ${
-                    selectedCategory === 'services'
-                      ? 'bg-primary-navy text-white shadow-sm'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                >
-                  خدمات
-                </button>
+            {/* Right side: Tools & View Toggles */}
+            <div className="flex items-center gap-3 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+              {/* Product count nicely styled */}
+              <div className="whitespace-nowrap px-5 py-3.5 bg-primary-green/10 border border-primary-green/20 text-primary-green font-bold rounded-2xl text-sm flex items-center gap-2 shadow-sm">
+                <div className="w-2 h-2 rounded-full bg-primary-green animate-pulse" />
+                {softwareProducts.length} {t('pages.products.system_count', { count: softwareProducts.length }).split(' ').slice(1).join(' ')}
               </div>
 
-              {/* View Mode */}
-              <div className="flex gap-2 p-1 bg-slate-100 dark:bg-gray-700 rounded-2xl">
+              {/* Professional Filter Button */}
+              <button
+                className="p-3.5 rounded-2xl bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:text-primary-green hover:border-primary-green hover:bg-primary-green/5 transition-all duration-300 shadow-sm flex items-center gap-2 font-medium"
+                title="Filter"
+              >
+                <SlidersHorizontal size={20} />
+                <span className="hidden sm:inline">تصفية</span>
+              </button>
+
+              {/* View modes */}
+              <div className="flex bg-slate-100 dark:bg-slate-900/80 p-1 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-inner">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded-xl transition-all ${
-                    viewMode === 'grid' ? 'bg-white dark:bg-gray-600 text-primary-green shadow-sm' : 'text-slate-600 dark:text-slate-300'
-                  }`}
+                  className={`p-2.5 rounded-xl transition-all duration-300 flex items-center justify-center ${viewMode === 'grid'
+                    ? 'bg-white dark:bg-slate-700 text-primary-green shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
+                    }`}
+                  title="Grid View"
                 >
-                  <Grid size={20} />
+                  <LayoutGrid size={20} />
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`p-2 rounded-xl transition-all ${
-                    viewMode === 'list' ? 'bg-white dark:bg-gray-600 text-primary-green shadow-sm' : 'text-slate-600 dark:text-slate-300'
-                  }`}
+                  className={`p-2.5 rounded-xl transition-all duration-300 flex items-center justify-center ${viewMode === 'list'
+                    ? 'bg-white dark:bg-slate-700 text-primary-green shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
+                    }`}
+                  title="List View"
                 >
                   <List size={20} />
                 </button>
@@ -142,58 +110,17 @@ export const Products = () => {
           </div>
         </motion.div>
 
-        {/* Services Section */}
-        {services.length > 0 && (
-          <div className="mb-20">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <span className="text-primary-navy dark:text-white text-sm font-bold uppercase tracking-widest">الخدمات</span>
-                <h2 className="text-3xl lg:text-4xl font-display font-bold text-primary-navy dark:text-white mt-2">
-                  خدماتنا المتميزة
-                </h2>
-              </div>
-              <span className="text-slate-500 dark:text-slate-400 text-sm bg-slate-100 dark:bg-gray-700 px-4 py-2 rounded-full">
-                {services.length} خدمة
-              </span>
-            </div>
-            <div className={viewMode === 'grid' 
-              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-              : "space-y-6"
-            }>
-              {services.map((service, index) => (
-                <ProductCard 
-                  key={service.id} 
-                  product={service} 
-                  index={index}
-                  viewMode={viewMode}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Products Section */}
+        {/* Products (Software Systems) Section */}
         {softwareProducts.length > 0 && (
           <div>
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <span className="text-primary-navy dark:text-white text-sm font-bold uppercase tracking-widest">البرامج</span>
-                <h2 className="text-3xl lg:text-4xl font-display font-bold text-primary-navy dark:text-white mt-2">
-                  الأنظمة البرمجية
-                </h2>
-              </div>
-              <span className="text-slate-500 dark:text-slate-400 text-sm bg-slate-100 dark:bg-gray-700 px-4 py-2 rounded-full">
-                {softwareProducts.length} نظام
-              </span>
-            </div>
-            <div className={viewMode === 'grid' 
-              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            <div className={viewMode === 'grid'
+              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               : "space-y-6"
             }>
               {softwareProducts.map((product, index) => (
-                <ProductCard 
-                  key={product.id} 
-                  product={product} 
+                <ProductCard
+                  key={product.id}
+                  product={product}
                   index={index}
                   viewMode={viewMode}
                 />
@@ -203,15 +130,15 @@ export const Products = () => {
         )}
 
         {/* No Results */}
-        {filteredProducts.length === 0 && (
+        {softwareProducts.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="text-center py-20"
           >
             <div className="text-6xl mb-6">🔍</div>
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">لم يتم العثور على نتائج</h3>
-            <p className="text-slate-600 dark:text-slate-300">جرب تغيير مصطلحات البحث أو الفلاتر</p>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{t('pages.products.no_results_title')}</h3>
+            <p className="text-slate-600 dark:text-slate-400">{t('pages.products.no_results_desc')}</p>
           </motion.div>
         )}
 
@@ -220,19 +147,19 @@ export const Products = () => {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-primary-green to-primary-navy rounded-3xl p-12 lg:p-16 text-center text-white mt-20"
+          className="bg-gradient-to-r from-primary-green to-primary-navy rounded-3xl p-12 lg:p-16 text-center text-white mt-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            لم تجد ما تبحث عنه؟
+            {t('pages.products.cta_title')}
           </h2>
           <p className="text-lg text-white/80 mb-8">
-            تحدث معنا عن احتياجاتك الخاصة وسنقوم بتطوير حل مخصص لك
+            {t('pages.products.cta_desc')}
           </p>
           <Link
             to="/contact"
             className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 text-primary-green dark:text-primary-green px-8 py-3 rounded-xl font-bold hover:scale-105 transition-transform"
           >
-            تواصل معنا <ChevronRight size={20} />
+            {t('pages.products.cta_button')} <ChevronRight size={20} />
           </Link>
         </motion.div>
       </div>

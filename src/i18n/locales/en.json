@@ -13,6 +13,94 @@
     "admin": "Admin Panel",
     "logout": "Logout"
   },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "subtitle": "Login to access your dashboard and favorite services",
+      "welcome": "Welcome Back",
+      "email_label": "Email Address",
+      "email_placeholder": "name@example.com",
+      "password_label": "Password",
+      "password_placeholder": "••••••••",
+      "forgot_password": "Forgot Password?",
+      "submit": "Login",
+      "loading": "Logging in...",
+      "or_login_with": "Or login with",
+      "google": "Login with Google",
+      "back_to_home": "Back to Home",
+      "new_account": "Don't have an account?",
+      "create_account": "Create Account",
+      "errors": {
+        "invalid_credentials": "Email or password is incorrect",
+        "too_many_requests": "Too many attempts. Please try again later",
+        "generic": "Something went wrong. Please try again"
+      },
+      "features": {
+        "security": "Top-level security and protection",
+        "instant": "Instant access to all services",
+        "experience": "Premium and seamless user experience",
+        "support": "24/7 technical support"
+      }
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Create your account for free and enjoy all our premium services",
+      "welcome": "Join the Creators Community",
+      "login_link": "Login",
+      "has_account": "Already have an account?",
+      "step1": "Personal Information",
+      "step2": "Password",
+      "personal_info": "Personal Information",
+      "password_label": "Password",
+      "name_label": "Full Name",
+      "name_placeholder": "Enter your full name",
+      "email_label": "Email Address",
+      "email_placeholder": "name@example.com",
+      "next": "Next",
+      "password_label": "Password",
+      "password_placeholder": "••••••••",
+      "confirm_password_label": "Confirm Password",
+      "password_strength": "Password Strength",
+      "weak": "Weak",
+      "medium": "Medium",
+      "good": "Good",
+      "strong": "Strong",
+      "terms_agree": "I agree to the",
+      "terms": "Terms and Conditions",
+      "privacy": "Privacy Policy",
+      "and": "and",
+      "submit": "Create Account",
+      "loading": "Creating...",
+      "previous": "Previous",
+      "success_title": "Account Created Successfully!",
+      "success_message": "Welcome",
+      "redirecting": "Redirecting now...",
+      "errors": {
+        "name_required": "Please enter your full name",
+        "email_invalid": "Please enter a valid email",
+        "password_mismatch": "Passwords do not match",
+        "password_short": "Password must be at least 6 characters",
+        "terms_required": "You must agree to the terms",
+        "email_exists": "This email is already registered",
+        "weak_password": "Password is too weak",
+        "generic": "Something went wrong. Please try again"
+      },
+      "benefits": {
+        "launch": {
+          "title": "Launch Your Project Fast",
+          "desc": "Instant access to all tools and services"
+        },
+        "exclusive": {
+          "title": "Exclusive Services",
+          "desc": "Offers and perks for premium members"
+        },
+        "partnership": {
+          "title": "Long-term Partnership",
+          "desc": "Dedicated support team with you every step"
+        }
+      }
+    }
+  },
   "hero": {
     "badge": "Future of software starts with a smart cloud",
     "title": "We develop <0>smart web systems</0> that manage your business with a soft touch",
@@ -64,9 +152,18 @@
     "subtitle": "Discover our selection of integrated software systems that have proven highly efficient and contributed to the success of hundreds of businesses.",
     "cta_store": "View Software Store",
     "items": {
-      "accounting": { "title": "Express Accounting System", "cat": "Cloud ERP System" },
-      "ecommerce": { "title": "Ecommerce Pro Platform", "cat": "Online Stores" },
-      "spa": { "title": "Integrated Spa System V2", "cat": "Facility Management" }
+      "accounting": {
+        "title": "Express Accounting System",
+        "cat": "Cloud ERP System"
+      },
+      "ecommerce": {
+        "title": "Ecommerce Pro Platform",
+        "cat": "Online Stores"
+      },
+      "spa": {
+        "title": "Integrated Spa System V2",
+        "cat": "Facility Management"
+      }
     }
   },
   "cta": {
@@ -82,7 +179,139 @@
     "retry": "Retry",
     "back_to_home": "Back to Home",
     "ready": "Ready to work",
-    "details": "View Details"
+    "details": "View Details",
+    "address": "Riyadh, Saudi Arabia",
+    "available_now": "Available now"
+  },
+  "pages": {
+    "about": {
+      "badge": "SUCCESS STORY STARTS HERE",
+      "title": "About",
+      "description": "We are not just a software company, we are your partners in digital success. We combine deep technical expertise with creative design to build systems that last.",
+      "vision_title": "Our Vision",
+      "vision_desc": "To be the primary reference in the Arab world for professional web system development and to contribute to the comprehensive digital transformation of institutions and companies of all sizes.",
+      "mission_title": "Our Mission",
+      "mission_desc": "To provide innovative, secure, and easy-to-use technical solutions that enable entrepreneurs to manage their projects with intelligence and high efficiency, while ensuring the best continuous technical support."
+    },
+    "services": {
+      "badge": "OUR SERVICES",
+      "title": "Premium Services",
+      "subtitle": "Innovative solutions that scale with your business growth",
+      "cta_title": "Looking for something else?",
+      "cta_desc": "Our team is ready to develop a package of services that fits your project needs exactly.",
+      "cta_button": "Contact Us"
+    },
+    "products": {
+      "title": "Our Products & Services",
+      "subtitle": "Discover a comprehensive range of advanced software solutions specifically designed to meet your business needs",
+      "search_placeholder": "Search for a product or service...",
+      "filter_all": "All",
+      "filter_software": "Software",
+      "filter_services": "Services",
+      "section_services": "Services",
+      "section_services_title": "Our Premium Services",
+      "service_count": "{{count}} services",
+      "section_software": "Software",
+      "section_software_title": "Software Systems",
+      "system_count": "{{count}} systems",
+      "no_results_title": "No results found",
+      "no_results_desc": "Try changing your search terms or filters",
+      "cta_title": "Can't find what you're looking for?",
+      "cta_desc": "Talk to us about your specific needs and we will develop a customized solution for you",
+      "cta_button": "Contact Us",
+      "price_label": "Price",
+      "currency": "SAR",
+      "view_details": "View",
+      "try_system": "Try System",
+      "try_system_title": "Open system in new window",
+      "order_now": "Order Now"
+    },
+    "blog": {
+      "title": "Blog",
+      "subtitle": "Articles and news about the world of programming and modern technologies",
+      "load_more": "View more articles"
+    },
+    "careers": {
+      "title": "Available Vacancies",
+      "subtitle": "Join us and be part of our creative team",
+      "stats_employees": "Employees",
+      "stats_experience": "Years Experience",
+      "stats_projects": "Successful Projects",
+      "stats_satisfaction": "Client Satisfaction",
+      "req_title": "Requirements",
+      "ben_title": "Benefits",
+      "apply_now": "Apply Now",
+      "no_job_title": "Can't find the right job?",
+      "no_job_desc": "Send your CV and we will contact you when a suitable opportunity arises",
+      "send_cv": "Send your CV"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "subtitle": "We are here to help. Contact us now and let us start building your digital future."
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Everything you need to know about our systems and services",
+      "search_placeholder": "Search for a question...",
+      "items": [
+        {
+          "question": "How can I order a product or service?",
+          "answer": "You can order products and services by contacting us directly through our Contact page, and we will schedule a meeting to discuss your requirements and project details."
+        },
+        {
+          "question": "What payment methods are available?",
+          "answer": "We offer several payment methods for software projects: bank transfer, and electronic transfer. Payments are agreed upon based on project milestones."
+        },
+        {
+          "question": "Do you provide a warranty on software products?",
+          "answer": "Yes, we provide a warranty and technical support for all systems and websites after delivery to ensure they work perfectly."
+        },
+        {
+          "question": "How can I track the progress of my project?",
+          "answer": "We assign a dedicated project manager as your direct point of contact, who will provide you with regular reports on the progress of your project."
+        },
+        {
+          "question": "How can I contact you?",
+          "answer": "You can contact us by phone, email: info@softycode.com, or through the contact form on our contact page."
+        },
+        {
+          "question": "Do you provide technical support services?",
+          "answer": "Yes, we provide continuous technical support to ensure the stability of the systems and websites we develop and to resolve any issues you may encounter."
+        },
+        {
+          "question": "What services do you offer?",
+          "answer": "We offer a comprehensive range of services: web system development, mobile applications, technical consulting, interface design, cloud maintenance, and digital security."
+        }
+      ],
+      "contact_cta": "Didn't find your answer? Contact us"
+    },
+    "terms": {
+      "title": "Terms and Conditions",
+      "intro": "Please read the terms and conditions before using our products and services",
+      "acceptance": "By visiting our website and using our products and services, you acknowledge that you have read these terms and agree to abide by them. If you do not agree to any of these terms, please do not use our products and services.",
+      "use": "Our products and services should be used only for lawful purposes and for the purposes for which they were designed. Use of our products and services for any illegal or unethical purpose is not permitted.",
+      "intellectual": "All rights related to our products and services are reserved to us. Use, copying, distribution, or modification of our products and services without written permission from us is not permitted.",
+      "warranty": "We provide a 30-day warranty on all our products and services. If you encounter any problem, you can request a refund or replacement within this period. See the detailed refund policy.",
+      "limitation": "We are not responsible for any damages resulting from the use of our products and services. You must verify the validity of the products and services before use.",
+      "privacy_link": "We are committed to protecting your privacy. Review the detailed privacy policy to know how we collect and use your data."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "intro": "At SoftyCode, we value your privacy and are committed to protecting your personal data. This privacy policy explains how we collect and use your personal information. Please read this policy carefully before using our products and services."
+    }
+  },
+  "footer": {
+    "description": "Your ideal technical partner for building smart cloud solutions with a soft touch. We transform programming complexities into easy and effective systems that support your future vision.",
+    "quick_links": "Quick Links",
+    "legal": "Legal",
+    "privacy_policy": "Privacy Policy",
+    "terms_conditions": "Terms of Service",
+    "newsletter": "Newsletter",
+    "newsletter_desc": "Subscribe to receive our latest news and exclusive offers",
+    "email_placeholder": "Your email address",
+    "subscribe": "Subscribe Now",
+    "copyright": "© {{year}} SoftyCode. All rights reserved.",
+    "scroll_to_top": "Scroll to Top"
   },
   "seo": {
     "home_title": "SoftyCode | Professional Software & Web Solutions"

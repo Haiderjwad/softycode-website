@@ -1,9 +1,12 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, FileText, Shield, CheckCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { ArrowLeft, FileText, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const Terms = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-32 pb-20 transition-colors duration-300">
       {/* Header */}
@@ -14,7 +17,7 @@ export const Terms = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl font-display font-bold text-slate-900 dark:text-white mb-4 transition-colors duration-300"
           >
-            الشروط والأحكام
+            {t('pages.terms.title')}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -22,7 +25,7 @@ export const Terms = () => {
             transition={{ delay: 0.1 }}
             className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl transition-colors duration-300"
           >
-            قراءة الشروط والأحكام قبل استخدام منتجاتنا وخدماتنا
+            {t('pages.terms.intro')}
           </motion.p>
         </div>
       </div>
@@ -38,10 +41,10 @@ export const Terms = () => {
             <FileText size={32} className="text-primary-green flex-shrink-0 mt-1" />
             <div>
               <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
-                مقدمة
+                {t('pages.terms.intro')}
               </h2>
               <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                هذه الشروط والأحكام تحكم استخدامك لمنتجاتنا وخدماتنا. قبل استخدام أي من منتجاتنا أو خدماتنا، يرجى قراءة هذه الشروط بعناية. باستخدام منتجاتنا أو خدماتنا، فإنك توافق على هذه الشروط.
+                {t('pages.terms.body_intro')}
               </p>
             </div>
           </div>
@@ -50,10 +53,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              1. قبول الشروط
+              1. {t('pages.terms.title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              من خلال زيارة موقعنا واستخدام منتجاتنا وخدماتنا، فإنك تقر بأنك قد قرأت هذه الشروط وأنك توافق على الالتزام بها. إذا كنت لا توافق على أي من هذه الشروط، يرجى عدم استخدام منتجاتنا وخدماتنا.
+              {t('pages.terms.acceptance')}
             </p>
           </div>
 
@@ -61,10 +64,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              2. استخدام المنتجات والخدمات
+              2. {t('pages.terms.title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              يجب استخدام منتجاتنا وخدماتنا فقط للأغراض المشروعة وللأغراض التي وضعتنا من أجله. لا يُسمح باستخدام منتجاتنا وخدماتنا لأي غرض غير قانوني أو غير أخلاقي.
+              {t('pages.terms.use')}
             </p>
           </div>
 
@@ -72,10 +75,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              3. حقوق الملكية
+              3. {t('pages.terms.title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              جميع الحقوق المتعلقة بمنتجاتنا وخدماتنا محفوظة لنا. لا يُسمح باستخدام أو نسخ أو توزيع أو تعديل منتجاتنا وخدماتنا دون إذن كتابي منا.
+              {t('pages.terms.intellectual')}
             </p>
           </div>
 
@@ -83,10 +86,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              4. الضمان والاسترجاع
+              4. {t('pages.terms.title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              نقدم ضماناً لمدة 30 يوماً على جميع منتجاتنا وخدماتنا. إذا واجهت أي مشكلة، يمكنك طلب الاسترجاع أو الاستبدال خلال هذه الفترة. راجع سياسة الاسترجاع التفصيلية.
+              {t('pages.terms.warranty')}
             </p>
           </div>
 
@@ -94,10 +97,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              5. المسؤولية
+              5. {t('pages.terms.title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              نحن غير مسؤولين عن أي أضرار ناتجة عن استخدام منتجاتنا وخدماتنا. يجب عليك التحقق من صحة المنتجات والخدمات قبل الاستخدام.
+              {t('pages.terms.limitation')}
             </p>
           </div>
 
@@ -105,10 +108,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              6. التعديلات على الشروط
+              6. {t('pages.terms.title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              نحتفظ بالحق في تعديل هذه الشروط في أي وقت. سيتم إبلاغك بأي تعديلات من خلال إشعار على موقعنا أو عبر البريد الإلكتروني.
+              {t('pages.terms.limitation')}
             </p>
           </div>
 
@@ -116,17 +119,17 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              7. سياسة الخصوصية
+              7. {t('pages.privacy.title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              نلتزم بحماية خصوصيتك. راجع سياسة الخصوصية التفصيلية لمعرفة كيفية جمع واستخدام بياناتك.
+              {t('pages.terms.privacy_link')}
             </p>
           </div>
 
           {/* Footer */}
           <div className="pt-8 border-t border-slate-200 dark:border-slate-800">
             <p className="text-slate-500 dark:text-slate-500 text-sm">
-              آخر تحديث: 29 أبريل 2026
+              {t('common.last_update')}: 29 April 2026
             </p>
           </div>
         </motion.div>
@@ -138,7 +141,7 @@ export const Terms = () => {
             className="inline-flex items-center gap-2 text-primary-green font-bold hover:underline"
           >
             <ArrowLeft size={20} />
-            العودة للرئيسية
+            {t('common.back_to_home')}
           </Link>
         </div>
       </div>

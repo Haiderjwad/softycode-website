@@ -1,12 +1,15 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Target, Users, Award, Rocket, CheckCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { Target, Users, Award, Rocket } from 'lucide-react';
 
 export const About = () => {
+  const { t } = useTranslation();
+
   const stats = [
-    { label: 'عميل سعيد', value: '500+', icon: <Users className="text-purple-600" /> },
-    { label: 'مشروع ناجح', value: '1,200+', icon: <Rocket className="text-teal-600" /> },
-    { label: 'سنة خبرة', value: '10+', icon: <Award className="text-blue-600" /> },
+    { label: t('hero.stats.clients'), value: '500+', icon: <Users className="text-purple-600" /> },
+    { label: t('hero.stats.projects'), value: '1,200+', icon: <Rocket className="text-teal-600" /> },
+    { label: t('hero.stats.experience'), value: '10+', icon: <Award className="text-blue-600" /> },
   ];
 
   return (
@@ -18,14 +21,14 @@ export const About = () => {
           animate={{ opacity: 1 }}
           className="text-primary-purple dark:text-purple-400 font-bold tracking-widest uppercase text-sm mb-4 block"
         >
-          قصة النجاح تبدأ هنا
+          {t('pages.about.badge')}
         </motion.span>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-5xl lg:text-7xl font-display font-bold text-slate-900 dark:text-white mb-8"
         >
-          عن <span className="text-brand-gradient">SoftyCode</span>
+          {t('pages.about.title')} <span className="text-brand-gradient">SoftyCode</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -33,7 +36,7 @@ export const About = () => {
           transition={{ delay: 0.1 }}
           className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed"
         >
-          نحن لسنا مجرد شركة برمجيات، نحن شركاؤك في النجاح الرقمي. نجمع بين الخبرة التقنية العميقة والإبداع التصميمي لنبني أنظمة تدوم طويلاً.
+          {t('pages.about.description')}
         </motion.p>
       </section>
 
@@ -74,9 +77,9 @@ export const About = () => {
             <div className="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-8 transition-colors duration-300">
               <Target size={32} />
             </div>
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">رؤيتنا</h2>
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">{t('pages.about.vision_title')}</h2>
             <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              أن نكون المرجع الأول في الوطن العربي لتطوير أنظمة الويب الاحترافية، ونسهم في التحول الرقمي الشامل للمؤسسات والشركات بمختلف أحجامها.
+              {t('pages.about.vision_desc')}
             </p>
           </motion.div>
 
@@ -89,9 +92,9 @@ export const About = () => {
             <div className="w-14 h-14 bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 rounded-2xl flex items-center justify-center mb-8 transition-colors duration-300">
               <Rocket size={32} />
             </div>
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">رسالتنا</h2>
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">{t('pages.about.mission_title')}</h2>
             <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              توفير حلول تقنية مبتكرة، آمنة، وسهلة الاستخدام تمكن رواد الأعمال من إدارة مشاريعهم بذكاء وكفاءة عالية، مع ضمان تقديم أفضل دعم فني مستمر.
+              {t('pages.about.mission_desc')}
             </p>
           </motion.div>
         </div>

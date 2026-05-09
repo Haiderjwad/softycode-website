@@ -1,41 +1,22 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronDown, CheckCircle, ArrowLeft, Phone, Mail, MessageSquare, Search } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { ChevronDown, CheckCircle, Phone, Mail, Search } from 'lucide-react';
 
-const faqs = [
-  {
-    question: 'كيف يمكنني طلب منتج أو خدمة؟',
-    answer: 'يمكنك طلب المنتجات والخدمات من خلال التواصل معنا مباشرة عبر صفحة اتصل بنا، وسيتم تحديد اجتماع لمناقشة متطلباتك وتفاصيل المشروع.',
-  },
-  {
-    question: 'ما هي طرق الدفع المتاحة؟',
-    answer: 'نحن نقدم عدة طرق للدفع للمشاريع البرمجية: التحويل البنكي، والتحويل الإلكتروني. يتم الاتفاق عل الدفعات بناءً على مراحل المشروع.',
-  },
-  {
-    question: 'هل تقدمون ضماناً على المنتجات البرمجية؟',
-    answer: 'نعم، نقدم ضماناً ودعماً فنياً على جميع الأنظمة والمواقع بعد التسليم لضمان عملها بشكل مثالي.',
-  },
-  {
-    question: 'كيف يمكنني متابعة سير العمل في مشروعي؟',
-    answer: 'نقوم بتعيين مدير مشروع خاص بك ليكون نقطة التواصل المباشرة، وسيزودك بتقارير دورية حول تقدم العمل في مشروعك.',
-  },
-  {
-    question: 'كيف يمكنني التواصل معكم؟',
-    answer: 'يمكنك التواصل معنا عبر الهاتف، البريد الإلكتروني: info@softycode.com، أو عبر نموذج الاتصال في صفحة التواصل.',
-  },
-  {
-    question: 'هل تقدمون خدمات الدعم الفني؟',
-    answer: 'نعم، نقدم دعماً فنياً متواصلاً لضمان استقرار الأنظمة والمواقع التي نطورها وحل أي مشكلة قد تواجهك.',
-  },
-  {
-    question: 'ما هي الخدمات التي تقدمونها؟',
-    answer: 'نقدم مجموعة شاملة من الخدمات: تطوير أنظمة الويب، تطبيقات الجوال، استشارات تقنية، تصميم الواجهات، الصيانة السحابية، والأمان الرقمي.',
-  },
-];
+
 
 export const FAQ = () => {
+  const { t } = useTranslation();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const faqs = t('pages.faq.items', { returnObjects: true }) as Array<{ question: string; answer: string }>;
+  const faqsArray = Array.isArray(faqs) ? faqs : [];
+
+  const filteredFaqs = faqsArray.filter(faq =>
+    faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 pt-32 pb-20 transition-colors duration-300">
@@ -47,7 +28,7 @@ export const FAQ = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl font-display font-bold text-slate-900 dark:text-white mb-4 transition-colors duration-300"
           >
-            الأسئلة الشائعة
+            {t('pages.faq.title')}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -55,7 +36,7 @@ export const FAQ = () => {
             transition={{ delay: 0.1 }}
             className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl transition-colors duration-300"
           >
-            اكتشف إجابات على أسئلتك الشائعة حول منتجاتنا وخدماتنا
+            {t('pages.faq.subtitle')}
           </motion.p>
         </div>
       </div>
@@ -70,7 +51,9 @@ export const FAQ = () => {
           <div className="relative">
             <input
               type="text"
-              placeholder="ابحث عن سؤال..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={t('pages.faq.search_placeholder') || "Search for a question..."}
               className="w-full px-6 py-5 pr-14 rounded-2xl bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-primary-green focus:ring-4 focus:ring-primary-green/10 transition-all outline-none text-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400"
             />
             <Search size={24} className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 transition-colors duration-300" />
@@ -79,7 +62,7 @@ export const FAQ = () => {
 
         {/* FAQ Items */}
         <div className="space-y-4 mb-16">
-          {faqs.map((faq, index) => (
+          {filteredFaqs.map((faq, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
@@ -131,10 +114,10 @@ export const FAQ = () => {
         >
           <CheckCircle size={48} className="mx-auto mb-6" />
           <h2 className="text-3xl font-bold mb-4">
-            لم تجد إجابة لسؤالك؟
+            {t('pages.faq.contact_cta')}
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            فريقنا جاهز لمساعدتك. تواصل معنا الآن وسنرد عليك في أقرب وقت ممكن.
+            {t('pages.contact.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

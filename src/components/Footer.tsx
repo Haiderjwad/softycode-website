@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 import {
   ArrowUp, Mail, Phone, MapPin, Clock,
   X as XIcon, Linkedin, Instagram, Facebook, Github, Globe,
@@ -66,6 +67,7 @@ const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
 ];
 
 export const Footer = () => {
+  const { t } = useTranslation();
   const { contact, loading: contactLoading } = useContactInfo();
 
   const scrollToTop = () => {
@@ -73,20 +75,19 @@ export const Footer = () => {
   };
 
   const quickLinks = [
-    { name: 'الرئيسية', path: '/' },
-    { name: 'خدماتنا', path: '/services' },
-    { name: 'منتجاتنا', path: '/products' },
-    { name: 'المدونة', path: '/blog' },
-    { name: 'الوظائف', path: '/careers' },
-    { name: 'من نحن', path: '/about' },
-    { name: 'الأسئلة الشائعة', path: '/faq' },
-    { name: 'اتصل بنا', path: '/contact' },
+    { name: t('nav.home'), path: '/' },
+    { name: t('nav.services'), path: '/services' },
+    { name: t('nav.products'), path: '/products' },
+    { name: t('nav.blog'), path: '/blog' },
+    { name: t('nav.careers'), path: '/careers' },
+    { name: t('nav.about'), path: '/about' },
+    { name: t('nav.faq'), path: '/faq' },
+    { name: t('nav.contact'), path: '/contact' },
   ];
 
   const legalLinks = [
-    { name: 'سياسة الخصوصية', path: '/privacy' },
-    { name: 'الشروط والأحكام', path: '/terms' },
-    { name: 'الوظائف', path: '/careers' },
+    { name: t('footer.privacy_policy'), path: '/privacy' },
+    { name: t('footer.terms_conditions'), path: '/terms' },
   ];
 
   // ====================================================
@@ -97,7 +98,7 @@ export const Footer = () => {
     if (!sm || Object.keys(sm).length === 0) return DEFAULT_SOCIAL_LINKS;
 
     const links: SocialLink[] = [];
-    // الترتيب المفضل: تويتر → انستغرام → فيسبوك → لينكدإن → جيتهاب
+    // الترتيب المفضل: تويتر → انستغرام → فيسبوك → لينكدإن → جيثهب
     const preferredOrder = ['twitter', 'x', 'instagram', 'facebook', 'linkedin', 'github'];
 
     preferredOrder.forEach((key) => {
@@ -130,7 +131,7 @@ export const Footer = () => {
   ].filter(Boolean) as { icon: React.ReactNode; label: string; dir: string }[] : [
     { icon: <Mail size={16} className="flex-shrink-0" />, label: 'info@softycode.com', dir: 'ltr' },
     { icon: <Phone size={16} className="flex-shrink-0" />, label: '+966 500 000 000', dir: 'ltr' },
-    { icon: <MapPin size={16} className="flex-shrink-0" />, label: 'الرياض، المملكة العربية السعودية', dir: 'rtl' },
+    { icon: <MapPin size={16} className="flex-shrink-0" />, label: t('common.address'), dir: 'rtl' },
   ];
 
   return (
@@ -163,7 +164,7 @@ export const Footer = () => {
               </div>
             </Link>
             <p className="text-slate-600 dark:text-slate-300 text-base mb-10 max-w-sm leading-relaxed transition-colors duration-300">
-              شريكك التقني الأمثل لبناء حلول سحابية ذكية بلمسة ناعمة. نحوّل تعقيدات البرمجة إلى أنظمة سهلة وفعّالة تدعم رؤيتك للمستقبل.
+              {t('footer.description')}
             </p>
 
             {/* ── Social Media Icons ── */}
@@ -232,7 +233,7 @@ export const Footer = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-bold text-slate-900 dark:text-white text-lg mb-8 font-display transition-colors duration-300">الروابط السريعة</h4>
+            <h4 className="font-bold text-slate-900 dark:text-white text-lg mb-8 font-display transition-colors duration-300">{t('footer.quick_links')}</h4>
             <ul className="space-y-4">
               {quickLinks.map((link, i) => (
                 <motion.li key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
@@ -255,7 +256,7 @@ export const Footer = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-bold text-slate-900 dark:text-white text-lg mb-8 font-display transition-colors duration-300">قانوني</h4>
+            <h4 className="font-bold text-slate-900 dark:text-white text-lg mb-8 font-display transition-colors duration-300">{t('footer.legal')}</h4>
             <ul className="space-y-4">
               {legalLinks.map((link, i) => (
                 <motion.li key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
@@ -278,12 +279,12 @@ export const Footer = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-bold text-slate-900 dark:text-white text-lg mb-8 font-display transition-colors duration-300">النشرة البريدية</h4>
-            <p className="text-slate-600 dark:text-slate-400 text-sm mb-6 transition-colors duration-300">اشترك لتتلقى آخر أخبارنا والعروض الحصرية</p>
+            <h4 className="font-bold text-slate-900 dark:text-white text-lg mb-8 font-display transition-colors duration-300">{t('footer.newsletter')}</h4>
+            <p className="text-slate-600 dark:text-slate-400 text-sm mb-6 transition-colors duration-300">{t('footer.newsletter_desc')}</p>
             <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
-                placeholder="بريدك الإلكتروني"
+                placeholder={t('footer.email_placeholder')}
                 className="input-primary w-full"
               />
               <motion.button
@@ -292,7 +293,7 @@ export const Footer = () => {
                 whileTap={{ scale: 0.95 }}
                 className="w-full py-2 bg-brand-gradient text-white rounded-lg font-semibold text-sm hover-glow transition-all"
               >
-                اشترك الآن
+                {t('footer.subscribe')}
               </motion.button>
             </form>
           </motion.div>
@@ -309,7 +310,7 @@ export const Footer = () => {
           className="flex flex-col md:flex-row justify-between items-center gap-6"
         >
           <div className="text-sm text-slate-600 dark:text-slate-400 font-medium transition-colors duration-300">
-            © {new Date().getFullYear()} SoftyCode. جميع الحقوق محفوظة.
+            {t('footer.copyright', { year: new Date().getFullYear() })}
           </div>
 
           <div className="flex items-center gap-4">
@@ -324,7 +325,7 @@ export const Footer = () => {
               whileHover={{ scale: 1.1, y: -5 }}
               whileTap={{ scale: 0.95 }}
               className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-green/20 to-primary-teal/20 dark:from-primary-green/30 dark:to-primary-teal/30 flex items-center justify-center text-primary-green hover:bg-primary-green hover:text-white dark:hover:bg-primary-green dark:hover:text-white transition-all duration-300"
-              title="العودة للأعلى"
+              title={t('footer.scroll_to_top')}
             >
               <ArrowUp size={20} />
             </motion.button>

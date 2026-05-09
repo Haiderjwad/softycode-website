@@ -106,9 +106,12 @@ export const Home = () => {
                 <span className="tracking-wide">{t('hero.badge')}</span>
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-display font-black text-slate-900 dark:text-white leading-[1.15] mb-6 tracking-tight">
-                <Trans i18nKey="hero.title">
-                  نطور <span className="text-brand-gradient">أنظمة ويب</span> ذكية تدير أعمالك بلمسة ناعمة
-                </Trans>
+                <Trans
+                  i18nKey="hero.title"
+                  components={{
+                    0: <span className="text-brand-gradient" />
+                  }}
+                />
               </h1>
               <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-10 max-w-xl font-medium">
                 {t('hero.description')}

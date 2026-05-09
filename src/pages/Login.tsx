@@ -5,23 +5,25 @@ import {
   CheckCircle, Sparkles, Shield, Zap,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/hooks/useAuth';
-import { Logo } from '@/components/Logo';
-
-const FEATURES = [
-  { icon: Shield, text: 'حماية وأمان على أعلى مستوى' },
-  { icon: Zap, text: 'وصول فوري لجميع الخدمات' },
-  { icon: Sparkles, text: 'تجربة مستخدم متميزة وسلسة' },
-  { icon: CheckCircle, text: 'دعم فني متواصل 24/7' },
-];
+import { Logo, LogoIcon, LogoText } from '@/components/Logo';
 
 export const Login = () => {
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  const FEATURES = [
+    { icon: Shield, text: t('auth.login.features.security') },
+    { icon: Zap, text: t('auth.login.features.instant') },
+    { icon: Sparkles, text: t('auth.login.features.experience') },
+    { icon: CheckCircle, text: t('auth.login.features.support') },
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,11 +35,11 @@ export const Login = () => {
     } catch (err: any) {
       const msg = err.code;
       if (msg === 'auth/user-not-found' || msg === 'auth/wrong-password' || msg === 'auth/invalid-credential') {
-        setError('البريد الإلكتروني أو كلمة المرور غير صحيحة');
+        setError(t('auth.login.errors.invalid_credentials'));
       } else if (msg === 'auth/too-many-requests') {
-        setError('تم تجاوز عدد المحاولات. يرجى المحاولة لاحقاً');
+        setError(t('auth.login.errors.too_many_requests'));
       } else {
-        setError('حدث خطأ. يرجى المحاولة مجدداً');
+        setError(t('auth.login.errors.generic'));
       }
     } finally {
       setLoading(false);
@@ -68,19 +70,19 @@ export const Login = () => {
         />
 
         <div className="relative z-10 text-center max-w-md">
-          {/* Logo Card */}
+          {/* Logo - Same as Navbar */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
             className="mb-12 inline-flex"
           >
-            <Link to="/">
-              <div className="relative inline-flex p-[2px] rounded-2xl shadow-2xl shadow-primary-green/20"
-                style={{ background: 'linear-gradient(135deg, #22c55e, #14b8a6, #22c55e)' }}>
-                <div className="bg-white rounded-[14px] px-8 py-5 flex items-center justify-center">
-                  <Logo size="lg" />
-                </div>
+            <Link to="/" className="inline-flex items-center gap-2">
+              {/* Cloud Icon */}
+              <LogoIcon size="xl" />
+              {/* Brand Name with white card - exactly like Navbar */}
+              <div className="bg-white/95 dark:bg-white rounded-lg px-2.5 py-1 shadow-sm border border-primary-green/20 dark:border-primary-green/40 transition-all duration-300 hover:border-primary-green/40 dark:hover:border-primary-green/60">
+                <LogoText size="xl" />
               </div>
             </Link>
           </motion.div>
@@ -91,7 +93,7 @@ export const Login = () => {
             transition={{ delay: 0.5 }}
             className="text-4xl font-display font-bold text-slate-100 mb-4"
           >
-            مرحباً بعودتك
+            {t('auth.login.welcome')}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -99,7 +101,7 @@ export const Login = () => {
             transition={{ delay: 0.6 }}
             className="text-slate-400 text-lg mb-12"
           >
-            سجّل دخولك للوصول إلى لوحة التحكم وخدماتك المفضلة
+            {t('auth.login.subtitle')}
           </motion.p>
 
           {/* Features list */}
@@ -128,7 +130,7 @@ export const Login = () => {
           transition={{ delay: 1.2 }}
           className="absolute bottom-8 text-slate-600 text-sm text-center"
         >
-          © {new Date().getFullYear()} SoftyCode — جميع الحقوق محفوظة
+          © {new Date().getFullYear()} SoftyCode — {t('nav.copyright', 'جميع الحقوق محفوظة')}
         </motion.p>
       </motion.div>
 
@@ -140,20 +142,25 @@ export const Login = () => {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="w-full max-w-md"
         >
-          {/* Mobile Logo */}
+          {/* Mobile Logo - Same as Navbar */}
           <div className="lg:hidden text-center mb-8">
-            <Link to="/"><Logo size="lg" className="mx-auto" /></Link>
+            <Link to="/" className="inline-flex items-center gap-2 mx-auto justify-center">
+              <LogoIcon size="lg" />
+              <div className="bg-white/95 dark:bg-white rounded-lg px-2.5 py-1 shadow-sm border border-primary-green/20 dark:border-primary-green/40">
+                <LogoText size="lg" />
+              </div>
+            </Link>
           </div>
 
           {/* Header */}
           <div className="mb-10">
             <h1 className="text-4xl font-display font-bold text-slate-900 dark:text-white mb-2">
-              تسجيل الدخول
+              {t('auth.login.title')}
             </h1>
             <p className="text-slate-500 dark:text-slate-400">
-              ليس لديك حساب؟{' '}
+              {t('auth.login.new_account')}{' '}
               <Link to="/register" className="text-primary-green font-bold hover:underline">
-                إنشاء حساب جديد
+                {t('auth.login.create_account')}
               </Link>
             </p>
           </div>
@@ -178,7 +185,9 @@ export const Login = () => {
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Email */}
               <div>
-                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">البريد الإلكتروني</label>
+                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                  {t('auth.login.email_label')}
+                </label>
                 <div className="relative">
                   <Mail size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
                   <input
@@ -186,7 +195,7 @@ export const Login = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full pr-11 pl-4 py-4 rounded-2xl bg-white dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 focus:border-primary-green dark:focus:border-primary-green focus:bg-white dark:focus:bg-slate-800 focus:ring-4 focus:ring-primary-green/10 dark:focus:ring-primary-green/20 transition-all outline-none text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
-                    placeholder="name@example.com"
+                    placeholder={t('auth.login.email_placeholder')}
                     required
                     dir="ltr"
                   />
@@ -196,9 +205,11 @@ export const Login = () => {
               {/* Password */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300">كلمة المرور</label>
+                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300">
+                    {t('auth.login.password_label')}
+                  </label>
                   <button type="button" className="text-xs text-primary-green hover:underline font-medium">
-                    نسيت كلمة المرور؟
+                    {t('auth.login.forgot_password')}
                   </button>
                 </div>
                 <div className="relative">
@@ -208,7 +219,7 @@ export const Login = () => {
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     className="w-full pr-11 pl-12 py-4 rounded-2xl bg-white dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 focus:border-primary-green dark:focus:border-primary-green focus:bg-white dark:focus:bg-slate-800 focus:ring-4 focus:ring-primary-green/10 dark:focus:ring-primary-green/20 transition-all outline-none text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
-                    placeholder="••••••••"
+                    placeholder={t('auth.login.password_placeholder')}
                     required
                     dir="ltr"
                   />
@@ -236,11 +247,11 @@ export const Login = () => {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                     </svg>
-                    جاري تسجيل الدخول...
+                    {t('auth.login.loading')}
                   </span>
                 ) : (
                   <>
-                    تسجيل الدخول
+                    {t('auth.login.submit')}
                     <ArrowLeft size={20} />
                   </>
                 )}
@@ -253,7 +264,9 @@ export const Login = () => {
                 <div className="w-full border-t border-slate-100 dark:border-slate-800" />
               </div>
               <div className="relative flex justify-center text-xs">
-                <span className="px-4 bg-slate-50 dark:bg-[#111118] text-slate-400 font-medium">أو تسجيل الدخول بـ</span>
+                <span className="px-4 bg-slate-50 dark:bg-[#111118] text-slate-400 font-medium">
+                  {t('auth.login.or_login_with')}
+                </span>
               </div>
             </div>
 
@@ -270,7 +283,7 @@ export const Login = () => {
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
               </svg>
-              تسجيل الدخول بـ Google
+              {t('auth.login.google')}
             </motion.button>
           </div>
 
@@ -278,7 +291,7 @@ export const Login = () => {
           <div className="mt-8 text-center">
             <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-primary-green transition-colors text-sm font-medium">
               <ArrowLeft size={16} />
-              العودة إلى الرئيسية
+              {t('auth.login.back_to_home')}
             </Link>
           </div>
         </motion.div>

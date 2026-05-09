@@ -1,16 +1,22 @@
 import { useServices } from '@/hooks/useFirestore';
-import { motion } from 'motion/react';
-import { ChevronRight, Loader } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ChevronRight, Search, Grid, List, SlidersHorizontal, LayoutGrid } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Loader as GlobalLoader } from '@/components/Loader';
+import { ServiceCard } from '@/components/ServiceCard';
 
 export const Services = () => {
+  const { t } = useTranslation();
   const { services, loading, error } = useServices();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center pt-32">
-        <GlobalLoader text="جاري تحميل الخدمات..." />
+        <GlobalLoader text={t('common.loading')} />
       </div>
     );
   }
@@ -19,126 +25,130 @@ export const Services = () => {
     return (
       <div className="min-h-screen flex items-center justify-center pt-32">
         <div className="bg-red-50 border border-red-200 text-red-700 px-8 py-6 rounded-2xl max-w-md text-center">
-          <h2 className="text-xl font-bold mb-2">حدث خطأ</h2>
+          <h2 className="text-xl font-bold mb-2">{t('common.error')}</h2>
           <p>{error}</p>
         </div>
       </div>
     );
   }
 
+  const filteredServices = services.filter((service) => {
+    const matchesSearch = service.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      service.description?.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesSearch;
+  });
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-gray-800 py-24 pt-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 lg:pt-36 pb-24">
+        {/* Professional Toolbar */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-20"
+          className="mb-16 sm:mb-20 lg:mb-24 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-3xl p-4 md:p-5 shadow-sm border border-slate-200/60 dark:border-slate-700/60 sticky top-24 z-30"
         >
-          <h1 className="text-5xl lg:text-6xl font-display font-bold text-primary-navy dark:text-white mb-6">
-            خدماتنا المتميزة
-          </h1>
-          <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            نقدم مجموعة شاملة من الخدمات المساعدة التي تدعم نجاح مشروعك على المدى الطويل
-          </p>
-          <p className="text-sm text-slate-400 dark:text-slate-500 mt-4">
-            {services.length} خدمة متاحة
-          </p>
+          <div className="flex flex-col md:flex-row gap-5 items-center justify-between">
+            {/* Left side: Professional Search */}
+            <div className="relative w-full md:max-w-xl group flex-1">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                <Search size={22} className="text-slate-400 dark:text-slate-500 group-hover:text-primary-green transition-colors duration-300" />
+              </div>
+              <input
+                type="text"
+                placeholder={t('pages.products.search_placeholder')}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-5 pr-12 py-3.5 bg-slate-100/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent text-slate-900 dark:text-white placeholder-slate-500 transition-all duration-300 hover:bg-slate-100 dark:hover:bg-slate-900 shadow-inner font-medium"
+              />
+            </div>
+
+            {/* Right side: Tools & View Toggles */}
+            <div className="flex items-center gap-3 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+              <div className="whitespace-nowrap px-5 py-3.5 bg-primary-green/10 border border-primary-green/20 text-primary-green font-bold rounded-2xl text-sm flex items-center gap-2 shadow-sm">
+                <div className="w-2 h-2 rounded-full bg-primary-green animate-pulse" />
+                {filteredServices.length} {t('pages.products.section_services', 'خدمات')}
+              </div>
+
+              <button
+                className="p-3.5 rounded-2xl bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:text-primary-green hover:border-primary-green hover:bg-primary-green/5 transition-all duration-300 shadow-sm flex items-center gap-2 font-medium"
+                title="Filter"
+              >
+                <SlidersHorizontal size={20} />
+                <span className="hidden sm:inline">تصفية</span>
+              </button>
+
+              <div className="flex bg-slate-100 dark:bg-slate-900/80 p-1 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-inner">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2.5 rounded-xl transition-all duration-300 flex items-center justify-center ${viewMode === 'grid'
+                    ? 'bg-white dark:bg-slate-700 text-primary-green shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
+                    }`}
+                  title="Grid View"
+                >
+                  <LayoutGrid size={20} />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2.5 rounded-xl transition-all duration-300 flex items-center justify-center ${viewMode === 'list'
+                    ? 'bg-white dark:bg-slate-700 text-primary-green shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
+                    }`}
+                  title="List View"
+                >
+                  <List size={20} />
+                </button>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
-        {services.length === 0 ? (
+        {filteredServices.length > 0 ? (
+          <div>
+            <div className={viewMode === 'grid'
+              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              : "space-y-6"
+            }>
+              {filteredServices.map((service, index) => (
+                <ServiceCard
+                  key={service.id}
+                  service={service}
+                  index={index}
+                  viewMode={viewMode}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="text-center py-20"
           >
-            <p className="text-lg text-slate-500 dark:text-slate-400">لا توجد خدمات حالياً</p>
+            <div className="text-6xl mb-6">🔍</div>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{t('pages.products.no_results_title')}</h3>
+            <p className="text-slate-600 dark:text-slate-400">{t('pages.products.no_results_desc')}</p>
           </motion.div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10 }}
-                className="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100 dark:border-gray-700 hover:border-primary-green/50"
-              >
-                <div className="flex items-start justify-between mb-6">
-                  <div>
-                    <h3 className="text-2xl font-bold text-primary-navy dark:text-white mb-2 font-display">
-                      {service.name}
-                    </h3>
-                    {service.period && (
-                      <span className="inline-block bg-primary-green/10 text-primary-green px-3 py-1 rounded-full text-sm font-semibold">
-                        {service.period}
-                      </span>
-                    )}
-                  </div>
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className="w-14 h-14 bg-primary-green/10 rounded-full flex items-center justify-center"
-                  >
-                    <span className="text-2xl">🎯</span>
-                  </motion.div>
-                </div>
-
-                <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed mb-6">
-                  {service.description}
-                </p>
-
-                {service.features && service.features.length > 0 && (
-                  <div className="mb-6 pb-6 border-b border-slate-100 dark:border-gray-700">
-                    <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-3 uppercase">المميزات:</p>
-                    <ul className="space-y-2">
-                      {service.features.map((feature, i) => (
-                        <li key={i} className="text-sm text-slate-600 dark:text-slate-300 flex items-center gap-2">
-                          <span className="text-primary-green">✓</span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-3xl font-bold text-primary-navy dark:text-white">
-                      {service.price.toLocaleString('ar-SA')}
-                      <span className="text-lg text-slate-500 dark:text-slate-400 font-normal"> ر.س</span>
-                    </p>
-                  </div>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-primary-green hover:bg-primary-green/90 text-white p-3 rounded-full transition-all shadow-lg"
-                  >
-                    <ChevronRight size={20} />
-                  </motion.button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         )}
 
+        {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-primary-green to-primary-navy rounded-3xl p-12 lg:p-16 text-center text-white"
+          className="bg-gradient-to-r from-primary-green to-primary-navy rounded-3xl p-12 lg:p-16 text-center text-white mt-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            تحتاج إلى خدمة مخصصة؟
+            {t('pages.services.cta_title')}
           </h2>
           <p className="text-lg text-white/80 mb-8">
-            فريقنا جاهز لتطوير باقة خدمات تناسب احتياجات مشروعك بالضبط
+            {t('pages.services.cta_desc')}
           </p>
           <Link
             to="/contact"
             className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 text-primary-green dark:text-primary-green px-8 py-3 rounded-xl font-bold hover:scale-105 transition-transform"
           >
-            تواصل معنا <ChevronRight size={20} />
+            {t('pages.services.cta_button')} <ChevronRight size={20} />
           </Link>
         </motion.div>
       </div>
