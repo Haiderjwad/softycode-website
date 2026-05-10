@@ -192,7 +192,7 @@ export const Blog = () => {
             className="w-full aspect-[21/9] object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-16">
+          <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-16">
             <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className="px-4 py-2 bg-primary-green text-white rounded-full text-sm font-bold shadow-lg">
                 {blogPosts[0].category}
@@ -291,7 +291,7 @@ export const Blog = () => {
               className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
               onClick={() => setSelectedPost(null)}
             />
-            
+
             <motion.div
               initial={{ opacity: 0, y: 50, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -300,7 +300,7 @@ export const Blog = () => {
               className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-2xl z-10 flex flex-col border border-slate-200/50 dark:border-slate-700/50"
             >
               {/* Image Header */}
-              <div className="relative h-64 sm:h-80 shrink-0">
+              <div className="relative h-48 sm:h-64 lg:h-80 shrink-0">
                 <img
                   src={selectedPost.image}
                   alt={selectedPost.title}
@@ -364,9 +364,9 @@ export const Blog = () => {
                     {selectedPost.excerpt}
                   </p>
                   <p className="text-base md:text-lg">
-                    {isArabic 
-                     ? 'تعتبر هذه النصائح والممارسات جزءاً أساسياً من نجاح أي استراتيجية تقنية. نأمل أن تكون هذه المقالة قد أضافت قيمة لك ولعملك، وندعوك لمشاركة هذه المعرفة مع من قد يستفيد منها في مجال عملك.'
-                     : 'These tips and practices are an essential part of any technical strategy. We hope this article added value to you and your business, and we invite you to share this knowledge with those who might benefit from it.'}
+                    {isArabic
+                      ? 'تعتبر هذه النصائح والممارسات جزءاً أساسياً من نجاح أي استراتيجية تقنية. نأمل أن تكون هذه المقالة قد أضافت قيمة لك ولعملك، وندعوك لمشاركة هذه المعرفة مع من قد يستفيد منها في مجال عملك.'
+                      : 'These tips and practices are an essential part of any technical strategy. We hope this article added value to you and your business, and we invite you to share this knowledge with those who might benefit from it.'}
                   </p>
                 </div>
               </div>

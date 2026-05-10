@@ -9,16 +9,13 @@ interface LogoProps {
 }
 
 /**
- * الأحجام:
- * icon     → حجم أيقونة S المزدوج بالبكسل
- * nameH    → ارتفاع صورة نص SOFTY CODE بالبكسل
- * gap      → المسافة بين الأيقونة والنص
+ * Responsive size mapping using Tailwind classes instead of fixed pixels.
  */
 const sizeMap = {
-  sm: { icon: 48, nameH: 20, gap: '2px' },
-  md: { icon: 72, nameH: 26, gap: '2px' },
-  lg: { icon: 96, nameH: 34, gap: '3px' },
-  xl: { icon: 128, nameH: 42, gap: '4px' },
+  sm: { icon: "w-12 h-12", nameH: "h-5", gap: 'gap-0.5' },
+  md: { icon: "w-16 h-16", nameH: "h-6", gap: 'gap-1' },
+  lg: { icon: "w-20 h-20 md:w-24 md:h-24", nameH: "h-8 md:h-10", gap: 'gap-1' },
+  xl: { icon: "w-20 h-20 md:w-24 md:h-24 lg:w-32 lg:h-32", nameH: "h-8 md:h-10 lg:h-[42px]", gap: 'gap-1.5' },
 };
 
 export const Logo: React.FC<LogoProps> = ({
@@ -30,8 +27,8 @@ export const Logo: React.FC<LogoProps> = ({
 
   return (
     <div
-      className={`inline-flex items-center transition-all duration-300 group ${className}`}
-      style={{ gap: dim.gap, lineHeight: 1 }}
+      className={`inline-flex items-center transition-all duration-300 group ${dim.gap} ${className}`}
+      style={{ lineHeight: 1 }}
       aria-label="SOFTY CODE"
       role="img"
     >
@@ -41,9 +38,10 @@ export const Logo: React.FC<LogoProps> = ({
           src="/branding/softylogo.png"
           alt="Softy Code Icon"
           draggable={false}
+          loading="eager"
+          // @ts-ignore
+          fetchPriority="high"
           style={{
-            width: dim.icon,
-            height: dim.icon,
             objectFit: 'contain',
             display: 'block',
             flexShrink: 0,
@@ -52,7 +50,7 @@ export const Logo: React.FC<LogoProps> = ({
               'drop-shadow(0 4px 14px rgba(34,197,94,0.28)) ' +
               'drop-shadow(0 2px 6px rgba(15,23,42,0.14))',
           }}
-          className="group-hover:scale-110"
+          className={`${dim.icon} group-hover:scale-110`}
         />
       )}
 
@@ -62,8 +60,10 @@ export const Logo: React.FC<LogoProps> = ({
           src="/branding/softy name brand.png"
           alt="Softy Code"
           draggable={false}
+          loading="eager"
+          // @ts-ignore
+          fetchPriority="high"
           style={{
-            height: dim.nameH,
             width: 'auto',
             objectFit: 'contain',
             display: 'block',
@@ -72,6 +72,7 @@ export const Logo: React.FC<LogoProps> = ({
               'drop-shadow(0 1px 3px rgba(15,23,42,0.12))',
             transition: 'opacity 0.3s ease',
           }}
+          className={dim.nameH}
         />
       )}
     </div>
@@ -90,9 +91,10 @@ export const LogoIcon: React.FC<{ size?: 'sm' | 'md' | 'lg' | 'xl'; className?: 
       src="/branding/softylogo.png"
       alt="Softy Code Icon"
       draggable={false}
+      loading="eager"
+      // @ts-ignore
+      fetchPriority="high"
       style={{
-        width: dim.icon,
-        height: dim.icon,
         objectFit: 'contain',
         display: 'block',
         transition: 'transform 0.35s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s ease',
@@ -100,7 +102,7 @@ export const LogoIcon: React.FC<{ size?: 'sm' | 'md' | 'lg' | 'xl'; className?: 
           'drop-shadow(0 4px 14px rgba(34,197,94,0.28)) ' +
           'drop-shadow(0 2px 6px rgba(15,23,42,0.14))',
       }}
-      className={`${className} hover:scale-110`}
+      className={`${dim.icon} ${className} hover:scale-110`}
     />
   );
 };
@@ -117,8 +119,10 @@ export const LogoText: React.FC<{ size?: 'sm' | 'md' | 'lg' | 'xl'; className?: 
       src="/branding/softy name brand.png"
       alt="Softy Code"
       draggable={false}
+      loading="eager"
+      // @ts-ignore
+      fetchPriority="high"
       style={{
-        height: dim.nameH,
         width: 'auto',
         objectFit: 'contain',
         display: 'block',
@@ -126,7 +130,7 @@ export const LogoText: React.FC<{ size?: 'sm' | 'md' | 'lg' | 'xl'; className?: 
           'drop-shadow(0 1px 3px rgba(15,23,42,0.12))',
         transition: 'opacity 0.3s ease',
       }}
-      className={className}
+      className={`${dim.nameH} ${className}`}
     />
   );
 };

@@ -50,7 +50,7 @@ export const About = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="bg-white dark:bg-gray-900 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-gray-700 text-center transition-colors duration-300"
+                className="bg-white dark:bg-gray-900 p-6 md:p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-gray-700 text-center transition-colors duration-300"
               >
                 <div className="w-16 h-16 bg-slate-50 dark:bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-6 transition-colors duration-300">
                   <div className="[&_.text-purple-600]:text-purple-600 [&_.text-teal-600]:text-teal-600 [&_.text-blue-600]:text-blue-600">
@@ -72,7 +72,7 @@ export const About = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-12 bg-white dark:bg-gray-800 rounded-[3rem] border border-slate-100 dark:border-gray-700 shadow-xl transition-colors duration-300"
+            className="p-8 md:p-12 bg-white dark:bg-gray-800 rounded-[2rem] md:rounded-[3rem] border border-slate-100 dark:border-gray-700 shadow-xl transition-colors duration-300"
           >
             <div className="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-8 transition-colors duration-300">
               <Target size={32} />
@@ -87,7 +87,7 @@ export const About = () => {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-12 bg-white dark:bg-gray-800 rounded-[3rem] border border-slate-100 dark:border-gray-700 shadow-xl transition-colors duration-300"
+            className="p-8 md:p-12 bg-white dark:bg-gray-800 rounded-[2rem] md:rounded-[3rem] border border-slate-100 dark:border-gray-700 shadow-xl transition-colors duration-300"
           >
             <div className="w-14 h-14 bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 rounded-2xl flex items-center justify-center mb-8 transition-colors duration-300">
               <Rocket size={32} />

@@ -18,6 +18,7 @@ import { AdminPanel } from './components/AdminPanel';
 import { ProductDetail } from './pages/ProductDetail';
 import { FreeTrialOffer } from './components/FreeTrialOffer';
 import { ThemeProvider } from './hooks/useTheme';
+import { FloatingSupport } from './components/FloatingSupport';
 
 import { OrderSuccess } from './pages/OrderSuccess';
 import { Blog } from './pages/Blog';
@@ -65,6 +66,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       </main>
       {!isAuthPage && <FreeTrialOffer />}
       {!isAuthPage && <Footer />}
+      {!isAuthPage && <FloatingSupport />}
     </div>
   );
 };

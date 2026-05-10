@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
-import { Mail, MessageSquare, MapPin, Phone, Send, Instagram, Twitter, Linkedin, CheckCircle, Zap } from 'lucide-react';
+import { Mail, MessageSquare, MapPin, Phone, Send, Instagram, XIcon, Linkedin, CheckCircle, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useContactInfo } from '@/hooks/useFirestore';
 import { Loader as GlobalLoader } from '@/components/Loader';
@@ -12,6 +12,7 @@ export const Contact = () => {
   const { contact, loading } = useContactInfo();
   const [formData, setFormData] = useState({ name: '', email: '', projectType: '', message: '' });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [hoveredSocial, setHoveredSocial] = useState<number | null>(null);
 
   // Form labels based on current language
   const formLabels = {
@@ -44,9 +45,9 @@ export const Contact = () => {
   }
 
   const contactInfo = contact || {
-    phone: '+966 500 000 000',
-    email: 'info@softycode.com',
-    address: isArabic ? 'الرياض، المملكة العربية السعودية' : 'Riyadh, Saudi Arabia',
+    phone: '+964 770 000 0000',
+    email: 'mailto:${contactInfo.email}',
+    address: isArabic ? 'العراق، بغداد' : 'Iraq, Baghdad',
     workingHours: isArabic ? 'الأحد - الخميس, 9 ص - 5 م' : 'Sunday - Thursday, 9 AM - 5 PM',
     socialMedia: {
       twitter: '#',
@@ -56,9 +57,33 @@ export const Contact = () => {
   };
 
   const socialLinks = [
-    { icon: Twitter, url: contactInfo.socialMedia.twitter || '#', label: 'Twitter', color: 'hover:text-blue-400' },
-    { icon: Linkedin, url: contactInfo.socialMedia.linkedin || '#', label: 'LinkedIn', color: 'hover:text-blue-600' },
-    { icon: Instagram, url: contactInfo.socialMedia.instagram || '#', label: 'Instagram', color: 'hover:text-pink-500' },
+    {
+      icon: XIcon,
+      url: contactInfo.socialMedia.twitter || '#',
+      label: 'X (Twitter)',
+      hoverBg: 'rgba(15,15,15,0.95)',
+      glowColor: 'rgba(255,255,255,0.25)',
+      borderColor: 'rgba(255,255,255,0.3)',
+      textColor: '#ffffff',
+    },
+    {
+      icon: Linkedin,
+      url: contactInfo.socialMedia.linkedin || '#',
+      label: 'LinkedIn',
+      hoverBg: 'rgba(10,102,194,0.9)',
+      glowColor: 'rgba(10,102,194,0.5)',
+      borderColor: 'rgba(10,102,194,0.6)',
+      textColor: '#ffffff',
+    },
+    {
+      icon: Instagram,
+      url: contactInfo.socialMedia.instagram || '#',
+      label: 'Instagram',
+      hoverBg: 'rgba(193,53,132,0.9)',
+      glowColor: 'rgba(193,53,132,0.5)',
+      borderColor: 'rgba(193,53,132,0.6)',
+      textColor: '#ffffff',
+    },
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -92,7 +117,7 @@ export const Contact = () => {
     {
       icon: MapPin,
       title: isArabic ? 'العنوان' : 'Address',
-      value: contactInfo.address || (isArabic ? 'الرياض، المملكة العربية السعودية' : 'Riyadh, Saudi Arabia'),
+      value: contactInfo.address || (isArabic ? 'العراق، بغداد' : 'Iraq, Baghdad'),
       link: '#',
       color: 'from-orange-500 to-red-500',
     },
@@ -143,7 +168,7 @@ export const Contact = () => {
         >
           <div className="grid lg:grid-cols-5 gap-0">
             {/* Left Side - Info */}
-            <div className="lg:col-span-2 bg-gradient-to-br from-slate-900 to-slate-800 p-12 text-white relative overflow-hidden">
+            <div className="lg:col-span-2 bg-gradient-to-br from-slate-900 to-slate-800 p-8 lg:p-12 text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary-green/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
 
               <div className="relative z-10">
@@ -176,17 +201,83 @@ export const Contact = () => {
                   </h4>
                   <div className="flex gap-4">
                     {socialLinks.map((social, i) => (
-                      <motion.a
-                        key={i}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1, y: -3 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center ${social.color} transition-all hover:bg-white/20`}
-                      >
-                        <social.icon size={20} />
-                      </motion.a>
+                      <div key={i} className="relative group">
+                        {/* Tooltip */}
+                        <motion.div
+                          initial={{ opacity: 0, y: 8, scale: 0.85 }}
+                          animate={hoveredSocial === i
+                            ? { opacity: 1, y: 0, scale: 1 }
+                            : { opacity: 0, y: 8, scale: 0.85 }
+                          }
+                          transition={{ duration: 0.2, ease: 'easeOut' }}
+                          className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none z-20"
+                        >
+                          <span
+                            className="px-3 py-1.5 rounded-lg text-xs font-bold shadow-xl"
+                            style={{
+                              background: social.hoverBg,
+                              color: social.textColor,
+                              border: `1px solid ${social.borderColor}`,
+                              backdropFilter: 'blur(12px)',
+                            }}
+                          >
+                            {social.label}
+                          </span>
+                          {/* Tooltip arrow */}
+                          <div
+                            className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0"
+                            style={{
+                              borderLeft: '5px solid transparent',
+                              borderRight: '5px solid transparent',
+                              borderTop: `5px solid ${social.hoverBg}`,
+                            }}
+                          />
+                        </motion.div>
+
+                        {/* Glow ring */}
+                        <motion.div
+                          animate={hoveredSocial === i
+                            ? { opacity: 1, scale: 1.3 }
+                            : { opacity: 0, scale: 1 }
+                          }
+                          transition={{ duration: 0.3 }}
+                          className="absolute inset-0 rounded-2xl pointer-events-none"
+                          style={{
+                            background: social.glowColor,
+                            filter: 'blur(12px)',
+                          }}
+                        />
+
+                        {/* Icon button */}
+                        <motion.a
+                          href={social.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onHoverStart={() => setHoveredSocial(i)}
+                          onHoverEnd={() => setHoveredSocial(null)}
+                          whileHover={{ scale: 1.15, y: -4 }}
+                          whileTap={{ scale: 0.92 }}
+                          animate={hoveredSocial === i
+                            ? { background: social.hoverBg, borderColor: social.borderColor }
+                            : { background: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.12)' }
+                          }
+                          transition={{ duration: 0.25 }}
+                          className="relative z-10 w-12 h-12 rounded-2xl flex items-center justify-center"
+                          style={{
+                            border: '1.5px solid rgba(255,255,255,0.12)',
+                            backdropFilter: 'blur(12px)',
+                            color: hoveredSocial === i ? social.textColor : 'rgba(255,255,255,0.7)',
+                          }}
+                          aria-label={social.label}
+                        >
+                          <motion.div
+                            animate={hoveredSocial === i ? { rotate: [0, -8, 8, 0] } : { rotate: 0 }}
+                            transition={{ duration: 0.4 }}
+                          >
+                            <social.icon size={19} strokeWidth={2.2} />
+                          </motion.div>
+                        </motion.a>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -194,7 +285,7 @@ export const Contact = () => {
             </div>
 
             {/* Right Side - Form */}
-            <div className="lg:col-span-3 p-12 bg-white dark:bg-gray-800 transition-colors duration-300">
+            <div className="lg:col-span-3 p-8 lg:p-12 bg-white dark:bg-gray-800 transition-colors duration-300">
               <motion.form
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

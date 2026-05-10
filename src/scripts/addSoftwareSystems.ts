@@ -1,78 +1,78 @@
 import { db } from '../config/firebase';
 import { collection, addDoc, getDocs, query, where, updateDoc, doc } from 'firebase/firestore';
 
-// أنظمة برمجية جاهزة مع روابط تجريبية
-const softwareSystems = [
+// أنظمة برمجية جديدة تضاف لقاعدة البيانات
+const newSoftwareSystems = [
   {
-    name: 'نظام المحاسبة السحابي',
-    nameEn: 'Cloud Accounting System',
-    description: 'نظام محاسبة سحابي متكامل لإدارة المالية والمخزون والمبيعات',
-    descriptionEn: 'Comprehensive cloud accounting system for finance, inventory, and sales management',
-    price: 2500,
+    name: 'نظام إدارة الموارد (ERP)',
+    nameEn: 'ERP Resource Management',
+    description: 'نظام برمجي متكامل طورته الشركة لإدارة الموارد، المبيعات، والعملاء باحترافية عالية.',
+    descriptionEn: 'Comprehensive ERP for resource, sales, and customer management.',
+    price: 25000,
     category: 'products',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
     duration: 'جاهز للاستخدام',
     features: [
-      'إدارة الفواتير',
-      'تقارير مالية',
-      'إدارة المخزون',
-      'دعم فني 24/7'
+      'إدارة المبيعات والمخزون',
+      'تقارير مالية شاملة',
+      'لوحة تحكم احترافية',
+      'دعم فني على مدار الساعة'
     ],
-    systemUrl: 'https://demo.example.com/accounting', // رابط تجريبي
+    systemUrl: 'https://software-demo.softycode.com',
     createdAt: new Date(),
   },
   {
-    name: 'نظام إدارة المطاعم',
-    nameEn: 'Restaurant Management System',
-    description: 'حل متكامل لإدارة الطلبات والمخزون والموظفين في المطاعم',
-    descriptionEn: 'Integrated solution for managing orders, inventory, and staff in restaurants',
-    price: 1800,
+    name: 'سوفتي لوجستك',
+    nameEn: 'Softy Logistic',
+    description: 'نظام متكامل واحترافي لإدارة شركات التوصيل والخدمات اللوجستية، يتيح تتبع الطلبات المباشر، إدارة المندوبين بكفاءة، ومتابعة الحسابات بدقة.',
+    descriptionEn: 'Integrated system for delivery and logistics management with live tracking and account management.',
+    price: 15000,
     category: 'products',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800',
-    duration: 'جاهز للاستخدام',
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8ed7c80a30?auto=format&fit=crop&q=80&w=800',
+    duration: 'تفعيل فوري',
     features: [
-      'إدارة الطاولات',
-      'نقطة بيع POS',
-      'تقارير المبيعات',
-      'تطبيق للطلبات'
+      'تتبع مباشر للطلبات',
+      'تطبيق خاص للمندوبين',
+      'إدارة حسابات وعمولات',
+      'لوحة تحكم ذكية للعملاء'
     ],
-    systemUrl: 'https://demo.example.com/restaurant',
+    systemUrl: 'https://logistic.softycode.com',
     createdAt: new Date(),
   },
   {
-    name: 'منصة التجارة الإلكترونية',
-    nameEn: 'E-commerce Platform',
-    description: 'منصة متكاملة لإنشاء متاجر إلكترونية احترافية',
-    descriptionEn: 'Integrated platform for creating professional online stores',
-    price: 3500,
+    name: 'سوفتي كيو كود',
+    nameEn: 'Softy Q-Code',
+    description: 'حل تقني متطور وشامل لإدارة العيادات والمجمعات الطبية باحترافية، يضمن سلاسة حجز المواعيد وإدارة السجلات الطبية.',
+    descriptionEn: 'Advanced tech solution for medical clinics management ensuring smooth booking and records.',
+    price: 18000,
     category: 'products',
-    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800',
-    duration: 'جاهز للاستخدام',
+    image: 'https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&q=80&w=800',
+    duration: 'تفعيل فوري',
     features: [
-      'متجر إلكتروني',
-      'بوابات دفع',
-      'إدارة المنتجات',
-      'تتبع الطلبات'
+      'حجز ذكي للمواعيد',
+      'سجلات طبية إلكترونية',
+      'إدارة التأمين والمطالبات',
+      'وصفة طبية إلكترونية'
     ],
-    systemUrl: 'https://demo.example.com/ecommerce',
+    systemUrl: 'https://clinics.softycode.com',
     createdAt: new Date(),
   },
   {
-    name: 'نظام إدارة العيادات',
-    nameEn: 'Clinic Management System',
-    description: 'نظام متكامل لإدارة العيادات الطبية وحجز المواعيد',
-    descriptionEn: 'Integrated system for managing medical clinics and appointments',
-    price: 2200,
+    name: 'سوفتي موجود',
+    nameEn: 'Softy Mawjoud',
+    description: 'نظام احترافي لإدارة الحضور والانصراف بالبصمة الإلكترونية وإدارة الموارد البشرية مع تقارير مفصلة للرواتب والموظفين.',
+    descriptionEn: 'Professional biometric attendance and HR management system with detailed reports.',
+    price: 9000,
     category: 'products',
-    image: 'https://images.unsplash.com/photo-1519494026892-80bbd9d24eaa?auto=format&fit=crop&q=80&w=800',
-    duration: 'جاهز للاستخدام',
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800',
+    duration: 'تفعيل فوري',
     features: [
-      'حجز المواعيد',
-      'ملفات المرضى',
-      'الوصفات الطبية',
-      'الفواتير والتأمين'
+      'ربط مباشر بأجهزة البصمة',
+      'إدارة الإجازات والغياب',
+      'الربط مع أنظمة الرواتب',
+      'تقارير أداء شاملة'
     ],
-    systemUrl: 'https://demo.example.com/clinic',
+    systemUrl: 'https://mawjoud.softycode.com',
     createdAt: new Date(),
   }
 ];
@@ -81,15 +81,15 @@ const softwareSystems = [
 export const addSoftwareSystems = async () => {
   try {
     console.log('🔄 جاري إضافة الأنظمة البرمجية...');
-    
-    for (const system of softwareSystems) {
+
+    for (const system of newSoftwareSystems) {
       // التحقق مما إذا كان النظام موجوداً بالفعل
       const q = query(
         collection(db, 'products'),
         where('name', '==', system.name)
       );
       const querySnapshot = await getDocs(q);
-      
+
       if (querySnapshot.empty) {
         // إضافة النظام
         await addDoc(collection(db, 'products'), {
@@ -98,15 +98,17 @@ export const addSoftwareSystems = async () => {
         });
         console.log(`✅ تم إضافة: ${system.name}`);
       } else {
-        // تحديث النظام الموجود بإضافة systemUrl
+        // تحديث النظام الموجود
         const docId = querySnapshot.docs[0].id;
         await updateDoc(doc(db, 'products', docId), {
-          systemUrl: system.systemUrl
+          systemUrl: system.systemUrl,
+          description: system.description,
+          features: system.features
         });
         console.log(`🔄 تم تحديث: ${system.name}`);
       }
     }
-    
+
     console.log('✅ اكتملت إضافة الأنظمة البرمجية بنجاح!');
     return true;
   } catch (error) {

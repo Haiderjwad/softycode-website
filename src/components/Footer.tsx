@@ -135,7 +135,7 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pt-24 pb-12 overflow-hidden relative transition-colors duration-300">
+    <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pt-16 md:pt-24 pb-8 md:pb-12 overflow-hidden relative transition-colors duration-300">
       {/* Decorative blobs */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary-green/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 blur-3xl rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none" />

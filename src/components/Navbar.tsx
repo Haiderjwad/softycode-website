@@ -13,16 +13,16 @@ import { useTheme } from '@/hooks/useTheme';
 // Flag SVG components
 const FlagSA = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="36" height="36" rx="4" fill="#165D31"/>
+    <rect width="36" height="36" rx="4" fill="#165D31" />
     <text x="18" y="24" textAnchor="middle" fill="white" fontSize="16" fontFamily="Arial">🇸🇦</text>
   </svg>
 );
 
 const FlagIQ = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="36" height="36" rx="4" fill="#CE1126"/>
-    <rect y="12" width="36" height="12" fill="white"/>
-    <rect y="24" width="36" height="12" fill="black"/>
+    <rect width="36" height="36" rx="4" fill="#CE1126" />
+    <rect y="12" width="36" height="12" fill="white" />
+    <rect y="24" width="36" height="12" fill="black" />
     <text x="18" y="24" textAnchor="middle" fill="white" fontSize="16" fontFamily="Arial">🇮🇶</text>
   </svg>
 );
@@ -82,7 +82,6 @@ export const Navbar = () => {
     { name: t('nav.services'), path: '/services' },
     { name: t('nav.products'), path: '/products' },
     { name: t('nav.blog'), path: '/blog' },
-    { name: t('nav.careers'), path: '/careers' },
     { name: t('nav.about'), path: '/about' },
     { name: t('nav.faq'), path: '/faq' },
     { name: t('nav.contact'), path: '/contact' },
@@ -110,19 +109,19 @@ export const Navbar = () => {
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24 lg:h-28">
+        <div className="flex justify-between items-center h-20 md:h-24 lg:h-28">
 
-      {/* Logo */}
-      <motion.div className="flex-shrink-0 flex items-center gap-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-        <Link to="/" className="inline-flex items-center gap-2">
-          {/* Cloud Icon */}
-          <LogoIcon size="xl" />
-          {/* Brand Name with white card in dark mode */}
-          <div className="bg-white/95 dark:bg-white rounded-lg px-2.5 py-1 shadow-sm border border-primary-green/20 dark:border-primary-green/40 transition-all duration-300 hover:border-primary-green/40 dark:hover:border-primary-green/60">
-            <LogoText size="xl" />
-          </div>
-        </Link>
-      </motion.div>
+          {/* Logo */}
+          <motion.div className="flex-shrink-0 flex items-center gap-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Link to="/" className="inline-flex items-center gap-2">
+              {/* Cloud Icon */}
+              <LogoIcon size="xl" />
+              {/* Brand Name with white card in dark mode */}
+              <div className="bg-white/95 dark:bg-white rounded-lg px-2.5 py-1 shadow-sm border border-primary-green/20 dark:border-primary-green/40 transition-all duration-300 hover:border-primary-green/40 dark:hover:border-primary-green/60">
+                <LogoText size="xl" />
+              </div>
+            </Link>
+          </motion.div>
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center flex-nowrap gap-0.5">
@@ -137,8 +136,8 @@ export const Navbar = () => {
                 <Link
                   to={link.path}
                   className={`relative inline-flex items-center whitespace-nowrap px-3 py-2 rounded-xl text-[13px] font-semibold transition-colors duration-200 ${isActive(link.path)
-                      ? 'text-primary-green'
-                      : 'text-slate-700 dark:text-slate-300 hover:text-primary-green'
+                    ? 'text-primary-green'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-primary-green'
                     }`}
                 >
                   {isActive(link.path) && (
@@ -190,11 +189,10 @@ export const Navbar = () => {
                       {/* Arabic Option */}
                       <button
                         onClick={() => toggleLanguage('ar')}
-                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
-                          currentLanguage === 'ar'
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${currentLanguage === 'ar'
                             ? 'bg-primary-green/10 text-primary-green'
                             : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
-                        }`}
+                          }`}
                       >
                         <span className="text-2xl">🇮🇶</span>
                         <div className="flex-1 text-right">
@@ -207,11 +205,10 @@ export const Navbar = () => {
                       {/* English Option */}
                       <button
                         onClick={() => toggleLanguage('en')}
-                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
-                          currentLanguage === 'en'
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${currentLanguage === 'en'
                             ? 'bg-primary-green/10 text-primary-green'
                             : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
-                        }`}
+                          }`}
                       >
                         <span className="text-2xl">🇬🇧</span>
                         <div className="flex-1 text-left">
@@ -261,6 +258,9 @@ export const Navbar = () => {
                       </div>
                       <div className="py-1">
                         <Link to="/admin" className="flex items-center gap-3 px-4 py-3 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary-green/5 hover:text-primary-green transition-colors"><LayoutDashboard size={16} />{t('nav.admin', 'لوحة الإدارة')}</Link>
+                        <Link to="/admin" className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary-green/10 text-primary-green rounded-xl font-bold text-sm mb-3">
+                          <LayoutDashboard size={16} />{t('nav.admin', 'لوحة الإدارة')}
+                        </Link>
                         <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"><LogOut size={16} />{t('nav.logout', 'تسجيل الخروج')}</button>
                       </div>
                     </motion.div>
@@ -335,22 +335,20 @@ export const Navbar = () => {
                 <div className="flex gap-2">
                   <button
                     onClick={() => toggleLanguage('ar')}
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm transition-all ${
-                      currentLanguage === 'ar'
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm transition-all ${currentLanguage === 'ar'
                         ? 'bg-primary-green text-white shadow-md'
                         : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
-                    }`}
+                      }`}
                   >
                     <span className="text-xl">🇮🇶</span>
                     العربية
                   </button>
                   <button
                     onClick={() => toggleLanguage('en')}
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm transition-all ${
-                      currentLanguage === 'en'
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm transition-all ${currentLanguage === 'en'
                         ? 'bg-primary-green text-white shadow-md'
                         : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
-                    }`}
+                      }`}
                   >
                     <span className="text-xl">🇬🇧</span>
                     English
@@ -360,9 +358,14 @@ export const Navbar = () => {
               <div className="h-px bg-slate-200 dark:bg-slate-700" />
               <div className="space-y-3">
                 {user ? (
-                   <button onClick={handleLogout} className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-red-50 dark:bg-red-900/20 text-red-600 rounded-xl font-bold text-sm">
-                    <LogOut size={16} />{t('nav.logout', 'تسجيل الخروج')}
-                  </button>
+                  <>
+                    <Link to="/admin" className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary-green/10 text-primary-green rounded-xl font-bold text-sm mb-3">
+                      <LayoutDashboard size={16} />{t('nav.admin', 'لوحة الإدارة')}
+                    </Link>
+                    <button onClick={handleLogout} className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-red-50 dark:bg-red-900/20 text-red-600 rounded-xl font-bold text-sm">
+                      <LogOut size={16} />{t('nav.logout', 'تسجيل الخروج')}
+                    </button>
+                  </>
                 ) : (
                   <>
                     <Link to="/login" className="flex items-center justify-center gap-2 w-full px-6 py-3.5 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-xl font-bold text-sm">{t('nav.login')}</Link>

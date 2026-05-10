@@ -24,7 +24,7 @@ export const useProducts = () => {
     const unsubscribe = onSnapshot(
       collection(db, 'products'),
       (snapshot) => {
-        const productsData = snapshot.docs.map((doc) => {
+        let productsData = snapshot.docs.map((doc) => {
           const data = doc.data();
           return {
             id: doc.id,
@@ -39,6 +39,56 @@ export const useProducts = () => {
             createdAt: data.createdAt?.toDate() || new Date(),
           } as Product;
         });
+
+        // ============================================
+        // حقن المنتجات الجديدة افتراضياً في حال لم يتم إضافتها 
+        // لقاعدة البيانات بعد لضمان ظهورها الفوري
+        // ============================================
+        const newSystems = [
+          {
+            id: 'softy-logistic-sys',
+            name: 'سوفتي لوجستك',
+            description: 'نظام متكامل واحترافي لإدارة شركات التوصيل والخدمات اللوجستية، يتيح تتبع الطلبات المباشر، إدارة المندوبين بكفاءة، ومتابعة الحسابات بدقة.',
+            price: 15000,
+            category: 'products',
+            image: 'https://images.unsplash.com/photo-1586528116311-ad8ed7c80a30?auto=format&fit=crop&q=80&w=800',
+            duration: 'تفعيل فوري',
+            features: ['تتبع مباشر للطلبات', 'تطبيق خاص للمندوبين', 'إدارة حسابات وعمولات', 'لوحة تحكم ذكية للعملاء'],
+            systemUrl: 'https://logistic.softycode.com',
+            createdAt: new Date(),
+          },
+          {
+            id: 'softy-qcode-sys',
+            name: 'سوفتي كيو كود',
+            description: 'حل تقني متطور وشامل لإدارة العيادات والمجمعات الطبية باحترافية، يضمن سلاسة حجز المواعيد وإدارة السجلات الطبية.',
+            price: 18000,
+            category: 'products',
+            image: 'https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&q=80&w=800',
+            duration: 'تفعيل فوري',
+            features: ['حجز ذكي للمواعيد', 'سجلات طبية إلكترونية', 'إدارة التأمين والمطالبات', 'وصفة طبية إلكترونية'],
+            systemUrl: 'https://clinics.softycode.com',
+            createdAt: new Date(),
+          },
+          {
+            id: 'softy-mawjoud-sys',
+            name: 'سوفتي موجود',
+            description: 'نظام احترافي لإدارة الحضور والانصراف بالبصمة الإلكترونية وإدارة الموارد البشرية مع تقارير مفصلة للرواتب والموظفين.',
+            price: 9000,
+            category: 'products',
+            image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800',
+            duration: 'تفعيل فوري',
+            features: ['ربط مباشر بأجهزة البصمة', 'إدارة الإجازات والغياب', 'الربط مع أنظمة الرواتب', 'تقارير أداء شاملة'],
+            systemUrl: 'https://mawjoud.softycode.com',
+            createdAt: new Date(),
+          }
+        ];
+
+        newSystems.forEach(sys => {
+          if (!productsData.some(p => p.name === sys.name)) {
+            productsData.push(sys);
+          }
+        });
+
         setProducts(productsData);
         setLoading(false);
       },

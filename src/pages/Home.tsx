@@ -21,12 +21,14 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSiteStats, useSiteSystems, useSiteFeatures, SiteSystem } from '../hooks/useSiteData';
+import { useProducts } from '../hooks/useProducts';
 
 export const Home = () => {
   const { t } = useTranslation();
   const { stats, loading: statsLoading } = useSiteStats();
   const { systems, loading: systemsLoading } = useSiteSystems();
   const { features, loading: featuresLoading } = useSiteFeatures();
+  const { products, loading: productsLoading } = useProducts();
 
   // Fallback data while loading or if no data in Firebase
   const defaultStats = [
@@ -86,8 +88,8 @@ export const Home = () => {
       <section className="relative min-h-[90vh] flex items-center pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-slate-50 dark:bg-slate-950">
         {/* Background Patterns */}
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] dark:opacity-[0.05] pointer-events-none"></div>
-        <div className="absolute top-0 right-0 -z-10 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-primary-teal/10 blur-[120px] rounded-full mix-blend-multiply dark:mix-blend-lighten" />
-        <div className="absolute bottom-0 left-0 -z-10 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-primary-purple/10 blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-lighten" />
+        <div className="absolute top-0 right-0 -z-10 w-[300px] sm:w-[500px] md:w-[800px] h-[300px] sm:h-[500px] md:h-[800px] bg-primary-teal/10 blur-[80px] md:blur-[120px] rounded-full mix-blend-multiply dark:mix-blend-lighten" />
+        <div className="absolute bottom-0 left-0 -z-10 w-[250px] sm:w-[400px] md:w-[600px] h-[250px] sm:h-[400px] md:h-[600px] bg-primary-purple/10 blur-[60px] md:blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-lighten" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-8 items-center">
@@ -99,7 +101,7 @@ export const Home = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/60 dark:bg-slate-800/60 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/60 text-slate-700 dark:text-slate-200 font-semibold text-sm mb-8 shadow-sm hover:shadow-md transition-all cursor-default">
-                 <span className="relative flex h-3 w-3">
+                <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-green/80 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-primary-green"></span>
                 </span>
@@ -137,7 +139,7 @@ export const Home = () => {
                 </div>
                 <div>
                   <div className="flex items-center gap-1 text-amber-400 mb-0.5">
-                    {[...Array(5)].map((_, i) => <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
+                    {[...Array(5)].map((_, i) => <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}
                   </div>
                   <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
                     <Trans i18nKey="hero.trust">
@@ -167,61 +169,99 @@ export const Home = () => {
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 src="/branding/softy-mascot.png"
                 alt="Softy Code Mascot"
+                loading="eager"
+                // @ts-ignore
+                fetchPriority="high"
                 className="w-[85%] max-w-[450px] drop-shadow-[0_25px_35px_rgba(34,197,94,0.15)] relative z-10 select-none"
                 draggable={false}
               />
 
-               {/* System Cards floating around the mascot */}
-               <div className="absolute inset-0 pointer-events-none z-20">
-                 {displaySystems.slice(0,3).map((system, index) => {
-                   const IconComponent = iconMap[system.icon] || Store;
-                   const positions = [
-                     'top-4 -right-2 md:-right-8',
-                     'bottom-24 -right-4 md:-right-12',
-                     '-bottom-6 left-4 md:-left-8'
-                   ];
-                   const delays = [0.8, 1.0, 1.2];
-                   const gradientClass = system.bgColor || 'from-slate-500 to-slate-700';
+              {/* System Cards floating around the mascot */}
+              <div className="absolute inset-0 pointer-events-none z-20">
+                {displaySystems.slice(0, 3).map((system, index) => {
+                  const IconComponent = iconMap[system.icon] || Store;
+                  const positions = [
+                    'top-8 right-2 md:top-12 md:-right-8',
+                    'bottom-24 right-0 md:bottom-20 md:-right-12',
+                    'bottom-0 left-2 md:bottom-12 md:-left-8'
+                  ];
+                  const tooltipPos = index === 2
+                    ? "left-[100%] ml-3 md:ml-4 -translate-x-4 group-hover:translate-x-0"
+                    : "right-[100%] mr-3 md:mr-4 translate-x-4 group-hover:translate-x-0";
+                  const delays = [0.8, 1.0, 1.2];
+                  const gradientClass = system.bgColor || 'from-slate-500 to-slate-700';
 
-                   return (
-                     <motion.div
-                       key={system.id || index}
-                       initial={{ opacity: 0, scale: 0.8, x: index % 2 === 0 ? 20 : -20 }}
-                       animate={{ opacity: 1, scale: 1, x: 0 }}
-                       transition={{ delay: delays[index], duration: 0.6, type: "spring" }}
-                       className={`absolute ${positions[index]} pointer-events-auto bg-white/95 dark:bg-slate-800/95 backdrop-blur-md px-5 py-3.5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 dark:border-slate-700 flex items-center gap-3.5 w-fit group hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1`}
-                     >
-                       <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${gradientClass} flex items-center justify-center text-white shadow-md flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-                         <IconComponent size={22} />
-                       </div>
-                       <div className="text-right">
-                         <div className="font-bold text-sm text-slate-800 dark:text-white leading-tight">{system.name}</div>
-                         <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">{t('common.ready', 'جاهز للعمل')}</div>
-                       </div>
-                     </motion.div>
-                   );
-                 })}
-               </div>
+                  return (
+                    <motion.div
+                      key={system.id || index}
+                      initial={{ opacity: 0, scale: 0.8, x: index % 2 === 0 ? 20 : -20 }}
+                      animate={{ opacity: 1, scale: 1, x: 0 }}
+                      transition={{ delay: delays[index], duration: 0.6, type: "spring" }}
+                      className={`absolute ${positions[index]} pointer-events-auto flex items-center justify-center group z-30`}
+                    >
+                      {/* Floating Sphere Icon */}
+                      <div className="relative flex items-center justify-center">
+                        {/* Sphere Bubble */}
+                        <div className="w-12 h-12 md:w-[68px] md:h-[68px] rounded-full bg-white/20 dark:bg-slate-800/30 md:bg-white/30 md:dark:bg-slate-800/40 backdrop-blur-md md:backdrop-blur-xl border border-white/30 dark:border-slate-500/30 md:border-white/50 md:dark:border-slate-500/50 shadow-[0_4px_16px_rgba(0,0,0,0.05)] md:shadow-[0_12px_40px_rgba(0,0,0,0.15)] flex items-center justify-center cursor-pointer transition-all duration-500 group-hover:scale-110 md:group-hover:scale-125 group-hover:bg-white/90 dark:group-hover:bg-slate-800/90 group-hover:shadow-[0_0_30px_rgba(34,197,94,0.3)] group-hover:border-white/100 dark:group-hover:border-slate-600/80">
+                          <div className={`w-7 h-7 md:w-[46px] md:h-[46px] rounded-full bg-gradient-to-br ${gradientClass} flex items-center justify-center text-white shadow-inner transition-transform duration-500 group-hover:scale-110 opacity-75 md:opacity-100 group-hover:opacity-100`}>
+                            <IconComponent className="w-3.5 h-3.5 md:w-[22px] md:h-[22px]" />
+                          </div>
+                        </div>
 
-                {/* Server Security Card */}
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0, y: [0, 8, 0] }}
-                  transition={{
-                    opacity: { delay: 1.4, duration: 0.5 },
-                    x: { delay: 1.4, duration: 0.5 },
-                    y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.4 },
-                  }}
-                  className="absolute top-1/4 -left-6 md:-left-12 z-20 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 dark:border-slate-700 flex items-center gap-3 hover:-translate-y-1 transition-transform pointer-events-auto"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0">
-                    <ShieldCheck size={22} />
+                        {/* Hover Tooltip Card */}
+                        <div className={`absolute top-1/2 -translate-y-1/2 ${tooltipPos} opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-400 ease-out pointer-events-none w-max z-50`}>
+                          <div className="bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl px-4 py-2.5 md:px-5 md:py-3.5 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.2)] border border-slate-200/60 dark:border-slate-700/60 flex items-center gap-3.5 transform origin-right">
+                            <div className="text-right">
+                              <div className="font-bold text-xs md:text-sm text-slate-800 dark:text-white leading-tight">{system.name}</div>
+                              <div className="text-[10px] md:text-xs text-primary-green mt-1 font-bold tracking-wide">{t('common.ready', 'جاهز للعمل')}</div>
+                            </div>
+                            <div className="relative flex items-center justify-center">
+                              <div className={`absolute inset-0 rounded-full animate-ping opacity-75 bg-gradient-to-br ${gradientClass}`}></div>
+                              <div className={`relative w-2.5 h-2.5 md:w-3 md:h-3 rounded-full shadow-sm bg-gradient-to-br ${gradientClass}`}></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Server Security Card */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0, y: [0, 8, 0] }}
+                transition={{
+                  opacity: { delay: 1.4, duration: 0.5 },
+                  x: { delay: 1.4, duration: 0.5 },
+                  y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.4 },
+                }}
+                className="absolute top-1/4 left-0 md:-left-6 pointer-events-auto flex items-center justify-center group z-30"
+              >
+                {/* Floating Sphere Icon */}
+                <div className="relative flex items-center justify-center">
+                  {/* Sphere Bubble */}
+                  <div className="w-12 h-12 md:w-[68px] md:h-[68px] rounded-full bg-white/20 dark:bg-slate-800/30 md:bg-white/30 md:dark:bg-slate-800/40 backdrop-blur-md md:backdrop-blur-xl border border-white/30 dark:border-slate-500/30 md:border-white/50 md:dark:border-slate-500/50 shadow-[0_4px_16px_rgba(0,0,0,0.05)] md:shadow-[0_12px_40px_rgba(0,0,0,0.15)] flex items-center justify-center cursor-pointer transition-all duration-500 group-hover:scale-110 md:group-hover:scale-125 group-hover:bg-white/90 dark:group-hover:bg-slate-800/90 group-hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] group-hover:border-white/100 dark:group-hover:border-slate-600/80">
+                    <div className="w-7 h-7 md:w-[46px] md:h-[46px] rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white shadow-inner transition-transform duration-500 group-hover:scale-110 opacity-75 md:opacity-100 group-hover:opacity-100">
+                      <ShieldCheck className="w-4 h-4 md:w-[22px] md:h-[22px]" />
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-bold text-slate-900 dark:text-white text-sm">{t('hero.security_card.title', 'أمان سيرفر')}</p>
-                    <p className="text-xs text-emerald-600 dark:text-emerald-400 font-bold mt-0.5">{t('hero.security_card.status', '100% موثوق')}</p>
+
+                  {/* Hover Tooltip Card */}
+                  <div className="absolute top-1/2 -translate-y-1/2 left-[100%] ml-3 md:ml-4 -translate-x-4 group-hover:translate-x-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-400 ease-out pointer-events-none w-max z-50">
+                    <div className="bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl px-4 py-2.5 md:px-5 md:py-3.5 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.2)] border border-slate-200/60 dark:border-slate-700/60 flex items-center gap-3.5 transform origin-left">
+                      <div className="text-right">
+                        <div className="font-bold text-xs md:text-sm text-slate-800 dark:text-white leading-tight">{t('hero.security_card.title', 'أمان سيرفر')}</div>
+                        <div className="text-[10px] md:text-xs text-emerald-600 dark:text-emerald-400 mt-1 font-bold tracking-wide">{t('hero.security_card.status', '100% موثوق')}</div>
+                      </div>
+                      <div className="relative flex items-center justify-center">
+                        <div className="absolute inset-0 rounded-full animate-ping opacity-75 bg-gradient-to-br from-emerald-400 to-emerald-600"></div>
+                        <div className="relative w-2.5 h-2.5 md:w-3 md:h-3 rounded-full shadow-sm bg-gradient-to-br from-emerald-400 to-emerald-600"></div>
+                      </div>
+                    </div>
                   </div>
-                </motion.div>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -241,7 +281,7 @@ export const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ delay: index * 0.15, duration: 0.6 }}
-                  className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl p-8 rounded-[2rem] border border-white dark:border-slate-700 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all text-center group"
+                  className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl p-6 md:p-8 rounded-[2rem] border border-white dark:border-slate-700 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all text-center group"
                 >
                   <div className={`w-16 h-16 ${colors.bg} dark:bg-slate-700 ${colors.text} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-sm`}>
                     <IconComponent size={32} />
@@ -261,7 +301,7 @@ export const Home = () => {
       <section className="py-24 bg-white dark:bg-slate-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16 relative z-10">
           <div className="inline-flex items-center justify-center mb-4">
-             <span className="px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-sm font-bold tracking-wide uppercase">{t('features.badge', 'مزايا SoftyCode')}</span>
+            <span className="px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-sm font-bold tracking-wide uppercase">{t('features.badge', 'مزايا SoftyCode')}</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-display font-black text-slate-900 dark:text-white mb-6 tracking-tight">{t('features.title', 'لماذا تختارنا كشريك تقني؟')}</h2>
           <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium">{t('features.subtitle', 'نحن نقدم حلولاً برمجية تتجاوز مجرد الكود، نحن نبني منصات متكاملة تدعم نجاحك المستمر وتضمن لك التفوق في سوق العمل.')}</p>
@@ -279,8 +319,8 @@ export const Home = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
               >
-                <Link to="/services" className="block h-full bg-slate-50 dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-700 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-700 hover:border-slate-200 shadow-sm hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] transition-all group relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/40 dark:from-white/5 to-transparent rounded-bl-full pointer-events-none opacity-50"></div>
+                <Link to="/services" className="block h-full bg-slate-50 dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-700 p-6 md:p-8 rounded-[2rem] border border-slate-100 dark:border-slate-700 hover:border-slate-200 shadow-sm hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] transition-all group relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-24 md:w-32 h-24 md:h-32 bg-gradient-to-br from-white/40 dark:from-white/5 to-transparent rounded-bl-full pointer-events-none opacity-50"></div>
 
                   <div className={`w-14 h-14 ${colors.bg} dark:bg-slate-900 ${colors.text} rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300`}>
                     <IconComponent size={28} />
@@ -309,7 +349,7 @@ export const Home = () => {
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div className="max-w-2xl">
               <div className="inline-flex items-center justify-center mb-4">
-                 <span className="px-4 py-1.5 rounded-full bg-primary-green/10 text-primary-green text-sm font-bold tracking-wide">{t('products.badge', 'المنتجات الجاهزة')}</span>
+                <span className="px-4 py-1.5 rounded-full bg-primary-green/10 text-primary-green text-sm font-bold tracking-wide">{t('products.badge', 'المنتجات الجاهزة')}</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-display font-black text-slate-900 dark:text-white mb-4 tracking-tight">{t('products.title', 'أنظمة احترافية جاهزة للنجاح')}</h2>
               <p className="text-lg text-slate-500 dark:text-slate-400 font-medium">{t('products.subtitle', 'اكتشف مجموعتنا المختارة من الأنظمة البرمجية المتكاملة التي أثبتت كفاءة عالية وساهمت في نجاح المئات من الأعمال.')}</p>
@@ -320,63 +360,68 @@ export const Home = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: t('products.items.accounting.title', 'نظام إكسبريس المحاسبي'),
-                image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
-                category: t('products.items.accounting.cat', 'نظام سحابي ERP'),
-                color: 'bg-emerald-500'
-              },
-              {
-                title: t('products.items.ecommerce.title', 'منصة التجارة الإلكترونية Pro'),
-                image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800',
-                category: t('products.items.ecommerce.cat', 'متاجر إلكترونية'),
-                color: 'bg-blue-500'
-              },
-              {
-                title: t('products.items.spa.title', 'نظام السبا المتكامل V2'),
-                image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800',
-                category: t('products.items.spa.cat', 'إدارة المنشآت'),
-                color: 'bg-purple-500'
-              }
-            ].map((p, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15, duration: 0.6 }}
-                className="group relative rounded-[2.5rem] overflow-hidden bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700"
-              >
-                <div className="aspect-[4/5] overflow-hidden relative">
-                  <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10" />
-                  <img src={p.image} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt={p.title} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent z-10 opacity-90" />
-                </div>
+            {(() => {
+              const displayProds = (!productsLoading && products && products.length > 0)
+                ? products.filter(p => p.category === 'products').slice(0, 3)
+                : [
+                  {
+                    name: t('products.items.accounting.title', 'نظام إكسبريس المحاسبي'),
+                    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
+                    category: t('products.items.accounting.cat', 'نظام سحابي ERP'),
+                  },
+                  {
+                    name: t('products.items.ecommerce.title', 'منصة التجارة الإلكترونية Pro'),
+                    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800',
+                    category: t('products.items.ecommerce.cat', 'متاجر إلكترونية'),
+                  },
+                  {
+                    name: t('products.items.spa.title', 'نظام السبا المتكامل V2'),
+                    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800',
+                    category: t('products.items.spa.cat', 'إدارة المنشآت'),
+                  }
+                ];
 
-                <div className="absolute bottom-0 left-0 right-0 p-8 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className={`w-2 h-2 rounded-full ${p.color}`}></span>
-                    <span className="text-white/80 text-sm font-bold tracking-wide">{p.category}</span>
+              const cardColors = ['bg-emerald-500', 'bg-blue-500', 'bg-purple-500'];
+
+              return displayProds.map((p, i) => (
+                <motion.div
+                  key={p.id || i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15, duration: 0.6 }}
+                  className="group relative rounded-[2.5rem] overflow-hidden bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700"
+                >
+                  <div className="aspect-[4/5] overflow-hidden relative">
+                    <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10" />
+                    <img src={p.image} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt={p.name} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent z-10 opacity-90" />
                   </div>
-                  <h3 className="text-2xl font-black text-white mb-4 leading-tight">{p.title}</h3>
-                  <Link to="/products" className="inline-flex items-center gap-2 text-white font-bold bg-white/10 hover:bg-white/20 backdrop-blur-md px-5 py-2.5 rounded-xl transition-colors text-sm">
-                    {t('common.details', 'شرح التفاصيل')} <ChevronRight size={16} />
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
+
+                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className={`w-2 h-2 rounded-full ${cardColors[i % cardColors.length]}`}></span>
+                      <span className="text-white/80 text-sm font-bold tracking-wide">{p.category === 'products' ? 'نظام متكامل' : p.category}</span>
+                    </div>
+                    <h3 className="text-2xl font-black text-white mb-4 leading-tight">{p.name}</h3>
+                    <Link to={p.id ? `/product/${p.id}` : "/products"} className="inline-flex items-center gap-2 text-white font-bold bg-white/10 hover:bg-white/20 backdrop-blur-md px-5 py-2.5 rounded-xl transition-colors text-sm">
+                      {t('common.details', 'شرح التفاصيل')} <ChevronRight size={16} />
+                    </Link>
+                  </div>
+                </motion.div>
+              ));
+            })()}
           </div>
         </div>
       </section>
 
       {/* Enterprise CTA Section */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-[3rem] p-12 lg:p-20 text-center text-white overflow-hidden shadow-[0_20px_50px_rgba(16,185,129,0.2)] bg-slate-900">
+        <div className="relative rounded-[2rem] md:rounded-[3rem] p-8 sm:p-12 lg:p-20 text-center text-white overflow-hidden shadow-[0_20px_50px_rgba(16,185,129,0.2)] bg-slate-900 mx-4 sm:mx-0">
           <div className="absolute inset-0 bg-brand-gradient opacity-90"></div>
           {/* Decorative shapes */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 blur-[100px] rounded-full mix-blend-overlay"></div>
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-black/20 blur-[100px] rounded-full mix-blend-overlay"></div>
+          <div className="absolute top-0 right-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-white/10 blur-[60px] md:blur-[100px] rounded-full mix-blend-overlay"></div>
+          <div className="absolute bottom-0 left-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-black/20 blur-[60px] md:blur-[100px] rounded-full mix-blend-overlay"></div>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -385,7 +430,7 @@ export const Home = () => {
             transition={{ duration: 0.8 }}
             className="relative z-10 flex flex-col items-center"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-[4rem] font-display font-black mb-6 tracking-tight leading-tight max-w-4xl">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[4rem] font-display font-black mb-6 tracking-tight leading-tight max-w-4xl">
               {t('cta.title', 'هل أنت جاهز لتغيير ملامح مشروعك الرقمي؟')}
             </h2>
             <p className="text-xl text-white/90 mb-10 max-w-2xl font-medium leading-relaxed">
