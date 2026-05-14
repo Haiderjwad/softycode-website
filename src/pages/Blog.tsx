@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 import { Calendar, User, Share2, Heart, X, BookOpen } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect } from 'react';
 
 const blogPostsAr = [
   {
@@ -148,14 +149,21 @@ export const Blog = () => {
 
   const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
 
-  // لمنع التمرير في الخلفية عند فتح المودال
-  if (selectedPost) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
+  useEffect(() => {
+    document.body.style.overflow = selectedPost ? 'hidden' : 'auto';
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [selectedPost]);
 
   return (
+    <>
+      <Helmet>
+        <title>{t('seo.blog_title')}</title>
+        <meta name="description" content={t('seo.blog_desc')} />
+        <meta property="og:title" content={t('seo.blog_title')} />
+        <meta property="og:description" content={t('seo.blog_desc')} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
     <div className="min-h-screen bg-slate-50 dark:bg-gray-900 pt-32 pb-20 transition-colors duration-300">
       {/* Header */}
       <div className="bg-white dark:bg-gray-800 border-b border-slate-100 dark:border-gray-700 transition-colors duration-300">
@@ -345,10 +353,10 @@ export const Blog = () => {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <button className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-primary-green transition-colors duration-300" title="مشاركة">
+                    <button className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-primary-green transition-colors duration-300" title={t('common.share')}>
                       <Share2 size={20} />
                     </button>
-                    <button className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 transition-colors duration-300" title="إعجاب">
+                    <button className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 transition-colors duration-300" title={t('common.like')}>
                       <Heart size={20} />
                     </button>
                   </div>
@@ -374,7 +382,7 @@ export const Blog = () => {
           </div>
         )}
       </AnimatePresence>
-
     </div>
+    </>
   );
 };

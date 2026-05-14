@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SoftyCode | حلول برمجية وأنظمة ويب احترافية</title>
+    <link rel="manifest" href="/manifest.json" />
     <!-- Preload Critical Images -->
     <link rel="preload" href="/branding/softy-mascot.png" as="image" type="image/png" fetchpriority="high" />
     <link rel="preload" href="/branding/softylogo.png" as="image" type="image/png" fetchpriority="high" />
@@ -12,9 +13,9 @@
       // منع الـ flash من الـ theme عند التحميل
       (function() {
         try {
-          const theme = localStorage.getItem('theme') || 
+          var theme = localStorage.getItem('theme') || 
                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-          const isDark = theme === 'dark';
+          var isDark = theme === 'dark';
           document.documentElement.classList.toggle('dark', isDark);
           document.documentElement.classList.toggle('light', !isDark);
           document.documentElement.style.colorScheme = theme;
@@ -22,7 +23,49 @@
           console.error('Theme script error:', e);
         }
       })();
+      // منع الـ flash من اللغة - ضبط العربية كافتراضية مع الاتجاه RTL
+      (function() {
+        try {
+          var savedLang = localStorage.getItem('i18nextLng');
+          if (!savedLang || (savedLang !== 'ar' && savedLang !== 'en')) {
+            localStorage.setItem('i18nextLng', 'ar');
+            savedLang = 'ar';
+          }
+          var dir = savedLang === 'ar' ? 'rtl' : 'ltr';
+          document.documentElement.lang = savedLang;
+          document.documentElement.dir = dir;
+          document.documentElement.style.direction = dir;
+        } catch (e) {
+          document.documentElement.lang = 'ar';
+          document.documentElement.dir = 'rtl';
+          document.documentElement.style.direction = 'rtl';
+        }
+      })();
     </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareCompany",
+  "name": "SoftyCode",
+  "url": "https://softycode.com",
+  "description": "شريكك التقني الأمثل لبناء حلول سحابية ذكية بلمسة ناعمة",
+  "image": "https://softycode.com/branding/softylogo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Riyadh",
+    "addressCountry": "SA"
+  },
+  "telephone": "+966 500 000 000",
+  "email": "info@softycode.com",
+  "areaServed": "SA",
+  "foundingDate": "2024",
+  "sameAs": [
+    "https://twitter.com/softycode",
+    "https://linkedin.com/company/softycode",
+    "https://instagram.com/softycode"
+  ]
+}
+</script>
   </head>
   <body>
     <div id="root"></div>

@@ -73,7 +73,19 @@ export const Navbar = () => {
   };
 
   const toggleLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
+    if (lng === i18n.language) {
+      setIsLangMenuOpen(false);
+      return;
+    }
+    document.documentElement.style.opacity = '0';
+    document.documentElement.style.transition = 'opacity 0.15s ease-in-out';
+    setTimeout(() => {
+      i18n.changeLanguage(lng).then(() => {
+        requestAnimationFrame(() => {
+          document.documentElement.style.opacity = '1';
+        });
+      });
+    }, 150);
     setIsLangMenuOpen(false);
   };
 
@@ -253,7 +265,7 @@ export const Navbar = () => {
                       className="absolute left-0 top-full mt-2 w-56 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-100 dark:border-slate-700 overflow-hidden z-50"
                     >
                       <div className="px-4 py-3 bg-slate-50 dark:bg-slate-900 border-b border-slate-100 dark:border-slate-700">
-                        <p className="text-xs text-slate-500 font-medium">مسجل بالبريد</p>
+                        <p className="text-xs text-slate-500 font-medium">{isRTL ? 'مسجل بالبريد' : 'Signed in as'}</p>
                         <p className="text-sm font-bold text-slate-800 dark:text-slate-100 truncate">{user.email}</p>
                       </div>
                       <div className="py-1">

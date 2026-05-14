@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, FileText, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -30,6 +31,11 @@ export const Terms = () => {
         </div>
       </div>
 
+      <Helmet>
+        <title>{t('seo.terms_title')}</title>
+        <meta name="description" content={t('seo.terms_desc')} />
+      </Helmet>
+
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -53,10 +59,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              1. {t('pages.terms.title')}
+              1. {t('terms.sections.s1_title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t('pages.terms.acceptance')}
+              {t('terms.sections.s1_body')}
             </p>
           </div>
 
@@ -64,10 +70,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              2. {t('pages.terms.title')}
+              2. {t('terms.sections.s2_title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t('pages.terms.use')}
+              {t('terms.sections.s2_body')}
             </p>
           </div>
 
@@ -75,10 +81,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              3. {t('pages.terms.title')}
+              3. {t('terms.sections.s3_title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t('pages.terms.intellectual')}
+              {t('terms.sections.s3_body')}
             </p>
           </div>
 
@@ -86,10 +92,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              4. {t('pages.terms.title')}
+              4. {t('terms.sections.s4_title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t('pages.terms.warranty')}
+              {t('terms.sections.s4_body')}
             </p>
           </div>
 
@@ -97,10 +103,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              5. {t('pages.terms.title')}
+              5. {t('terms.sections.s5_title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t('pages.terms.limitation')}
+              {t('terms.sections.s5_body')}
             </p>
           </div>
 
@@ -108,10 +114,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              6. {t('pages.terms.title')}
+              6. {t('terms.sections.s6_title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t('pages.terms.limitation')}
+              {t('terms.sections.s6_body')}
             </p>
           </div>
 
@@ -119,10 +125,10 @@ export const Terms = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
               <CheckCircle size={24} className="text-primary-green" />
-              7. {t('pages.privacy.title')}
+              7. {t('terms.sections.s7_title')}
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t('pages.terms.privacy_link')}
+              {t('terms.sections.s7_body')}
             </p>
           </div>
 

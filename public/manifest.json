@@ -1,0 +1,23 @@
+{
+  "name": "SoftyCode - حلول برمجية وأنظمة ويب احترافية",
+  "short_name": "SoftyCode",
+  "description": "شريكك التقني الأمثل لبناء حلول سحابية ذكية",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "/branding/softylogo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/branding/softylogo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

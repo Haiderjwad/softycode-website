@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { ChevronDown, CheckCircle, Phone, Mail, Search } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 
 
@@ -19,7 +20,16 @@ export const FAQ = () => {
   );
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 pt-32 pb-20 transition-colors duration-300">
+    <>
+      <Helmet>
+        <title>{t('seo.faq_title')}</title>
+        <meta name="description" content={t('seo.faq_desc')} />
+        <meta property="og:title" content={t('seo.faq_title')} />
+        <meta property="og:description" content={t('seo.faq_desc')} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+      <div className="min-h-screen bg-white dark:bg-slate-950 pt-32 pb-20 transition-colors duration-300">
       {/* Header */}
       <div className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -138,5 +148,6 @@ export const FAQ = () => {
         </motion.div>
       </div>
     </div>
+    </>
   );
 };

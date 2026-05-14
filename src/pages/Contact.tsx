@@ -3,38 +3,18 @@ import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { Mail, MessageSquare, MapPin, Phone, Send, Instagram, XIcon, Linkedin, CheckCircle, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { useContactInfo } from '@/hooks/useFirestore';
 import { Loader as GlobalLoader } from '@/components/Loader';
 
 export const Contact = () => {
   const { t, i18n } = useTranslation();
-  const isArabic = i18n.language === 'ar';
   const { contact, loading } = useContactInfo();
   const [formData, setFormData] = useState({ name: '', email: '', projectType: '', message: '' });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [hoveredSocial, setHoveredSocial] = useState<number | null>(null);
 
-  // Form labels based on current language
-  const formLabels = {
-    nameLabel: isArabic ? 'الاسم الكامل' : 'Full Name',
-    namePlaceholder: isArabic ? 'أحمد علي' : 'Ahmed Ali',
-    emailLabel: isArabic ? 'البريد الإلكتروني' : 'Email Address',
-    emailPlaceholder: isArabic ? 'ahmed@example.com' : 'ahmed@example.com',
-    projectLabel: isArabic ? 'نوع المشروع' : 'Project Type',
-    projectPlaceholder: isArabic ? 'اختر نوع المشروع' : 'Select project type',
-    projectOptions: isArabic
-      ? ['نظام محاسبي', 'متجر إلكتروني', 'نظام إدارة', 'تطبيق موبايل', 'أخرى']
-      : ['Accounting System', 'E-commerce Store', 'Management System', 'Mobile App', 'Other'],
-    messageLabel: isArabic ? 'الرسالة' : 'Message',
-    messagePlaceholder: isArabic
-      ? 'أخبرنا عن فكرتك وتوقعاتك...'
-      : 'Tell us about your idea and expectations...',
-    buttonSend: isArabic ? 'إرسال الرسالة' : 'Send Message',
-    buttonSending: isArabic ? 'جاري الإرسال...' : 'Sending...',
-    successMessage: isArabic
-      ? 'شكراً! تم إرسال رسالتك بنجاح'
-      : 'Thank you! Your message has been sent successfully',
-  };
+  const isArabic = i18n.language === 'ar';
 
   if (loading) {
     return (
@@ -46,8 +26,8 @@ export const Contact = () => {
 
   const contactInfo = contact || {
     phone: '+964 770 000 0000',
-    email: 'mailto:${contactInfo.email}',
-    address: isArabic ? 'العراق، بغداد' : 'Iraq, Baghdad',
+    email: 'info@softycode.com',
+    address: t('common.address'),
     workingHours: isArabic ? 'الأحد - الخميس, 9 ص - 5 م' : 'Sunday - Thursday, 9 AM - 5 PM',
     socialMedia: {
       twitter: '#',
@@ -102,28 +82,28 @@ export const Contact = () => {
   const contactItems = [
     {
       icon: Mail,
-      title: isArabic ? 'البريد الإلكتروني' : 'Email',
+      title: t('contact_info.email_title', 'البريد الإلكتروني'),
       value: contactInfo.email,
       link: `mailto:${contactInfo.email}`,
       color: 'from-blue-500 to-cyan-500',
     },
     {
       icon: Phone,
-      title: isArabic ? 'الهاتف' : 'Phone',
+      title: t('contact_info.phone_title', 'الهاتف'),
       value: contactInfo.phone,
       link: `tel:${contactInfo.phone}`,
       color: 'from-emerald-500 to-teal-500',
     },
     {
       icon: MapPin,
-      title: isArabic ? 'العنوان' : 'Address',
-      value: contactInfo.address || (isArabic ? 'العراق، بغداد' : 'Iraq, Baghdad'),
+      title: t('contact_info.address_title', 'العنوان'),
+      value: contactInfo.address || t('common.address'),
       link: '#',
       color: 'from-orange-500 to-red-500',
     },
     {
       icon: MessageSquare,
-      title: isArabic ? 'ساعات العمل' : 'Working Hours',
+      title: t('contact_info.hours_title', 'ساعات العمل'),
       value: contactInfo.workingHours,
       link: '#',
       color: 'from-purple-500 to-pink-500',
@@ -131,7 +111,16 @@ export const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-32 pb-20 transition-colors duration-300">
+    <>
+      <Helmet>
+        <title>{t('seo.contact_title')}</title>
+        <meta name="description" content={t('seo.contact_desc')} />
+        <meta property="og:title" content={t('seo.contact_title')} />
+        <meta property="og:description" content={t('seo.contact_desc')} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-32 pb-20 transition-colors duration-300">
       {/* Hero */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-4">
@@ -197,7 +186,7 @@ export const Contact = () => {
                 {/* Social Links */}
                 <div>
                   <h4 className="font-bold mb-6 text-xs uppercase tracking-widest text-slate-400">
-                    {isArabic ? 'تابعنا على مواقع التواصل' : 'Follow us on social media'}
+                    {t('pages.contact.social_title')}
                   </h4>
                   <div className="flex gap-4">
                     {socialLinks.map((social, i) => (
@@ -300,57 +289,57 @@ export const Contact = () => {
                     className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-3"
                   >
                     <CheckCircle size={20} className="text-emerald-600" />
-                    <span className="text-emerald-700 font-semibold">{formLabels.successMessage}</span>
+                    <span className="text-emerald-700 font-semibold">{t('pages.contact.success_message')}</span>
                   </motion.div>
                 )}
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <motion.div className="space-y-2" whileHover={{ y: -2 }}>
-                    <label className="font-bold text-slate-800 dark:text-slate-200 text-sm block">{formLabels.nameLabel}</label>
+                    <label className="font-bold text-slate-800 dark:text-slate-200 text-sm block">{t('pages.contact.label_name')}</label>
                     <input
                       type="text"
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="input-primary w-full"
-                      placeholder={formLabels.namePlaceholder}
+                      placeholder={t('pages.contact.placeholder_name')}
                     />
                   </motion.div>
                   <motion.div className="space-y-2" whileHover={{ y: -2 }}>
-                    <label className="font-bold text-slate-800 dark:text-slate-200 text-sm block">{formLabels.emailLabel}</label>
+                    <label className="font-bold text-slate-800 dark:text-slate-200 text-sm block">{t('pages.contact.label_email')}</label>
                     <input
                       type="email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="input-primary w-full"
-                      placeholder={formLabels.emailPlaceholder}
+                      placeholder={t('pages.contact.placeholder_email')}
                     />
                   </motion.div>
                 </div>
 
                 <motion.div className="space-y-2" whileHover={{ y: -2 }}>
-                  <label className="font-bold text-slate-800 dark:text-slate-200 text-sm block">{formLabels.projectLabel}</label>
+                  <label className="font-bold text-slate-800 dark:text-slate-200 text-sm block">{t('pages.contact.label_project')}</label>
                   <select
                     value={formData.projectType}
                     onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
                     className="input-primary w-full"
                   >
-                    <option value="">{formLabels.projectPlaceholder}</option>
-                    {formLabels.projectOptions.map((option, idx) => (
+                    <option value="">{t('pages.contact.placeholder_project')}</option>
+                    {(t('pages.contact.project_options', { returnObjects: true }) as string[]).map((option: string, idx: number) => (
                       <option key={idx} value={option}>{option}</option>
                     ))}
                   </select>
                 </motion.div>
 
                 <motion.div className="space-y-2" whileHover={{ y: -2 }}>
-                  <label className="font-bold text-slate-800 dark:text-slate-200 text-sm block">{formLabels.messageLabel}</label>
+                  <label className="font-bold text-slate-800 dark:text-slate-200 text-sm block">{t('pages.contact.label_message')}</label>
                   <textarea
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="input-primary w-full h-40"
-                    placeholder={formLabels.messagePlaceholder}
+                    placeholder={t('pages.contact.placeholder_message')}
                   />
                 </motion.div>
 
@@ -367,7 +356,7 @@ export const Contact = () => {
                     </motion.div>
                   ) : (
                     <>
-                      {formLabels.buttonSend}
+                      {t('pages.contact.button_send')}
                       <Send size={20} />
                     </>
                   )}
@@ -378,5 +367,6 @@ export const Contact = () => {
         </motion.div>
       </div>
     </div>
+    </>
   );
 };

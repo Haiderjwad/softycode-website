@@ -7,6 +7,7 @@ CheckCircle, Star, Rocket, HeartHandshake,
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Logo, LogoIcon, LogoText } from '@/components/Logo';
+import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 
 const BENEFITS = [
@@ -84,7 +85,16 @@ setLoading(false);
 };
 
   return (
-    <div className="min-h-screen flex" dir="rtl">
+    <>
+      <Helmet>
+        <title>{t('seo.register_title')}</title>
+        <meta name="description" content={t('seo.register_desc')} />
+        <meta property="og:title" content={t('seo.register_title')} />
+        <meta property="og:description" content={t('seo.register_desc')} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+      <div className="min-h-screen flex" dir="rtl">
       {/* ── Left Panel – Form ── */}
       <div className="flex-1 flex items-center justify-center bg-white dark:bg-[#0a0a0f] p-6 lg:p-16 order-2 lg:order-1">
         <motion.div
@@ -437,5 +447,6 @@ className="absolute bottom-8 text-slate-600 text-sm"
 </motion.p>
       </motion.div>
     </div>
+    </>
   );
 };

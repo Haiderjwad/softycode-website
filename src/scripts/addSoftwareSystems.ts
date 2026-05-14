@@ -18,9 +18,10 @@ const newSoftwareSystems = [
       'لوحة تحكم احترافية',
       'دعم فني على مدار الساعة'
     ],
-    systemUrl: 'https://software-demo.softycode.com',
-    createdAt: new Date(),
-  },
+  systemUrl: 'https://software-demo.softycode.com',
+  state: 'active', // active, inactive, updating
+  createdAt: new Date(),
+},
   {
     name: 'سوفتي لوجستك',
     nameEn: 'Softy Logistic',
@@ -36,9 +37,10 @@ const newSoftwareSystems = [
       'إدارة حسابات وعمولات',
       'لوحة تحكم ذكية للعملاء'
     ],
-    systemUrl: 'https://logistic.softycode.com',
-    createdAt: new Date(),
-  },
+  systemUrl: 'https://logistic.softycode.com',
+  state: 'active',
+  createdAt: new Date(),
+},
   {
     name: 'سوفتي كيو كود',
     nameEn: 'Softy Q-Code',
@@ -54,9 +56,10 @@ const newSoftwareSystems = [
       'إدارة التأمين والمطالبات',
       'وصفة طبية إلكترونية'
     ],
-    systemUrl: 'https://clinics.softycode.com',
-    createdAt: new Date(),
-  },
+  systemUrl: 'https://clinics.softycode.com',
+  state: 'active',
+  createdAt: new Date(),
+},
   {
     name: 'سوفتي موجود',
     nameEn: 'Softy Mawjoud',
@@ -72,9 +75,10 @@ const newSoftwareSystems = [
       'الربط مع أنظمة الرواتب',
       'تقارير أداء شاملة'
     ],
-    systemUrl: 'https://mawjoud.softycode.com',
-    createdAt: new Date(),
-  }
+  systemUrl: 'https://mawjoud.softycode.com',
+  state: 'active',
+  createdAt: new Date(),
+}
 ];
 
 // دالة لإضافة الأنظمة البرمجية
@@ -99,12 +103,13 @@ export const addSoftwareSystems = async () => {
         console.log(`✅ تم إضافة: ${system.name}`);
       } else {
         // تحديث النظام الموجود
-        const docId = querySnapshot.docs[0].id;
-        await updateDoc(doc(db, 'products', docId), {
-          systemUrl: system.systemUrl,
-          description: system.description,
-          features: system.features
-        });
+  const docId = querySnapshot.docs[0].id;
+  await updateDoc(doc(db, 'products', docId), {
+    systemUrl: system.systemUrl,
+    description: system.description,
+    features: system.features,
+    state: system.state || 'active'
+  });
         console.log(`🔄 تم تحديث: ${system.name}`);
       }
     }

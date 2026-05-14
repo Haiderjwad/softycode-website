@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 import { useAuth } from '@/hooks/useAuth';
 import { Logo, LogoIcon, LogoText } from '@/components/Logo';
 
@@ -47,7 +48,16 @@ export const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex" dir="rtl">
+    <>
+      <Helmet>
+        <title>{t('seo.login_title')}</title>
+        <meta name="description" content={t('seo.login_desc')} />
+        <meta property="og:title" content={t('seo.login_title')} />
+        <meta property="og:description" content={t('seo.login_desc')} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+      <div className="min-h-screen flex" dir="rtl">
       {/* ── Left Panel – Branding ── */}
       <motion.div
         initial={{ opacity: 0, x: -60 }}
@@ -297,5 +307,6 @@ export const Login = () => {
         </motion.div>
       </div>
     </div>
+    </>
   );
 };

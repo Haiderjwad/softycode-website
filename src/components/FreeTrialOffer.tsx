@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'motion/react';
 import { Gift, X, CheckCircle2, Zap } from 'lucide-react';
 import { useUserData } from '../hooks/useUserData';
@@ -6,6 +7,7 @@ import { updateFirestore } from '../utils/firestore';
 import { serverTimestamp } from 'firebase/firestore';
 
 export const FreeTrialOffer = () => {
+  const { t } = useTranslation();
   const { userData, loading } = useUserData();
   const [isVisible, setIsVisible] = useState(true);
   const [isActivating, setIsActivating] = useState(false);
@@ -34,7 +36,7 @@ export const FreeTrialOffer = () => {
       }, 3000);
     } catch (error) {
       console.error('Error activating trial:', error);
-      alert('حدث خطأ أثناء تفعيل التجربة المجانية. يرجى المحاولة مرة أخرى.');
+      alert(t('free_trial.error'));
     } finally {
       setIsActivating(false);
     }
@@ -67,11 +69,11 @@ export const FreeTrialOffer = () => {
                   </div>
                   
                   <h3 className="text-2xl font-display font-black text-slate-900 mb-3">
-                    هدية ترحيبية لك! 🎁
+                    {t('free_trial.title')}
                   </h3>
                   
                   <p className="text-slate-600 mb-8 leading-relaxed font-medium">
-                    استمتع بتجربة كاملة لجميع مميزات النظام <span className="text-primary-green font-bold">لمدة شهر كامل مجاناً</span>. اكتشف كيف يمكن لـ SoftyCode تطوير أعمالك.
+                    {t('free_trial.description')}
                   </p>
 
                   <button
@@ -84,13 +86,13 @@ export const FreeTrialOffer = () => {
                     ) : (
                       <>
                         <Zap size={20} />
-                        تفعيل التجربة المجانية
+                        {t('free_trial.activate')}
                       </>
                     )}
                   </button>
                   
                   <p className="text-center mt-4 text-xs text-slate-400 font-medium">
-                    * يسري هذا العرض لمرة واحدة فقط للمشتركين الجدد
+                    {t('free_trial.terms')}
                   </p>
                 </>
               ) : (
@@ -104,10 +106,10 @@ export const FreeTrialOffer = () => {
                   </motion.div>
                   
                   <h3 className="text-2xl font-display font-black text-slate-900 mb-2">
-                    تم التفعيل بنجاح!
+                    {t('free_trial.success_title')}
                   </h3>
                   <p className="text-slate-600 font-medium">
-                    مبروك! يمكنك الآن البدء في استخدام كافة ميزات النظام مجاناً لمدة 30 يوماً.
+                    {t('free_trial.success_desc')}
                   </p>
                 </div>
               )}

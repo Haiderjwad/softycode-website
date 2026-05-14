@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { db } from '@/config/firebase';
 import { collection, getDocs, onSnapshot, query, where } from 'firebase/firestore';
 
+export type ProductState = 'active' | 'inactive' | 'updating';
+
 export interface Product {
   id: string;
   name: string;
@@ -12,6 +14,7 @@ export interface Product {
   duration?: string;
   features?: string[];
   systemUrl?: string; // رابط النظام
+  state?: ProductState; // حالة النظام: active, inactive, updating
   createdAt: Date;
 }
 
@@ -36,6 +39,7 @@ export const useProducts = () => {
             duration: data.duration,
             features: data.features,
             systemUrl: data.systemUrl,
+            state: data.state || 'active', // default to active if not set
             createdAt: data.createdAt?.toDate() || new Date(),
           } as Product;
         });
@@ -44,7 +48,7 @@ export const useProducts = () => {
         // حقن المنتجات الجديدة افتراضياً في حال لم يتم إضافتها 
         // لقاعدة البيانات بعد لضمان ظهورها الفوري
         // ============================================
-        const newSystems = [
+        const newSystems: Product[] = [
           {
             id: 'softy-logistic-sys',
             name: 'سوفتي لوجستك',
@@ -55,6 +59,7 @@ export const useProducts = () => {
             duration: 'تفعيل فوري',
             features: ['تتبع مباشر للطلبات', 'تطبيق خاص للمندوبين', 'إدارة حسابات وعمولات', 'لوحة تحكم ذكية للعملاء'],
             systemUrl: 'https://logistic.softycode.com',
+            state: 'active',
             createdAt: new Date(),
           },
           {
@@ -67,6 +72,7 @@ export const useProducts = () => {
             duration: 'تفعيل فوري',
             features: ['حجز ذكي للمواعيد', 'سجلات طبية إلكترونية', 'إدارة التأمين والمطالبات', 'وصفة طبية إلكترونية'],
             systemUrl: 'https://clinics.softycode.com',
+            state: 'active',
             createdAt: new Date(),
           },
           {
@@ -79,6 +85,7 @@ export const useProducts = () => {
             duration: 'تفعيل فوري',
             features: ['ربط مباشر بأجهزة البصمة', 'إدارة الإجازات والغياب', 'الربط مع أنظمة الرواتب', 'تقارير أداء شاملة'],
             systemUrl: 'https://mawjoud.softycode.com',
+            state: 'active',
             createdAt: new Date(),
           }
         ];
@@ -87,6 +94,18 @@ export const useProducts = () => {
           if (!productsData.some(p => p.name === sys.name)) {
             productsData.push(sys);
           }
+        });
+
+        // Sort products by state: active first, then updating, then inactive
+        const statePriority: Record<ProductState, number> = {
+          active: 0,
+          updating: 1,
+          inactive: 2,
+        };
+        productsData.sort((a, b) => {
+          const priorityA = statePriority[(a.state || 'active') as ProductState];
+          const priorityB = statePriority[(b.state || 'active') as ProductState];
+          return priorityA - priorityB;
         });
 
         setProducts(productsData);
@@ -163,6 +182,7 @@ export const getProductById = async (productId: string) => {
       duration: data.duration,
       features: data.features,
       systemUrl: data.systemUrl,
+      state: data.state || 'active',
       createdAt: data.createdAt?.toDate() || new Date(),
     } as Product;
   } catch (error) {

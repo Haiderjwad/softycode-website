@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, Briefcase, MapPin, Calendar, DollarSign, Users, Award, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 
 // Job positions by language
@@ -187,7 +188,16 @@ export const Careers = () => {
   const positions = positionsData[isArabic ? 'ar' : 'en'];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-gray-900 pt-32 pb-20 transition-colors duration-300">
+    <>
+      <Helmet>
+        <title>{t('seo.careers_title')}</title>
+        <meta name="description" content={t('seo.careers_desc')} />
+        <meta property="og:title" content={t('seo.careers_title')} />
+        <meta property="og:description" content={t('seo.careers_desc')} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+      <div className="min-h-screen bg-slate-50 dark:bg-gray-900 pt-32 pb-20 transition-colors duration-300">
       {/* Header */}
       <div className="bg-white dark:bg-gray-800 border-b border-slate-100 dark:border-gray-700 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -346,5 +356,6 @@ export const Careers = () => {
         </motion.div>
       </div>
     </div>
+    </>
   );
 };

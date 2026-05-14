@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 import { Target, Users, Award, Rocket } from 'lucide-react';
 
 export const About = () => {
@@ -13,7 +14,16 @@ export const About = () => {
   ];
 
   return (
-    <div className="pt-32 pb-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+    <>
+      <Helmet>
+        <title>{t('seo.about_title')}</title>
+        <meta name="description" content={t('seo.about_desc')} />
+        <meta property="og:title" content={t('seo.about_title')} />
+        <meta property="og:description" content={t('seo.about_desc')} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+      <div className="pt-32 pb-20 bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Intro */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
         <motion.span
@@ -100,5 +110,6 @@ export const About = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };

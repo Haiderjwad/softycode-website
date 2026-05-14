@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Star, Play, MessageCircle, ArrowRight, Eye, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -46,7 +46,7 @@ export const ServiceCard = ({ service, index, viewMode }: ServiceCardProps) => {
               </div>
             )}
             <div className="absolute top-3 right-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
-              خدمة
+              {t('common.service')}
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
@@ -63,7 +63,7 @@ export const ServiceCard = ({ service, index, viewMode }: ServiceCardProps) => {
                       <Star key={i} size={16} className="fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <span className="text-sm font-medium text-slate-500 dark:text-slate-400">(45 {t('common.reviews', 'تقييم')})</span>
+                  <span className="text-sm font-medium text-slate-500 dark:text-slate-400">(45 {t('common.reviews')})</span>
                 </div>
               </div>
             </div>
@@ -76,14 +76,14 @@ export const ServiceCard = ({ service, index, viewMode }: ServiceCardProps) => {
               {service.period && (
                 <div className="flex items-center gap-2.5 text-sm bg-slate-50 dark:bg-slate-800/50 px-4 py-2 rounded-xl text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-slate-700">
                   <span className="text-primary-green">⏱️</span>
-                  <span>المدة: <strong>{service.period}</strong></span>
+                  <span>{t('common.duration')} <strong>{service.period}</strong></span>
                 </div>
               )}
             </div>
 
             {service.features && service.features.length > 0 && (
               <div className="pt-2">
-                <p className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-3 uppercase tracking-wider">المميزات الرئيسية:</p>
+                <p className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-3 uppercase tracking-wider">{t('common.features_main')}</p>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
                   {service.features.slice(0, 4).map((feature, i) => (
                     <li key={i} className="text-sm text-slate-600 dark:text-slate-400 flex items-center gap-2">
@@ -111,7 +111,7 @@ export const ServiceCard = ({ service, index, viewMode }: ServiceCardProps) => {
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary-navy to-slate-700 dark:from-primary-navy dark:to-slate-600 text-white font-semibold hover:shadow-lg transition-all duration-300"
                   >
                     <MessageCircle size={18} />
-                    {t('products.order_now', 'اطلب الآن')}
+                    {t('products.order_now')}
                   </Link>
                 </motion.div>
               </div>
@@ -151,7 +151,7 @@ export const ServiceCard = ({ service, index, viewMode }: ServiceCardProps) => {
           animate={{ opacity: 1, x: 0 }}
           className="absolute top-4 right-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg"
         >
-          خدمة
+          {t('common.service')}
         </motion.div>
       </div>
 
@@ -164,7 +164,7 @@ export const ServiceCard = ({ service, index, viewMode }: ServiceCardProps) => {
             {[...Array(5)].map((_, i) => (
               <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
             ))}
-            <span className="text-xs text-slate-500 dark:text-slate-400 ms-2 transition-colors duration-300">(45 تقييم)</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400 ms-2 transition-colors duration-300">{t('common.review_count', { count: 45 })}</span>
           </div>
         </div>
 
@@ -175,13 +175,13 @@ export const ServiceCard = ({ service, index, viewMode }: ServiceCardProps) => {
         {service.period && (
           <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400 mb-4 transition-colors duration-300">
             <span>⏱️</span>
-            <span>المدة: <strong>{service.period}</strong></span>
+            <span>{t('common.duration')} <strong>{service.period}</strong></span>
           </div>
         )}
 
         {service.features && service.features.length > 0 && (
           <div className="mb-4 pb-4 border-b border-slate-200 dark:border-slate-700 transition-colors duration-300">
-            <p className="text-xs font-bold text-slate-700 dark:text-slate-300 mb-2 uppercase transition-colors duration-300">المميزات:</p>
+            <p className="text-xs font-bold text-slate-700 dark:text-slate-300 mb-2 uppercase transition-colors duration-300">{t('common.features') + ':'}</p>
             <ul className="space-y-1.5">
               {service.features.slice(0, 2).map((feature, i) => (
                 <li key={i} className="text-xs text-slate-600 dark:text-slate-400 flex items-start gap-2 transition-colors duration-300">
@@ -207,7 +207,7 @@ export const ServiceCard = ({ service, index, viewMode }: ServiceCardProps) => {
             onClick={(e) => e.stopPropagation()}
           >
             <ArrowRight size={18} />
-            {t('products.order_now', 'اطلب الآن')}
+            {t('products.order_now')}
           </Link>
         </div>
       </div>

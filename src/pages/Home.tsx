@@ -362,7 +362,7 @@ export const Home = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {(() => {
               const displayProds = (!productsLoading && products && products.length > 0)
-                ? products.filter(p => p.category === 'products').slice(0, 3)
+                ? products.filter(p => p.category === 'products' && p.state !== 'inactive' && p.state !== 'updating').slice(0, 3)
                 : [
                   {
                     name: t('products.items.accounting.title', 'نظام إكسبريس المحاسبي'),

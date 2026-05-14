@@ -1,13 +1,13 @@
 /* ===== Google Fonts — يجب أن يكون أول شيء في الملف ===== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Sora:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Sora:wght@400;600;700&family=Tajawal:wght@300;400;500;700;800;900&display=swap');
 @import "tailwindcss";
 
 /* دعم التبديل اليدوي للوضع المظلم في Tailwind CSS 4 */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Outfit", "Sora", sans-serif;
+  --font-sans: "Inter", "Tajawal", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", "Tajawal", "Sora", sans-serif;
 
   /* Enhanced Primary Colors */
   --color-primary-green: #10b981;
@@ -69,8 +69,7 @@
 
 @layer base {
 
-  html,
-  body {
+  html {
     @apply overflow-x-hidden max-w-[100vw];
   }
 

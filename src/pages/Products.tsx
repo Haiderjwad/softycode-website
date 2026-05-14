@@ -4,6 +4,7 @@ import { ChevronRight, Search, Grid, List, SlidersHorizontal, LayoutGrid } from 
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 import { Loader as GlobalLoader } from '@/components/Loader';
 import { ProductCard } from '@/components/ProductCard';
 
@@ -40,6 +41,15 @@ export const Products = () => {
   });
 
   return (
+    <>
+      <Helmet>
+        <title>{t('seo.products_title')}</title>
+        <meta name="description" content={t('seo.products_desc')} />
+        <meta property="og:title" content={t('seo.products_title')} />
+        <meta property="og:description" content={t('seo.products_desc')} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
       {/* مسافة فاصله احترافيه بين الشريط العلوي للنظام ومحتوى القسم */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 lg:pt-36 pb-24">
@@ -80,7 +90,7 @@ export const Products = () => {
                 title="Filter"
               >
                 <SlidersHorizontal size={20} />
-                <span className="hidden sm:inline">تصفية</span>
+                <span className="hidden sm:inline">{t('common.filter')}</span>
               </button>
 
               {/* View modes */}
@@ -164,5 +174,6 @@ export const Products = () => {
         </motion.div>
       </div>
     </div>
+    </>
   );
 };

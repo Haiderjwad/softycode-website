@@ -7,7 +7,7 @@ import { useContactInfo } from '@/hooks/useFirestore';
 export const FloatingSupport = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { contact } = useContactInfo();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isArabic = i18n.language === 'ar';
 
   const defaultContact = {
@@ -55,7 +55,7 @@ export const FloatingSupport = () => {
                 <MessageSquare size={20} />
               </div>
               <span className="font-medium text-sm text-slate-700 dark:text-slate-300 px-2 whitespace-nowrap">
-                {isArabic ? 'تواصل عبر واتساب' : 'WhatsApp'}
+                {t('floating_support.whatsapp')}
               </span>
             </motion.button>
 
@@ -70,7 +70,7 @@ export const FloatingSupport = () => {
                 <Mail size={20} />
               </div>
               <span className="font-medium text-sm text-slate-700 dark:text-slate-300 px-2 whitespace-nowrap">
-                {isArabic ? 'مراسلة عبر البريد' : 'Email Us'}
+                {t('floating_support.email')}
               </span>
             </motion.button>
 
@@ -85,7 +85,7 @@ export const FloatingSupport = () => {
                 <Phone size={20} />
               </div>
               <span className="font-medium text-sm text-slate-700 dark:text-slate-300 px-2 whitespace-nowrap">
-                {isArabic ? 'اتصال مباشر' : 'Call Us'}
+                {t('floating_support.call')}
               </span>
             </motion.button>
           </motion.div>
