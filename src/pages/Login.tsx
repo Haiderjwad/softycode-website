@@ -140,7 +140,7 @@ export const Login = () => {
           transition={{ delay: 1.2 }}
           className="absolute bottom-8 text-slate-600 text-sm text-center"
         >
-          © {new Date().getFullYear()} SoftyCode — {t('nav.copyright', 'جميع الحقوق محفوظة')}
+          {t('footer.copyright', { year: new Date().getFullYear() })}
         </motion.p>
       </motion.div>
 

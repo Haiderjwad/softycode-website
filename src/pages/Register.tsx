@@ -11,9 +11,9 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 
 const BENEFITS = [
-{ icon: Rocket, title: 'auth.register.benefits.fast_start', desc: 'auth.register.benefits.fast_start_desc' },
-{ icon: Star, title: 'auth.register.benefits.exclusive', desc: 'auth.register.benefits.exclusive_desc' },
-{ icon: HeartHandshake, title: 'auth.register.benefits.partnership', desc: 'auth.register.benefits.partnership_desc' },
+{ icon: Rocket, title: 'auth.register.benefits.launch.title', desc: 'auth.register.benefits.launch.desc' },
+{ icon: Star, title: 'auth.register.benefits.exclusive.title', desc: 'auth.register.benefits.exclusive.desc' },
+{ icon: HeartHandshake, title: 'auth.register.benefits.partnership.title', desc: 'auth.register.benefits.partnership.desc' },
 ];
 
 // Password strength indicator
@@ -443,7 +443,7 @@ animate={{ opacity: 1 }}
 transition={{ delay: 1.3 }}
 className="absolute bottom-8 text-slate-600 text-sm"
 >
-© {new Date().getFullYear()} SoftyCode — {t('auth.register.all_rights_reserved')}
+{t('footer.copyright', { year: new Date().getFullYear() })}
 </motion.p>
       </motion.div>
     </div>
